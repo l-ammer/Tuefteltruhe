@@ -216,10 +216,10 @@
             // 
             // label10
             // 
-            this.label10.Location = new System.Drawing.Point(8, 91);
+            this.label10.Location = new System.Drawing.Point(0, 91);
             this.label10.Name = "label10";
             this.label10.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label10.Size = new System.Drawing.Size(100, 13);
+            this.label10.Size = new System.Drawing.Size(108, 14);
             this.label10.TabIndex = 29;
             this.label10.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 

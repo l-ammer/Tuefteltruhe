@@ -172,7 +172,7 @@ namespace Tüfteltruhe
             //Stichangriff
             if (Waffenwahl.stichmod > -20)
             {
-                if (Waffenwahl.waffentyp != "(Kein Waffentyp)") //Wenn Waffe -> reguläre Berechnung
+                if (Waffenwahl.waffentyp != "") //Wenn Waffe -> reguläre Berechnung
                 {stichangriff_ergebnis = Waffenwahl.stichmod + fixwert1 + fixwert2 + fixwert3;}
                 else //Wenn keine Waffe -> auch keine Waffenfähigkeit mit einberechnen
                 { stichangriff_ergebnis = Waffenwahl.stichmod + fixwert2 + fixwert3;}
@@ -199,7 +199,7 @@ namespace Tüfteltruhe
             //Wuchtangriff
             if (Waffenwahl.wuchtmod > -20)
             {
-                if (Waffenwahl.waffentyp != "(Kein Waffentyp)") //Wenn Waffe -> reguläre Berechnung
+                if (Waffenwahl.waffentyp != "") //Wenn Waffe -> reguläre Berechnung
                 { wuchtangriff_ergebnis = Waffenwahl.wuchtmod + fixwert1 + fixwert2 + fixwert3;}
                 else //Wenn keine Waffe -> auch keine Waffenfähigkeit mit einberechnen
                 { wuchtangriff_ergebnis = Waffenwahl.wuchtmod + fixwert2 + fixwert3;}
@@ -230,7 +230,7 @@ namespace Tüfteltruhe
             //Schnittangriff
             if (Waffenwahl.schnittmod > -20)
             {
-                if (Waffenwahl.waffentyp != "(Kein Waffentyp)") //Wenn Waffe -> reguläre Berechnung
+                if (Waffenwahl.waffentyp != "") //Wenn Waffe -> reguläre Berechnung
                 { schnittangriff_ergebnis = Waffenwahl.schnittmod + fixwert1 + fixwert2 + fixwert3;}
                 else //Wenn keine Waffe -> auch keine Waffenfähigkeit mit einberechnen
                 { schnittangriff_ergebnis = Waffenwahl.schnittmod + fixwert2 + fixwert3;}
@@ -970,7 +970,7 @@ namespace Tüfteltruhe
                     else Waffenwahl.name = null;
                     tmp = row["Waffenfähigkeit"].ToString();
                     if (!string.IsNullOrEmpty(tmp) && tmp != "-") Waffenwahl.waffentyp = tmp;
-                    else Waffenwahl.waffentyp = null;
+                    else Waffenwahl.waffentyp = "";
                     tmp = row["Gewicht"].ToString();
                     if (!string.IsNullOrEmpty(tmp) && tmp != "-") Waffenwahl.gewicht = (double)row["Gewicht"];
                     else Waffenwahl.gewicht = -100;

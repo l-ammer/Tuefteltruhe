@@ -1,7 +1,7 @@
 ![Titelbild](https://alberich-verlag.de/pngs/T%C3%BCfteltruhe-Logo.PNG)
 
 # Überblick
-Sammlung an kleinen Hilfanwendungen für das PNP-Spiel [Alt-Europa](https://alberich-verlag.de/alteuropa.html).
+Sammlung an kleinen Hilfsanwendungen für das PNP-Spiel [Alt-Europa](https://alberich-verlag.de/alteuropa.html).
 
 [**➤ Tüfteltruhe herunterladen**](https://alberich-verlag.de/alteuropamaterial.html)
 
