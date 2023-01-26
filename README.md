@@ -1,11 +1,11 @@
 # Überblick
-Sammlung an kleinen Hilfanwendungen für das PNP-Spiel "Alt-Europa".
-https://alberich-verlag.de/alteuropa.html
-https://alberich-verlag.de/alteuropamaterial.html
+ Sammlung an kleinen Hilfanwendungen für das PNP-Spiel "Alt-Europa".
+ https://alberich-verlag.de/alteuropa.html
+ https://alberich-verlag.de/alteuropamaterial.html
 
 # Fertige Hilfsmittel
 
-####### Spielermodus:
+###### Spielermodus:
 - Waffentest-Schnellrechner
 - Reisetest-Schnellrechner
 - Seereise-Schnellrechner
@@ -23,9 +23,9 @@ https://alberich-verlag.de/alteuropamaterial.html
 - Zufälliger Name
 
 ###### Weitere:
-Feldherrenkampagne
-➤ Schlacht-Simulator
-➤ Interaktive Weltkarte, die pro Stamm die Daten anzeigt
+- Feldherrenkampagne
+- Schlacht-Simulator
+- Interaktive Weltkarte, die pro Stamm die Daten anzeigt
 
 # Installation
 
@@ -37,15 +37,15 @@ Feldherrenkampagne
 
 # Anleitung
 
-Hier entsteht eine genauere Bedienungsanleitung.
+Hier entsteht eine genauere Bedienungsanleitung...
 
 # Versionshistorie
 
-######v0.7
+###### v0.7
 - **Zutatensuche** abgeschlossen und **Marktzusammensetzung** hinzugefügt.
-######v0.6
+###### v0.6
 - **Spielermodus** korrigiert und **Zutatensuche** hinzugefügt.
-######v0.5
+###### v0.5
 - **Spielermodus** abgeschlossen.
 
 # Danksagung
