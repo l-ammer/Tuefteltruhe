@@ -1,7 +1,7 @@
 # Überblick
- Sammlung an kleinen Hilfanwendungen für das PNP-Spiel "Alt-Europa".
- https://alberich-verlag.de/alteuropa.html
- https://alberich-verlag.de/alteuropamaterial.html
+Sammlung an kleinen Hilfanwendungen für das PNP-Spiel "Alt-Europa".
+- https://alberich-verlag.de/alteuropa.html
+- https://alberich-verlag.de/alteuropamaterial.html
 
 # Fertige Hilfsmittel
 
@@ -25,15 +25,15 @@
 ###### Weitere:
 - Feldherrenkampagne
 - Schlacht-Simulator
-- Interaktive Weltkarte, die pro Stamm die Daten anzeigt
+- Interaktive Weltkarte, die für Stämme und Orte alle Informationen anzeigt
 
 # Installation
 
-1. Herunterladen
-2. zip- oder rar-Datei entpacken
+1. Herunterladen.
+2. zip- oder rar-Datei entpacken.
 3. Ggf. prüfen, ob **Tüfteltruhe.exe** und **TTruheAccess.accdb** vorhanden und im selben Ordner sind.
 4. Ggf. prüfen, ob **TTruheAccess.accdb** entsperrt und von Windows als vertrauenswürdig eingestuft ist.
-5. Ausführen der **Tüfteltruhe.exe**
+5. Ausführen der **Tüfteltruhe.exe**.
 
 # Anleitung
 
