@@ -1,7 +1,9 @@
-# Überblick
-Sammlung an kleinen Hilfanwendungen für das [PNP-Spiel **Alt-Europa**](https://alberich-verlag.de/alteuropa.html).
+![Titelbild](https://alberich-verlag.de/pngs/T%C3%BCfteltruhe-Logo.PNG)
 
-[➤Tüfteltruhe herunterladen](https://alberich-verlag.de/alteuropamaterial.html)
+# Überblick
+Sammlung an kleinen Hilfanwendungen für das PNP-Spiel [**Alt-Europa**](https://alberich-verlag.de/alteuropa.html).
+
+[➤ Tüfteltruhe herunterladen](https://alberich-verlag.de/alteuropamaterial.html)
 
 # Fertige und geplante Anwendungen
 
@@ -35,6 +37,10 @@ Sammlung an kleinen Hilfanwendungen für das [PNP-Spiel **Alt-Europa**](https://
 
 Hier entsteht eine genauere Bedienungsanleitung...
 
+# Bilder
+
+![Titelbild](https://alberich-verlag.de/pngs/T%C3%BCfteltruhe-Logo.PNG)
+
 # Versionshistorie
 
 ###### v0.7
@@ -46,4 +52,4 @@ Hier entsteht eine genauere Bedienungsanleitung...
 
 # Danksagung
 
-Danke an Niklas, Kai, Fabian, Kathi und Jessi für langjähriges Testen und Rückmeldungen zu Alt-Europa und Tüfteltruhe.
+Danke an Niklas, Kai, Fabian, Kathi und Jessi für langjähriges Testen und Rückmeldungen zu Alt-Europa und Tüfteltruhe!
