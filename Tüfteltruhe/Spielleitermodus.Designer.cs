@@ -36,14 +36,33 @@
             this.neuesFensterSchlachtenSimulatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.neuesFensterInteraktiveWeltkarteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripTextBox2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.marktzusammensetzungExportierenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.warenangebotExportierenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.button9 = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
+            this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -99,12 +118,9 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tapPage2 = new System.Windows.Forms.TabControl();
-            this.marktzusammensetzungExportierenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripTextBox2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.warenangebotExportierenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -189,6 +205,34 @@
             this.toolStripMenuItem1.Size = new System.Drawing.Size(119, 20);
             this.toolStripMenuItem1.Text = "Exportieren (Word)";
             // 
+            // toolStripTextBox1
+            // 
+            this.toolStripTextBox1.Name = "toolStripTextBox1";
+            this.toolStripTextBox1.Size = new System.Drawing.Size(281, 22);
+            this.toolStripTextBox1.Text = "Allgemeine Zutatensuche exportieren...";
+            this.toolStripTextBox1.Click += new System.EventHandler(this.AllgZutatensucheExp);
+            // 
+            // toolStripTextBox2
+            // 
+            this.toolStripTextBox2.Name = "toolStripTextBox2";
+            this.toolStripTextBox2.Size = new System.Drawing.Size(281, 22);
+            this.toolStripTextBox2.Text = "Spezielle Zutatensuche exportieren...";
+            this.toolStripTextBox2.Click += new System.EventHandler(this.SpzZutatensucheExp);
+            // 
+            // marktzusammensetzungExportierenToolStripMenuItem
+            // 
+            this.marktzusammensetzungExportierenToolStripMenuItem.Name = "marktzusammensetzungExportierenToolStripMenuItem";
+            this.marktzusammensetzungExportierenToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.marktzusammensetzungExportierenToolStripMenuItem.Text = "Marktzusammensetzung exportieren...";
+            this.marktzusammensetzungExportierenToolStripMenuItem.Click += new System.EventHandler(this.MarktzusammensetzungExp);
+            // 
+            // warenangebotExportierenToolStripMenuItem
+            // 
+            this.warenangebotExportierenToolStripMenuItem.Name = "warenangebotExportierenToolStripMenuItem";
+            this.warenangebotExportierenToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.warenangebotExportierenToolStripMenuItem.Text = "Warenangebot exportieren...";
+            this.warenangebotExportierenToolStripMenuItem.Click += new System.EventHandler(this.WarenangebotExp);
+            // 
             // tabPage6
             // 
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
@@ -221,6 +265,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.dataGridView4);
             this.tabPage2.Controls.Add(this.dataGridView2);
             this.tabPage2.Controls.Add(this.panel4);
             this.tabPage2.Controls.Add(this.panel3);
@@ -231,6 +276,57 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Marktangebot";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView4
+            // 
+            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column7,
+            this.Column8,
+            this.Column10,
+            this.Column13,
+            this.Column9,
+            this.Column12});
+            this.dataGridView4.Location = new System.Drawing.Point(392, 102);
+            this.dataGridView4.Name = "dataGridView4";
+            this.dataGridView4.Size = new System.Drawing.Size(771, 427);
+            this.dataGridView4.TabIndex = 27;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "Ware";
+            this.Column7.Name = "Column7";
+            this.Column7.Width = 120;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "Preis";
+            this.Column8.Name = "Column8";
+            this.Column8.Width = 40;
+            // 
+            // Column10
+            // 
+            this.Column10.HeaderText = "Gewicht";
+            this.Column10.Name = "Column10";
+            this.Column10.Width = 50;
+            // 
+            // Column13
+            // 
+            this.Column13.HeaderText = "Qualität";
+            this.Column13.Name = "Column13";
+            this.Column13.Width = 190;
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "Verfügbar?";
+            this.Column9.Name = "Column9";
+            this.Column9.Width = 70;
+            // 
+            // Column12
+            // 
+            this.Column12.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column12.HeaderText = "Beschreibung";
+            this.Column12.Name = "Column12";
             // 
             // dataGridView2
             // 
@@ -262,11 +358,95 @@
             // 
             // panel4
             // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.checkBox4);
+            this.panel4.Controls.Add(this.checkBox3);
+            this.panel4.Controls.Add(this.checkBox2);
+            this.panel4.Controls.Add(this.label20);
+            this.panel4.Controls.Add(this.comboBox7);
+            this.panel4.Controls.Add(this.button9);
+            this.panel4.Controls.Add(this.label19);
+            this.panel4.Controls.Add(this.comboBox6);
             this.panel4.Controls.Add(this.label18);
             this.panel4.Location = new System.Drawing.Point(392, 6);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(771, 523);
+            this.panel4.Size = new System.Drawing.Size(771, 90);
             this.panel4.TabIndex = 13;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(487, 63);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(275, 17);
+            this.checkBox4.TabIndex = 33;
+            this.checkBox4.Text = "Preistendenzen anzeigen (nur für Spielleiter!)";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            this.Icon = Properties.Resources.TT_Logo_Kiste2;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(268, 64);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(200, 17);
+            this.checkBox3.TabIndex = 32;
+            this.checkBox3.Text = "Qualitätsschwankungen ausschalten";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(268, 37);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(182, 17);
+            this.checkBox2.TabIndex = 31;
+            this.checkBox2.Text = "Preisschwankungen ausschalten";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(5, 65);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(69, 13);
+            this.label20.TabIndex = 30;
+            this.label20.Text = "Kulturkontext";
+            // 
+            // comboBox7
+            // 
+            this.comboBox7.FormattingEnabled = true;
+            this.comboBox7.Location = new System.Drawing.Point(80, 61);
+            this.comboBox7.Name = "comboBox7";
+            this.comboBox7.Size = new System.Drawing.Size(179, 21);
+            this.comboBox7.TabIndex = 29;
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(483, 34);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(275, 23);
+            this.button9.TabIndex = 28;
+            this.button9.Text = "Neues Warenangebot";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(16, 37);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(58, 13);
+            this.label19.TabIndex = 27;
+            this.label19.Text = "Händlertyp";
+            // 
+            // comboBox6
+            // 
+            this.comboBox6.FormattingEnabled = true;
+            this.comboBox6.Location = new System.Drawing.Point(80, 34);
+            this.comboBox6.Name = "comboBox6";
+            this.comboBox6.Size = new System.Drawing.Size(179, 21);
+            this.comboBox6.TabIndex = 26;
             // 
             // label18
             // 
@@ -837,34 +1017,6 @@
             this.tapPage2.Size = new System.Drawing.Size(1177, 561);
             this.tapPage2.TabIndex = 33;
             // 
-            // marktzusammensetzungExportierenToolStripMenuItem
-            // 
-            this.marktzusammensetzungExportierenToolStripMenuItem.Name = "marktzusammensetzungExportierenToolStripMenuItem";
-            this.marktzusammensetzungExportierenToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
-            this.marktzusammensetzungExportierenToolStripMenuItem.Text = "Marktzusammensetzung exportieren...";
-            this.marktzusammensetzungExportierenToolStripMenuItem.Click += new System.EventHandler(this.MarktzusammensetzungExp);
-            // 
-            // toolStripTextBox2
-            // 
-            this.toolStripTextBox2.Name = "toolStripTextBox2";
-            this.toolStripTextBox2.Size = new System.Drawing.Size(281, 22);
-            this.toolStripTextBox2.Text = "Spezielle Zutatensuche exportieren...";
-            this.toolStripTextBox2.Click += new System.EventHandler(this.SpzZutatensucheExp);
-            // 
-            // toolStripTextBox1
-            // 
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(281, 22);
-            this.toolStripTextBox1.Text = "Allgemeine Zutatensuche exportieren...";
-            this.toolStripTextBox1.Click += new System.EventHandler(this.AllgZutatensucheExp);
-            // 
-            // warenangebotExportierenToolStripMenuItem
-            // 
-            this.warenangebotExportierenToolStripMenuItem.Name = "warenangebotExportierenToolStripMenuItem";
-            this.warenangebotExportierenToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
-            this.warenangebotExportierenToolStripMenuItem.Text = "Warenangebot exportieren...";
-            this.warenangebotExportierenToolStripMenuItem.Click += new System.EventHandler(this.WarenangebotExp);
-            // 
             // Spielleitermodus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -878,6 +1030,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
@@ -977,5 +1130,20 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripTextBox2;
         private System.Windows.Forms.ToolStripMenuItem marktzusammensetzungExportierenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem warenangebotExportierenToolStripMenuItem;
+        private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ComboBox comboBox7;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
+        private System.Windows.Forms.CheckBox checkBox4;
     }
 }

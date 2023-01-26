@@ -222,6 +222,7 @@
             this.label10.Size = new System.Drawing.Size(108, 14);
             this.label10.TabIndex = 29;
             this.label10.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.Icon = Properties.Resources.TT_Logo_Kiste2;
             // 
             // label4
             // 

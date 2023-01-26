@@ -54,6 +54,8 @@ Hier entsteht eine genauere Bedienungsanleitung...
 
 # Versionshistorie
 
+###### v0.8
+- **Warenangebot**  hinzugefügt.
 ###### v0.7
 - **Zutatensuche** abgeschlossen und **Marktzusammensetzung** hinzugefügt.
 ###### v0.6

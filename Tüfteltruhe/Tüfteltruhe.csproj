@@ -115,6 +115,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Spielleitermodus.resx">
       <DependentUpon>Spielleitermodus.cs</DependentUpon>
@@ -156,6 +157,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\TTruheSymbolKiste.png" />
+    <None Include="Resources\TT-Logo-Kiste.PNG" />
+    <None Include="Resources\TT-Logo-Kiste.bmp" />
+    <None Include="Resources\TT-Logo-Kiste.ico" />
     <Content Include="TT-Logo-Kiste.ico" />
     <Content Include="TTruheAccess.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

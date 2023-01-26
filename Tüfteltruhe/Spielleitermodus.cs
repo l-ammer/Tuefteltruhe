@@ -22,6 +22,9 @@ namespace Tüfteltruhe
         public DataTable ZutatenTB = new DataTable();
         public DataTable HaendlerTB = new DataTable();
         public DataTable SondergewerbeTB = new DataTable();
+        public DataTable WarenTB = new DataTable();
+        public DataTable HaendlerWarenTB = new DataTable();
+        public DataTable KulturkontexteTB = new DataTable();
         public Bereich Region = new Bereich(0, "", null, null, null, null);
         public Bereich Umgebung = new Bereich(0, "", null, null, null, null);
         public Bereich Region2 = new Bereich(0, "", null, null, null, null);
@@ -39,6 +42,7 @@ namespace Tüfteltruhe
         public int rowcount = 0;
         public int rowcount2 = 0;
         public int rowcount3 = 0;
+        public int rowcount4 = 0;
         public int portionenerhöht = 0;
         public int bisherigeportionenzahl = 0;
         public int gesamtstunden = 0;
@@ -76,7 +80,7 @@ namespace Tüfteltruhe
 
 
         //#################### ################################################
-        //### ZUTATENSUCHE ### ################################################
+        //##### ZUTATEN ###### ################################################
         //#################### ################################################
 
         private void button2_Click(object sender, EventArgs e) //Allgemeine Suche
@@ -369,6 +373,11 @@ namespace Tüfteltruhe
             OleDbDataReader reader6 = null;
             OleDbDataReader reader7 = null;
             OleDbDataReader reader8 = null;
+            OleDbDataReader reader9 = null;
+            OleDbDataReader reader10 = null;
+            OleDbDataReader reader11 = null;
+            OleDbDataReader reader12 = null;
+            OleDbDataReader reader13 = null;
             OleDbCommand command = new OleDbCommand("SELECT * FROM ZutatenRegion", connection);
             OleDbCommand command2 = new OleDbCommand("SELECT * FROM ZutatenRegion", connection);
             OleDbCommand command3 = new OleDbCommand("SELECT * FROM ZutatenUmgebung", connection);
@@ -377,6 +386,11 @@ namespace Tüfteltruhe
             OleDbCommand command6 = new OleDbCommand("SELECT * FROM Zutaten", connection);
             OleDbCommand command7 = new OleDbCommand("SELECT * FROM Haendler", connection);
             OleDbCommand command8 = new OleDbCommand("SELECT * FROM Sondergewerbe", connection);
+            OleDbCommand command9 = new OleDbCommand("SELECT * FROM Waren", connection);
+            OleDbCommand command10 = new OleDbCommand("SELECT * FROM HaendlerWaren", connection);
+            OleDbCommand command11 = new OleDbCommand("SELECT * FROM HaendlerWaren", connection);
+            OleDbCommand command12 = new OleDbCommand("SELECT * FROM Kulturkontexte", connection);
+            OleDbCommand command13 = new OleDbCommand("SELECT * FROM Kulturkontexte", connection);
             reader = command.ExecuteReader();
             reader2 = command2.ExecuteReader();
             reader3 = command3.ExecuteReader();
@@ -385,9 +399,16 @@ namespace Tüfteltruhe
             reader6 = command6.ExecuteReader();
             reader7 = command7.ExecuteReader();
             reader8 = command8.ExecuteReader();
+            reader9 = command9.ExecuteReader();
+            reader10 = command10.ExecuteReader();
+            reader11 = command11.ExecuteReader();
+            reader12 = command12.ExecuteReader();
+            reader13 = command13.ExecuteReader();
             comboBox5.Items.Clear();
             comboBox1.Items.Clear();
             comboBox2.Items.Clear();
+            comboBox6.Items.Clear();
+            comboBox7.Items.Clear();
 
             while (reader.Read())
             {
@@ -403,24 +424,41 @@ namespace Tüfteltruhe
             {
                 comboBox2.Items.Add(reader5[1].ToString());
             }
+            while (reader10.Read())
+            {
+                comboBox6.Items.Add(reader10[1].ToString());
+            }
+            while (reader12.Read())
+            {
+                comboBox7.Items.Add(reader12[1].ToString());
+            }
 
             DataTable ZutatenRegionTabelle = new DataTable();
             DataTable ZutatenUmgebungTabelle = new DataTable();
             DataTable ZutatenTabelle = new DataTable();
             DataTable HaendlerTabelle = new DataTable();
             DataTable SondergewerbeTabelle = new DataTable();
+            DataTable WarenTabelle = new DataTable();
+            DataTable HaendlerWarenTabelle = new DataTable();
+            DataTable KulturkontexteTabelle = new DataTable();
 
             ZutatenRegionTabelle.Load(reader2);
             ZutatenUmgebungTabelle.Load(reader4);
             ZutatenTabelle.Load(reader);
             HaendlerTabelle.Load(reader7);
             SondergewerbeTabelle.Load(reader8);
+            WarenTabelle.Load(reader9);
+            HaendlerWarenTabelle.Load(reader11);
+            KulturkontexteTabelle.Load(reader13);
 
             ZutatenRegionTB = ZutatenRegionTabelle;
             ZutatenUmgebungTB = ZutatenUmgebungTabelle;
             ZutatenTB = ZutatenTabelle;
             HaendlerTB = HaendlerTabelle;
             SondergewerbeTB = SondergewerbeTabelle;
+            WarenTB = WarenTabelle;
+            HaendlerWarenTB = HaendlerWarenTabelle;
+            KulturkontexteTB = KulturkontexteTabelle;
 
             connection.Close();
         }
@@ -772,35 +810,24 @@ namespace Tüfteltruhe
             rowcount2 = 0;
         }
 
-        public void comboBox2_SelectedValueChanged(object sender, EventArgs e)
+        public void comboBox2_SelectedValueChanged(object sender, EventArgs e) //Zutat geädert
         {
             neuesuche();
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e) //Region geändert
         {
             if (comboBox2.GetItemText(comboBox2.SelectedItem) != null) { neuesuche(); }
         }
 
-        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e) //Umgebung geändert
         {
             if (comboBox2.GetItemText(comboBox2.SelectedItem) != null) { neuesuche(); }
-        }
-        private void neuesFensterSpielermodusToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Spielermodus spielermodus = new Spielermodus();
-            spielermodus.Show();
-        }
-
-        private void neuesFensterSpielleitermodusToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Spielleitermodus spielleitermodus = new Spielleitermodus();
-            spielleitermodus.Show();
         }
 
 
         //#################### ################################################
-        //### MARKTANGEBOT ### ################################################
+        //###### MARKT ####### ################################################
         //#################### ################################################
 
 
@@ -924,6 +951,153 @@ namespace Tüfteltruhe
             }
         }
 
+        //#################### ################################################
+        //###### WAREN ####### ################################################
+        //#################### ################################################
+        private void button9_Click(object sender, EventArgs e)
+        {
+            dataGridView4.Rows.Clear();
+            rowcount4 = 0;
+            foreach (DataRow row in WarenTB.Rows)
+            {
+                if (row["Haendler"].ToString() == comboBox6.GetItemText(comboBox6.SelectedItem))
+                {
+                    if (row["Verweis"].ToString() == "")
+                    {
+                        string[] kulturkontexte = row["Kulturkontexte"].ToString().Split(',');
+                        bool richtigekultur = false;
+                        for (int i = 0; i < kulturkontexte.Length; i++)
+                        {
+                            if (kulturkontexte[i] == " " + comboBox7.GetItemText(comboBox7.SelectedItem))
+                            {
+                                richtigekultur = true;
+                            }
+                        }
+                        if (richtigekultur || row["Kulturkontexte"].ToString() == "")
+                        {
+                            dataGridView4.Rows.Add();
+                            rowcount4++;
+                            dataGridView4[0, rowcount4 - 1].Value = row["Ware"].ToString();
+                            dataGridView4[2, rowcount4 - 1].Value = row["Gewicht"].ToString();
+                            dataGridView4[3, rowcount4 - 1].Value = "Mittel";
+                            dataGridView4[5, rowcount4 - 1].Value = row["Beschreibung"].ToString(); ;
+                            dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.LightYellow;
+                            double preis = (double)row["Realwert"];
+
+                            if (!checkBox3.Checked) //Qualitätsschwankungen
+                            {
+                                int quali = zufall.Next(1, 20);
+                                switch (quali)
+                                {
+                                    case 1:
+                                    case 2:
+                                        dataGridView4[3, rowcount4 - 1].Value = "Beschädigt, nicht verwendbar!";
+                                        dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.OrangeRed;
+                                        preis*= 0.5;
+                                        break;
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                        dataGridView4[3, rowcount4 - 1].Value = "Niedrige Qualität: -1 auf Aktionen";
+                                        dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Orange;
+                                        preis *= 0.5;
+                                        break;
+                                    case 18:
+                                    case 19:
+                                        dataGridView4[3, rowcount4 - 1].Value = "Hohe Qualität: +1 auf Aktionen";
+                                        dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
+                                        preis *= 1.5;
+                                        break;
+                                    case 20:
+                                        dataGridView4[3, rowcount4 - 1].Value = "Herausragende Qualität: +3 auf Aktionen";
+                                        dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Gold;
+                                        preis *= 3;
+                                        break;
+                                }
+
+                            }
+                            if (!checkBox2.Checked) //Preisschwankungen
+                            {
+                                int preisschwank = zufall.Next(1, 20);
+                                switch (preisschwank)
+                                {
+                                    case 1:
+                                        preis *= 0.25;
+                                        //dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.Gold;
+                                        break;
+                                    case 2:
+                                    case 3:
+                                        preis *= 0.5;
+                                        //dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
+                                        break;
+                                    case 4:
+                                    case 5:
+                                        preis *= 0.75;
+                                        //dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.LightGreen;
+                                        break;
+                                    case 13:
+                                    case 14:
+                                    case 15:
+                                    case 16:
+                                    case 17:
+                                        preis *= 1.5;
+                                        //dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.Orange;
+                                        break;
+                                    case 18:
+                                    case 19:
+                                        preis *= 2;
+                                        //dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.OrangeRed;
+                                        break;
+                                    case 20:
+                                        preis *= 3;
+                                        //dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.LightCoral;
+                                        break;
+                                }
+                            }
+
+                            dataGridView4[1, rowcount4 - 1].Value = preis;
+                            if (preis > (double)row["Realwert"])
+                            {
+                                dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.Orange;
+                            }
+                            else if (preis < (double)row["Realwert"])
+                            {
+                                dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
+                            }
+                            if(!checkBox4.Checked)
+                            {
+                                dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.LightYellow;
+                            }
+
+                            if ((double)row["Wahrscheinlichkeit"] >= zufall.Next(1, 10))
+                            {
+                                dataGridView4[4, rowcount4 - 1].Value = "Ja";
+                            }
+                            else
+                            {
+                                dataGridView4[4, rowcount4 - 1].Value = row["Dauer"].ToString();
+                                dataGridView4[1, rowcount4 - 1].Value = "";
+                                dataGridView4[2, rowcount4 - 1].Value = "";
+                                dataGridView4[3, rowcount4 - 1].Value = "";
+                                dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.LightCoral;
+                                dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.LightCoral;
+                                dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.LightCoral;
+                            }
+                            
+                        }
+                    }
+                    else 
+                    {
+                        //++Verweise!
+                    }
+                }
+            }
+        }
+
+        //#################### ################################################
+        //##### EXPORTE ###### ################################################
+        //#################### ################################################
 
         public void Export_Data_To_Word(DataGridView DGV, string filename)
         {
@@ -1070,5 +1244,22 @@ namespace Tüfteltruhe
         //        Export_Data_To_Word(dataGridView1, sfd.FileName);
         //    }
         }
+
+        //#################### ################################################
+        //### NEUE FENSTER ### ################################################
+        //#################### ################################################
+
+        private void neuesFensterSpielermodusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Spielermodus spielermodus = new Spielermodus();
+            spielermodus.Show();
+        }
+
+        private void neuesFensterSpielleitermodusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Spielleitermodus spielleitermodus = new Spielleitermodus();
+            spielleitermodus.Show();
+        }
+
     }
 }

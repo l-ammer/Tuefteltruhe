@@ -70,6 +70,7 @@ namespace Tüfteltruhe
             this.button3.TabIndex = 2;
             this.button3.Text = "Feldherrenkampagne";
             this.button3.UseVisualStyleBackColor = true;
+            this.Icon = Properties.Resources.TT_Logo_Kiste2;
             // 
             // button4
             // 
