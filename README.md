@@ -3,29 +3,25 @@ Sammlung an kleinen Hilfanwendungen für das PNP-Spiel "Alt-Europa".
 - https://alberich-verlag.de/alteuropa.html
 - https://alberich-verlag.de/alteuropamaterial.html
 
-# Fertige Hilfsmittel
+# Fertige und geplante Anwendungen
 
 ###### Spielermodus:
-- Waffentest-Schnellrechner
-- Reisetest-Schnellrechner
-- Seereise-Schnellrechner
+- [x] Waffentest-Schnellrechner
+- [x] Reisetest-Schnellrechner
+- [x] Seereise-Schnellrechner
 
 ###### Spielleitermodus:
-- Zutatensuche (zufällige Zutaten)
-- Zufällige Marktzusammensetzung
-
-# Zukünftige Hilfsmittel
-
-###### Spielleitermodus:
-- Zufälliges Warenangebot (mit Qualität und natürlicher Preisschwankung)
-- Zufällige Begegnung
-- Zufälliger NSC
-- Zufälliger Name
+- [x] Zutatensuche (zufällige Zutaten)
+- [x] Zufällige Marktzusammensetzung
+- [ ] Zufälliges Warenangebot (mit Qualität und natürlicher Preisschwankung)
+- [ ] Zufällige Begegnung
+- [ ] Zufälliger NSC
+- [ ] Zufälliger Name
 
 ###### Weitere:
-- Feldherrenkampagne
-- Schlacht-Simulator
-- Interaktive Weltkarte, die für Stämme und Orte alle Informationen anzeigt
+- [ ] Feldherrenkampagne
+- [ ] Schlacht-Simulator
+- [ ] Interaktive Weltkarte, die für Stämme und Orte alle Informationen anzeigt
 
 # Installation
 
