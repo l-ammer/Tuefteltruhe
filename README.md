@@ -1,18 +1,18 @@
 # Überblick
-Sammlung an kleinen Hilfanwendungen für das PNP-Spiel "Alt-Europa".
-- https://alberich-verlag.de/alteuropa.html
-- https://alberich-verlag.de/alteuropamaterial.html
+Sammlung an kleinen Hilfanwendungen für das [PNP-Spiel **Alt-Europa**](https://alberich-verlag.de/alteuropa.html).
+
+[➤Tüfteltruhe herunterladen](https://alberich-verlag.de/alteuropamaterial.html)
 
 # Fertige und geplante Anwendungen
 
 ###### Spielermodus:
-- [x] Waffentest-Schnellrechner
-- [x] Reisetest-Schnellrechner
-- [x] Seereise-Schnellrechner
+- [x] **Waffentest-Schnellrechner**
+- [x] **Reisetest-Schnellrechner**
+- [x] **Seereise-Schnellrechner**
 
 ###### Spielleitermodus:
-- [x] Zutatensuche (zufällige Zutaten)
-- [x] Zufällige Marktzusammensetzung
+- [x] **Zutatensuche (zufällige Zutaten)**
+- [x] **Zufällige Marktzusammensetzung**
 - [ ] Zufälliges Warenangebot (mit Qualität und natürlicher Preisschwankung)
 - [ ] Zufällige Begegnung
 - [ ] Zufälliger NSC
