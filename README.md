@@ -39,11 +39,17 @@ Hier entsteht eine genauere Bedienungsanleitung...
 
 # Bilder
 
+###### Waffentest
 ![Beispielbild](https://alberich-verlag.de/pngs/ttruhe/Bild1.png)
+###### Reisetest
 ![Beispielbild](https://alberich-verlag.de/pngs/ttruhe/Bild2.png)
+###### Seereisetest
 ![Beispielbild](https://alberich-verlag.de/pngs/ttruhe/Bild3.png)
+###### Allgemeine Zutatensuche
 ![Beispielbild](https://alberich-verlag.de/pngs/ttruhe/Bild4.png)
+###### Spezielle Zutatensuche
 ![Beispielbild](https://alberich-verlag.de/pngs/ttruhe/Bild5.png)
+###### Marktzusammensetzung
 ![Beispielbild](https://alberich-verlag.de/pngs/ttruhe/Bild6.png)
 
 # Versionshistorie
