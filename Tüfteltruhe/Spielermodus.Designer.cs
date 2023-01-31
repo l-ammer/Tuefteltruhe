@@ -193,7 +193,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1169, 536);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Waffentest-Schnellrechner";
+            this.tabPage1.Text = "Waffentest";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // textBox2
@@ -550,7 +550,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(1169, 536);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Reisetest-Schnellrechner";
+            this.tabPage2.Text = "Reisetest";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // textBox1
@@ -852,7 +852,7 @@
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(1169, 536);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Seereise-Schnellrechner";
+            this.tabPage3.Text = "Seereise";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // label1

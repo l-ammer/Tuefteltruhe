@@ -1089,6 +1089,7 @@ namespace Tüfteltruhe
                 
                 dataGridView4.Rows.Add();
                 rowcount4++;
+                dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.LightYellow;
                 dataGridView4[0, rowcount4 - 1].Value = schmuckbezeichnung;
                 if (!checkBox2.Checked) //Preisschwankungen (sind bei Schmuck weniger extrem als sonst)
                 {
@@ -1130,7 +1131,7 @@ namespace Tüfteltruhe
                 }
                 if (!checkBox4.Checked) //Preisschwank verbergen
                 {
-                    dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.White;
+                    dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.LightYellow;
                 }
                 dataGridView4[1, rowcount4 - 1].Value = Math.Round(realwert, 2); 
                 dataGridView4[2, rowcount4 - 1].Value = Math.Round(gesamtgewicht, 1) + Convert.ToInt16(ergebniszeile["Zusatzgewicht"]);
@@ -1170,7 +1171,7 @@ namespace Tüfteltruhe
                         dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Tomato;
                         break;
                 }
-                if (metallgewicht == 0) { dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.White; }
+                if (metallgewicht == 0) { dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.LightYellow; }
                 switch (ergebniszeilezier["Schmuckstein"].ToString())
                 {
                     case "Diamant":
@@ -1207,6 +1208,7 @@ namespace Tüfteltruhe
             {
                 dataGridView4.Rows.Add();
                 rowcount4++;
+                dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.LightYellow;
                 DataRow schmuckstein = ZierTB.Rows[zufall.Next(1, 100)]; 
                 int karatzahl = XwY(Convert.ToInt16(schmuckstein["RohWurfZahl"]), Convert.ToInt16(schmuckstein["RohWuerfel"]));
                 dataGridView4[0, rowcount4 - 1].Value = schmuckstein["Schmuckstein"].ToString() + " (" + karatzahl + " kt)";
@@ -1253,7 +1255,7 @@ namespace Tüfteltruhe
                 dataGridView4[2, rowcount4 - 1].Value = Math.Round(karatzahl * 0.0004, 1);
                 if (!checkBox4.Checked) //Preisschwank verbergen
                 {
-                    dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.White;
+                    dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.LightYellow;
                 }
                 switch (schmuckstein["Schmuckstein"].ToString())
                 {
