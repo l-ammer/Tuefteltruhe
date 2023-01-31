@@ -13,12 +13,11 @@ Sammlung an kleinen Hilfsanwendungen für das PNP-Spiel [Alt-Europa](https://alb
 - [x] **Seereise-Schnellrechner**
 
 ###### Spielleitermodus:
-- [x] **Zutatensuche (zufällige Zutaten)**
+- [x] **Zutatensuche (zufällige Pflanzen und Pilze)**
 - [x] **Zufällige Marktzusammensetzung**
-- [ ] Zufälliges Warenangebot (mit Qualität und natürlicher Preisschwankung)
+- [x] **Zufälliges Warenangebot**
 - [ ] Zufällige Begegnung
-- [ ] Zufälliger NSC
-- [ ] Zufälliger Name
+- [ ] Zufälliger NSC und Name
 
 ###### Weitere:
 - [ ] Feldherrenkampagne
