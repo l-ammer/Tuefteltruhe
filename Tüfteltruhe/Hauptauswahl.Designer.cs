@@ -70,7 +70,6 @@ namespace Tüfteltruhe
             this.button3.TabIndex = 2;
             this.button3.Text = "Feldherrenkampagne";
             this.button3.UseVisualStyleBackColor = true;
-            this.Icon = Properties.Resources.TT_Logo_Kiste2;
             // 
             // button4
             // 
@@ -97,7 +96,7 @@ namespace Tüfteltruhe
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(211, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(353, 234);
+            this.label1.Size = new System.Drawing.Size(216, 221);
             this.label1.TabIndex = 5;
             this.label1.Text = resources.GetString("label1.Text");
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -125,6 +124,7 @@ namespace Tüfteltruhe
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Icon = global::Tüfteltruhe.Properties.Resources.TT_Logo_Kiste2;
             this.Name = "Hauptauswahl";
             this.Text = "Tüfteltruhe: Hauptauswahl";
             this.Load += new System.EventHandler(this.Hauptauswahl_Load);

@@ -25,6 +25,9 @@ namespace Tüfteltruhe
         public DataTable WarenTB = new DataTable();
         public DataTable HaendlerWarenTB = new DataTable();
         public DataTable KulturkontexteTB = new DataTable();
+        public DataTable SchmuckTB = new DataTable();
+        public DataTable MetallTB = new DataTable();
+        public DataTable ZierTB = new DataTable();
         public Bereich Region = new Bereich(0, "", null, null, null, null);
         public Bereich Umgebung = new Bereich(0, "", null, null, null, null);
         public Bereich Region2 = new Bereich(0, "", null, null, null, null);
@@ -78,6 +81,130 @@ namespace Tüfteltruhe
             InitializeComponent();
         }
 
+        public void DatenbankLaden(object sender, EventArgs e)
+        {
+            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string path = (System.IO.Path.GetDirectoryName(executable));
+            AppDomain.CurrentDomain.SetData("DataDirectory", path);
+            //Provider=Microsoft.ACE.OLEDB.12.0;
+            OleDbConnection connection = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=|DataDirectory|\TTruheAccess.accdb");
+            //OleDbConnection connection = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=E:\Tüfteltruhe\Tüfteltruhe\TTruheAccess.accdb");
+            connection.Open();
+            OleDbDataReader reader = null;
+            OleDbDataReader reader2 = null;
+            OleDbDataReader reader3 = null;
+            OleDbDataReader reader4 = null;
+            OleDbDataReader reader5 = null;
+            OleDbDataReader reader6 = null;
+            OleDbDataReader reader7 = null;
+            OleDbDataReader reader8 = null;
+            OleDbDataReader reader9 = null;
+            OleDbDataReader reader10 = null;
+            OleDbDataReader reader11 = null;
+            OleDbDataReader reader12 = null;
+            OleDbDataReader reader13 = null;
+            OleDbDataReader reader14 = null;
+            OleDbDataReader reader15 = null;
+            OleDbDataReader reader16 = null;
+            OleDbCommand command = new OleDbCommand("SELECT * FROM ZutatenRegion", connection);
+            OleDbCommand command2 = new OleDbCommand("SELECT * FROM ZutatenRegion", connection);
+            OleDbCommand command3 = new OleDbCommand("SELECT * FROM ZutatenUmgebung", connection);
+            OleDbCommand command4 = new OleDbCommand("SELECT * FROM ZutatenUmgebung", connection);
+            OleDbCommand command5 = new OleDbCommand("SELECT * FROM Zutaten", connection);
+            OleDbCommand command6 = new OleDbCommand("SELECT * FROM Zutaten", connection);
+            OleDbCommand command7 = new OleDbCommand("SELECT * FROM Haendler", connection);
+            OleDbCommand command8 = new OleDbCommand("SELECT * FROM Sondergewerbe", connection);
+            OleDbCommand command9 = new OleDbCommand("SELECT * FROM Waren", connection);
+            OleDbCommand command10 = new OleDbCommand("SELECT * FROM HaendlerWaren", connection);
+            OleDbCommand command11 = new OleDbCommand("SELECT * FROM HaendlerWaren", connection);
+            OleDbCommand command12 = new OleDbCommand("SELECT * FROM Kulturkontexte", connection);
+            OleDbCommand command13 = new OleDbCommand("SELECT * FROM Kulturkontexte", connection);
+            OleDbCommand command14 = new OleDbCommand("SELECT * FROM Schmuck", connection);
+            OleDbCommand command15 = new OleDbCommand("SELECT * FROM Metall", connection);
+            OleDbCommand command16 = new OleDbCommand("SELECT * FROM Zier", connection);
+            reader = command.ExecuteReader();
+            reader2 = command2.ExecuteReader();
+            reader3 = command3.ExecuteReader();
+            reader4 = command4.ExecuteReader();
+            reader5 = command5.ExecuteReader();
+            reader6 = command6.ExecuteReader();
+            reader7 = command7.ExecuteReader();
+            reader8 = command8.ExecuteReader();
+            reader9 = command9.ExecuteReader();
+            reader10 = command10.ExecuteReader();
+            reader11 = command11.ExecuteReader();
+            reader12 = command12.ExecuteReader();
+            reader13 = command13.ExecuteReader();
+            reader14 = command14.ExecuteReader();
+            reader15 = command15.ExecuteReader();
+            reader16 = command16.ExecuteReader();
+            comboBox5.Items.Clear();
+            comboBox1.Items.Clear();
+            comboBox2.Items.Clear();
+            comboBox6.Items.Clear();
+            comboBox7.Items.Clear();
+
+            while (reader.Read())
+            {
+                comboBox1.Items.Add(reader[1].ToString());
+                comboBox3.Items.Add(reader[1].ToString());
+            }
+            while (reader3.Read())
+            {
+                comboBox5.Items.Add(reader3[1].ToString());
+                comboBox4.Items.Add(reader3[1].ToString());
+            }
+            while (reader5.Read())
+            {
+                comboBox2.Items.Add(reader5[1].ToString());
+            }
+            while (reader10.Read())
+            {
+                comboBox6.Items.Add(reader10[1].ToString());
+            }
+            while (reader12.Read())
+            {
+                comboBox7.Items.Add(reader12[1].ToString());
+            }
+
+            DataTable ZutatenRegionTabelle = new DataTable();
+            DataTable ZutatenUmgebungTabelle = new DataTable();
+            DataTable ZutatenTabelle = new DataTable();
+            DataTable HaendlerTabelle = new DataTable();
+            DataTable SondergewerbeTabelle = new DataTable();
+            DataTable WarenTabelle = new DataTable();
+            DataTable HaendlerWarenTabelle = new DataTable();
+            DataTable KulturkontexteTabelle = new DataTable();
+            DataTable SchmuckTabelle = new DataTable();
+            DataTable MetallTabelle = new DataTable();
+            DataTable ZierTabelle = new DataTable();
+
+            ZutatenRegionTabelle.Load(reader2);
+            ZutatenUmgebungTabelle.Load(reader4);
+            ZutatenTabelle.Load(reader);
+            HaendlerTabelle.Load(reader7);
+            SondergewerbeTabelle.Load(reader8);
+            WarenTabelle.Load(reader9);
+            HaendlerWarenTabelle.Load(reader11);
+            KulturkontexteTabelle.Load(reader13);
+            SchmuckTabelle.Load(reader14);
+            MetallTabelle.Load(reader15);
+            ZierTabelle.Load(reader16);
+
+            ZutatenRegionTB = ZutatenRegionTabelle;
+            ZutatenUmgebungTB = ZutatenUmgebungTabelle;
+            ZutatenTB = ZutatenTabelle;
+            HaendlerTB = HaendlerTabelle;
+            SondergewerbeTB = SondergewerbeTabelle;
+            WarenTB = WarenTabelle;
+            HaendlerWarenTB = HaendlerWarenTabelle;
+            KulturkontexteTB = KulturkontexteTabelle;
+            SchmuckTB = SchmuckTabelle;
+            MetallTB = MetallTabelle;
+            ZierTB = ZierTabelle;
+
+            connection.Close();
+        }
 
         //#################### ################################################
         //##### ZUTATEN ###### ################################################
@@ -245,22 +372,22 @@ namespace Tüfteltruhe
                 //wiederholungen = 0;
                 //while (wiederholungen < 10000 && regionergebnis != umgebungergebnis)
                 //{
-                //    regionergebnis = Region.selten[zufall.Next(0, Region.selten.Length - 1)];
-                //    umgebungergebnis = Umgebung.selten[zufall.Next(0, Umgebung.selten.Length - 1)];
+                //    regionergebnis = Region.selten[zufall.Next(0, Region.selten.Length)];
+                //    umgebungergebnis = Umgebung.selten[zufall.Next(0, Umgebung.selten.Length)];
                 //    wiederholungen++;
                 //}
                 //ergebniszutat = regionergebnis;
 
                 //MODUS: SUMME
-                ergebniszutat = Region.selten[zufall.Next(0, Region.selten.Length - 1)];
-                if (comboBox5.GetItemText(comboBox5.SelectedItem) != "" && zufall.Next(0, 1) == 1) { ergebniszutat = Umgebung.selten[zufall.Next(0, Umgebung.selten.Length - 1)]; }
+                ergebniszutat = Region.selten[zufall.Next(0, Region.selten.Length )];
+                if (comboBox5.GetItemText(comboBox5.SelectedItem) != "" && zufall.Next(0, 2) == 1) { ergebniszutat = Umgebung.selten[zufall.Next(0, Umgebung.selten.Length)]; }
 
                 //Erhöhende Ergebnisse!
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
                     if (row.Cells[0].Value.ToString().Equals(ergebniszutat))
                     {
-                        dataGridView1[1, dataGridView1.Rows.IndexOf(row)].Value = (int)dataGridView1[1, dataGridView1.Rows.IndexOf(row)].Value + zufall.Next(1, 3);
+                        dataGridView1[1, dataGridView1.Rows.IndexOf(row)].Value = (int)dataGridView1[1, dataGridView1.Rows.IndexOf(row)].Value + zufall.Next(1, 4);
                         portionenerhöht = 1;
                         break;
                     }
@@ -274,8 +401,8 @@ namespace Tüfteltruhe
                     dataGridView1.Rows[rowcount - 1].DefaultCellStyle.BackColor = Color.YellowGreen;
                     dataGridView1[0, rowcount - 1].Value = ergebniszutat;
                     dataGridView1[2, rowcount - 1].Value = "Selten";
-                    dataGridView1[1, rowcount - 1].Value = zufall.Next(1, 3);
-                    if (zufall.Next(1, 10) > kenntniszw)
+                    dataGridView1[1, rowcount - 1].Value = zufall.Next(1, 4);
+                    if (zufall.Next(1, 11) > kenntniszw)
                     {
                         dataGridView1[3, rowcount - 1].Value = "Unbekannt!";
                         dataGridView1[3, rowcount - 1].Style.BackColor = Color.Orange;
@@ -288,15 +415,15 @@ namespace Tüfteltruhe
                 portionenerhöht = 0;
 
                 //MODUS: SUMME
-                ergebniszutat = Region.ungewöhnlich[zufall.Next(0, Region.ungewöhnlich.Length - 1)];
-                if (comboBox5.GetItemText(comboBox5.SelectedItem) != "" && zufall.Next(0, 1) == 1) { ergebniszutat = Umgebung.ungewöhnlich[zufall.Next(0, Umgebung.ungewöhnlich.Length - 1)]; }
+                ergebniszutat = Region.ungewöhnlich[zufall.Next(0, Region.ungewöhnlich.Length)];
+                if (comboBox5.GetItemText(comboBox5.SelectedItem) != "" && zufall.Next(0, 2) == 1) { ergebniszutat = Umgebung.ungewöhnlich[zufall.Next(0, Umgebung.ungewöhnlich.Length)]; }
 
                 //Erhöhende Ergebnisse!
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
                     if (row.Cells[0].Value.ToString().Equals(ergebniszutat))
                     {
-                        dataGridView1[1, dataGridView1.Rows.IndexOf(row)].Value = (int)dataGridView1[1, dataGridView1.Rows.IndexOf(row)].Value + zufall.Next(1, 5);
+                        dataGridView1[1, dataGridView1.Rows.IndexOf(row)].Value = (int)dataGridView1[1, dataGridView1.Rows.IndexOf(row)].Value + zufall.Next(1, 6);
                         portionenerhöht = 1;
                         break;
                     }
@@ -310,8 +437,8 @@ namespace Tüfteltruhe
                     dataGridView1.Rows[rowcount - 1].DefaultCellStyle.BackColor = Color.LightGreen;
                     dataGridView1[0, rowcount - 1].Value = ergebniszutat;
                     dataGridView1[2, rowcount - 1].Value = "Ungewöhnlich";
-                    dataGridView1[1, rowcount - 1].Value = zufall.Next(1, 5);
-                    if (zufall.Next(1, 10) > kenntniszw + 1)
+                    dataGridView1[1, rowcount - 1].Value = zufall.Next(1, 6);
+                    if (zufall.Next(1, 11) > kenntniszw + 1)
                     {
                         dataGridView1[3, rowcount - 1].Value = "Unbekannt!";
                         dataGridView1[3, rowcount - 1].Style.BackColor = Color.Orange;
@@ -324,15 +451,15 @@ namespace Tüfteltruhe
                 portionenerhöht = 0;
 
                 //MODUS: SUMME
-                ergebniszutat = Region.gewöhnlich[zufall.Next(0, Region.gewöhnlich.Length - 1)];
-                if (comboBox5.GetItemText(comboBox5.SelectedItem) != "" && zufall.Next(0, 1) == 1) { ergebniszutat = Umgebung.gewöhnlich[zufall.Next(0, Umgebung.gewöhnlich.Length - 1)]; }
+                ergebniszutat = Region.gewöhnlich[zufall.Next(0, Region.gewöhnlich.Length)];
+                if (comboBox5.GetItemText(comboBox5.SelectedItem) != "" && zufall.Next(0, 2) == 1) { ergebniszutat = Umgebung.gewöhnlich[zufall.Next(0, Umgebung.gewöhnlich.Length)]; }
 
                 //Erhöhende Ergebnisse!
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
                     if (row.Cells[0].Value.ToString().Equals(ergebniszutat))
                     {
-                        dataGridView1[1, dataGridView1.Rows.IndexOf(row)].Value = (int)dataGridView1[1, dataGridView1.Rows.IndexOf(row)].Value + zufall.Next(1, 7);
+                        dataGridView1[1, dataGridView1.Rows.IndexOf(row)].Value = (int)dataGridView1[1, dataGridView1.Rows.IndexOf(row)].Value + zufall.Next(1, 8);
                         portionenerhöht = 1;
                         break;
                     }
@@ -346,8 +473,8 @@ namespace Tüfteltruhe
                     dataGridView1.Rows[rowcount - 1].DefaultCellStyle.BackColor = Color.LightYellow;
                     dataGridView1[0, rowcount - 1].Value = ergebniszutat;
                     dataGridView1[2, rowcount - 1].Value = "Gewöhnlich";
-                    dataGridView1[1, rowcount - 1].Value = zufall.Next(1, 7);
-                    if (zufall.Next(1, 10) > kenntniszw + 1)
+                    dataGridView1[1, rowcount - 1].Value = zufall.Next(1, 8);
+                    if (zufall.Next(1, 11) > kenntniszw + 1)
                     {
                         dataGridView1[3, rowcount - 1].Value = "Unbekannt!";
                         dataGridView1[3, rowcount - 1].Style.BackColor = Color.Orange;
@@ -355,113 +482,6 @@ namespace Tüfteltruhe
                 }
             }
         } 
-
-        public void DatenbankLaden(object sender, EventArgs e)
-        {
-            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            string path = (System.IO.Path.GetDirectoryName(executable));
-            AppDomain.CurrentDomain.SetData("DataDirectory", path);
-            //Provider=Microsoft.ACE.OLEDB.12.0;
-            OleDbConnection connection = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0; Data Source=|DataDirectory|\TTruheAccess.accdb");
-            //OleDbConnection connection = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=E:\Tüfteltruhe\Tüfteltruhe\TTruheAccess.accdb");
-            connection.Open();
-            OleDbDataReader reader = null;
-            OleDbDataReader reader2 = null;
-            OleDbDataReader reader3 = null;
-            OleDbDataReader reader4 = null;
-            OleDbDataReader reader5 = null;
-            OleDbDataReader reader6 = null;
-            OleDbDataReader reader7 = null;
-            OleDbDataReader reader8 = null;
-            OleDbDataReader reader9 = null;
-            OleDbDataReader reader10 = null;
-            OleDbDataReader reader11 = null;
-            OleDbDataReader reader12 = null;
-            OleDbDataReader reader13 = null;
-            OleDbCommand command = new OleDbCommand("SELECT * FROM ZutatenRegion", connection);
-            OleDbCommand command2 = new OleDbCommand("SELECT * FROM ZutatenRegion", connection);
-            OleDbCommand command3 = new OleDbCommand("SELECT * FROM ZutatenUmgebung", connection);
-            OleDbCommand command4 = new OleDbCommand("SELECT * FROM ZutatenUmgebung", connection);
-            OleDbCommand command5 = new OleDbCommand("SELECT * FROM Zutaten", connection);
-            OleDbCommand command6 = new OleDbCommand("SELECT * FROM Zutaten", connection);
-            OleDbCommand command7 = new OleDbCommand("SELECT * FROM Haendler", connection);
-            OleDbCommand command8 = new OleDbCommand("SELECT * FROM Sondergewerbe", connection);
-            OleDbCommand command9 = new OleDbCommand("SELECT * FROM Waren", connection);
-            OleDbCommand command10 = new OleDbCommand("SELECT * FROM HaendlerWaren", connection);
-            OleDbCommand command11 = new OleDbCommand("SELECT * FROM HaendlerWaren", connection);
-            OleDbCommand command12 = new OleDbCommand("SELECT * FROM Kulturkontexte", connection);
-            OleDbCommand command13 = new OleDbCommand("SELECT * FROM Kulturkontexte", connection);
-            reader = command.ExecuteReader();
-            reader2 = command2.ExecuteReader();
-            reader3 = command3.ExecuteReader();
-            reader4 = command4.ExecuteReader();
-            reader5 = command5.ExecuteReader();
-            reader6 = command6.ExecuteReader();
-            reader7 = command7.ExecuteReader();
-            reader8 = command8.ExecuteReader();
-            reader9 = command9.ExecuteReader();
-            reader10 = command10.ExecuteReader();
-            reader11 = command11.ExecuteReader();
-            reader12 = command12.ExecuteReader();
-            reader13 = command13.ExecuteReader();
-            comboBox5.Items.Clear();
-            comboBox1.Items.Clear();
-            comboBox2.Items.Clear();
-            comboBox6.Items.Clear();
-            comboBox7.Items.Clear();
-
-            while (reader.Read())
-            {
-                comboBox1.Items.Add(reader[1].ToString());
-                comboBox3.Items.Add(reader[1].ToString());
-            }
-            while (reader3.Read())
-            {
-                comboBox5.Items.Add(reader3[1].ToString());
-                comboBox4.Items.Add(reader3[1].ToString());
-            }
-            while (reader5.Read())
-            {
-                comboBox2.Items.Add(reader5[1].ToString());
-            }
-            while (reader10.Read())
-            {
-                comboBox6.Items.Add(reader10[1].ToString());
-            }
-            while (reader12.Read())
-            {
-                comboBox7.Items.Add(reader12[1].ToString());
-            }
-
-            DataTable ZutatenRegionTabelle = new DataTable();
-            DataTable ZutatenUmgebungTabelle = new DataTable();
-            DataTable ZutatenTabelle = new DataTable();
-            DataTable HaendlerTabelle = new DataTable();
-            DataTable SondergewerbeTabelle = new DataTable();
-            DataTable WarenTabelle = new DataTable();
-            DataTable HaendlerWarenTabelle = new DataTable();
-            DataTable KulturkontexteTabelle = new DataTable();
-
-            ZutatenRegionTabelle.Load(reader2);
-            ZutatenUmgebungTabelle.Load(reader4);
-            ZutatenTabelle.Load(reader);
-            HaendlerTabelle.Load(reader7);
-            SondergewerbeTabelle.Load(reader8);
-            WarenTabelle.Load(reader9);
-            HaendlerWarenTabelle.Load(reader11);
-            KulturkontexteTabelle.Load(reader13);
-
-            ZutatenRegionTB = ZutatenRegionTabelle;
-            ZutatenUmgebungTB = ZutatenUmgebungTabelle;
-            ZutatenTB = ZutatenTabelle;
-            HaendlerTB = HaendlerTabelle;
-            SondergewerbeTB = SondergewerbeTabelle;
-            WarenTB = WarenTabelle;
-            HaendlerWarenTB = HaendlerWarenTabelle;
-            KulturkontexteTB = KulturkontexteTabelle;
-
-            connection.Close();
-        }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -539,9 +559,9 @@ namespace Tüfteltruhe
                 rowcount2++;
                 dataGridView3.Rows[rowcount2 - 1].DefaultCellStyle.BackColor = Color.YellowGreen;
                 int portionen = 1;
-                if (istselten) portionen = zufall.Next(1, 3);
-                if (istungewöhnlich) portionen = zufall.Next(1, 5);
-                if (istgewöhnlich) portionen = zufall.Next(1, 7);
+                if (istselten) portionen = zufall.Next(1, 4);
+                if (istungewöhnlich) portionen = zufall.Next(1, 6);
+                if (istgewöhnlich) portionen = zufall.Next(1, 8);
                 dataGridView3[0, rowcount2 - 1].Value = portionen + " Portionen der gesuchten Zutat " + comboBox2.GetItemText(comboBox2.SelectedItem) + " gefunden!";
                 neuesuche();
             }
@@ -550,7 +570,7 @@ namespace Tüfteltruhe
                 dataGridView3.Rows.Add();
                 rowcount2++;
                 dataGridView3.Rows[rowcount2 - 1].DefaultCellStyle.BackColor = Color.LightYellow;
-                dataGridView3[0, rowcount2 - 1].Value = "Nebenbei " + zufall.Next(1,7) + " Portionen der Zutat" + Region2.gewöhnlich[zufall.Next(0, Region2.gewöhnlich.Length - 1)] + " gefunden.";
+                dataGridView3[0, rowcount2 - 1].Value = "Nebenbei " + zufall.Next(1,8) + " Portionen der Zutat" + Region2.gewöhnlich[zufall.Next(0, Region2.gewöhnlich.Length)] + " gefunden.";
             }
             else
             {
@@ -755,7 +775,6 @@ namespace Tüfteltruhe
                 }
             }
 
-
             if (richtigeumgebung && richtigeregion)
             {
                 if (istgewöhnlich) erforderlichesuchstunden = 1;
@@ -778,7 +797,7 @@ namespace Tüfteltruhe
                 if (istsehrselten) erforderlichesuchstunden = 10000;
             }
 
-            testergebnis2 = (int)numericUpDown5.Value + zufall.Next(1, 6) + zufall.Next(1, 6) + zufall.Next(1, 6);
+            testergebnis2 = (int)numericUpDown5.Value + zufall.Next(1, 7) + zufall.Next(1, 7) + zufall.Next(1, 7);
             label15.Text = "Letzter Wurf: " + (testergebnis2 - (int)numericUpDown5.Value) + " + " + (int)numericUpDown5.Value + " = " + testergebnis2;
             if (testergebnis2 < 11)
             {
@@ -840,20 +859,19 @@ namespace Tüfteltruhe
 
         private void button8_Click(object sender, EventArgs e) //Markt generieren
         {
-            if (radioButton1.Checked) händleranzahl = 1 + zufall.Next(1,4);
-            else if (radioButton2.Checked) händleranzahl = 5 + zufall.Next(1, 10);
-            else if (radioButton3.Checked) händleranzahl = 15 + zufall.Next(1, 20);
-            else if (radioButton4.Checked) händleranzahl = 35 + zufall.Next(1, 20);
+            if (radioButton1.Checked) händleranzahl = 1 + zufall.Next(1,5);
+            else if (radioButton2.Checked) händleranzahl = 5 + zufall.Next(1, 11);
+            else if (radioButton3.Checked) händleranzahl = 15 + zufall.Next(1, 21);
+            else if (radioButton4.Checked) händleranzahl = 35 + zufall.Next(1, 21);
 
-            if (radioButton1.Checked) sondergewerbe = zufall.Next(1, 4) - 1;
-            else if (radioButton2.Checked) sondergewerbe = zufall.Next(1, 6);
-            else if (radioButton3.Checked) sondergewerbe = zufall.Next(1, 8) + zufall.Next(1, 8);
-            else if (radioButton4.Checked) sondergewerbe = zufall.Next(1, 12) + zufall.Next(1, 12);
-
+            if (radioButton1.Checked) sondergewerbe = zufall.Next(1, 5) - 1;
+            else if (radioButton2.Checked) sondergewerbe = zufall.Next(1, 7);
+            else if (radioButton3.Checked) sondergewerbe = zufall.Next(1, 9) + zufall.Next(1, 9);
+            else if (radioButton4.Checked) sondergewerbe = zufall.Next(1, 13) + zufall.Next(1, 13);
 
             for (int i = 0; i < händleranzahl; i++)
             {
-                int ergebnis = zufall.Next(1, 100);
+                int ergebnis = zufall.Next(1, 101);
                 foreach (DataRow row in HaendlerTB.Rows)
                 {
                     if (row["Ergebnis"].ToString() == ergebnis.ToString())
@@ -895,7 +913,7 @@ namespace Tüfteltruhe
 
             for (int i = 0; i < sondergewerbe; i++)
             {
-                int ergebnis2 = zufall.Next(1, 100);
+                int ergebnis2 = zufall.Next(1, 101);
                 foreach (DataRow row in SondergewerbeTB.Rows)
                 {
                     if (row["Ergebnis"].ToString() == ergebnis2.ToString())
@@ -954,15 +972,368 @@ namespace Tüfteltruhe
         //#################### ################################################
         //###### WAREN ####### ################################################
         //#################### ################################################
-        private void button9_Click(object sender, EventArgs e)
+
+        public int XwY(int wuerfelzahl, int wuerfelart)
         {
-            dataGridView4.Rows.Clear();
-            rowcount4 = 0;
+            int ergebnis = 0;
+            for (int i = 0; i < wuerfelzahl; i++)
+            {
+                ergebnis += zufall.Next(1, wuerfelart + 1);
+            }
+            return ergebnis;
+        }
+
+        public string ZufaelligerZauber()
+        {
+            //+++
+            return "";
+        }
+
+        public void ZaubertrankGenerator()
+        {
+            //+++
+        }
+
+        public void ZauberrolleGenerator()
+        {
+            //+++
+        }
+
+        public void ArtefaktGenerator()
+        {
+            //+++
+        }
+
+        public void ZaubersteinGenerator()
+        {
+            //+++
+        }
+
+        public void SchmuckGenerator()
+        {    
+            int warenzahl = zufall.Next(1, 9) + zufall.Next(1, 9) + zufall.Next(1, 9);
+            if (zufall.Next(1, 5) == 1) { warenzahl += zufall.Next(1, 31); } //in 25% der Fälle: Reichhaltigeres Angebot, also +1W30
+            int rohsteinzahl = zufall.Next(1, 13);
+
+            for (int i = 0; i < warenzahl; i++)
+            {
+                string schmuckbezeichnung = "";
+                double realwert = 0;
+                double gesamtgewicht = 0;
+                DataRow ergebniszeilemetall = MetallTB.Rows[0];
+                DataRow ergebniszeilezier = ZierTB.Rows[0];
+                //Gegenstand
+                DataRow ergebniszeile = SchmuckTB.Rows[zufall.Next(1, 130)];
+                schmuckbezeichnung += ergebniszeile["Schmuck"].ToString();
+                //Metall
+                int metallgewicht = XwY(Convert.ToInt16(ergebniszeile["MetallWurfZahl"]), Convert.ToInt16(ergebniszeile["MetallWuerfel"])) + Convert.ToInt16(ergebniszeile["MetallMod"]);
+                if (metallgewicht > 0)
+                {
+                    schmuckbezeichnung += " aus " + (double)metallgewicht * 0.01 + " Pfund " /*+ "(=" + (double)metallgewicht * 25 + " Karat) "*/;
+                    ergebniszeilemetall = MetallTB.Rows[zufall.Next(1, 100)];
+                    schmuckbezeichnung += ergebniszeilemetall["Metall"].ToString();
+                    realwert += metallgewicht * (double)ergebniszeilemetall["Preis"];
+                    gesamtgewicht += metallgewicht * 0.01;
+                }
+                //Zierelemente
+                int anzahlzierelemente = XwY(Convert.ToInt16(ergebniszeile["ZierWurfZahl"]), Convert.ToInt16(ergebniszeile["ZierWuerfel"])) + Convert.ToInt16(ergebniszeile["ZierMod"]);
+                if (anzahlzierelemente > 0)
+                {
+                    int ergebnisverschiedenheitsgrad = zufall.Next(1, 21);
+                    int anzahlelementtypen = 0;
+                    //anzahlzierelemente verschwindet...! +++
+                    switch (ergebnisverschiedenheitsgrad)
+                    {
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 8:
+                        case 9:
+                        case 10:
+                        case 11:
+                        case 12:
+                        case 13:
+                        case 14:
+                            anzahlelementtypen = 1;
+                            break;
+                        case 15:
+                        case 16:
+                        case 17:
+                            anzahlelementtypen = 2;
+                            break;
+                        case 18:
+                        case 19:
+                            anzahlelementtypen = 2;
+                            break;
+                        case 20:
+                            anzahlelementtypen = anzahlzierelemente;
+                            break;
+                    }
+
+                    for (int a = 0; a < anzahlelementtypen; a++)
+                    {
+                        ergebniszeilezier = ZierTB.Rows[zufall.Next(1, 100)];
+                        if (a == 0) { schmuckbezeichnung += " mit "; }
+                        else { schmuckbezeichnung += " und "; }
+                        schmuckbezeichnung += ergebniszeilezier["Schmuckstein"].ToString() + " (";
+                        int karatzahl = XwY(Convert.ToInt16(ergebniszeilezier["ZierWurfZahl"]), Convert.ToInt16(ergebniszeilezier["ZierWuerfel"]));
+                        schmuckbezeichnung += karatzahl + " kt)";
+                        realwert += karatzahl * (double)ergebniszeilezier["Preis"];
+                        gesamtgewicht += karatzahl * 0.0004; //1 Pfund sind 2500 Karat
+                    }
+                }
+                
+                dataGridView4.Rows.Add();
+                rowcount4++;
+                dataGridView4[0, rowcount4 - 1].Value = schmuckbezeichnung;
+                if (!checkBox2.Checked) //Preisschwankungen (sind bei Schmuck weniger extrem als sonst)
+                {
+                    int preisschwank = zufall.Next(1, 21);
+                    switch (preisschwank)
+                    {
+                        case 1:
+                            realwert *= 0.5;
+                            dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
+                            break;
+                        case 2:
+                        case 3:
+                            realwert *= 0.7;
+                            dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
+                            break;
+                        case 4:
+                        case 5:
+                            realwert *= 0.9;
+                            dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
+                            break;
+                        case 13:
+                        case 14:
+                        case 15:
+                        case 16:
+                        case 17:
+                            realwert *= 1.2;
+                            dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.Orange;
+                            break;
+                        case 18:
+                        case 19:
+                            realwert *= 1.5;
+                            dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.Orange;
+                            break;
+                        case 20:
+                            realwert *= 2;
+                            dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.Orange;
+                            break;
+                    }
+                }
+                if (!checkBox4.Checked) //Preisschwank verbergen
+                {
+                    dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.White;
+                }
+                dataGridView4[1, rowcount4 - 1].Value = Math.Round(realwert, 2); 
+                dataGridView4[2, rowcount4 - 1].Value = Math.Round(gesamtgewicht, 1) + Convert.ToInt16(ergebniszeile["Zusatzgewicht"]);
+                dataGridView4[3, rowcount4 - 1].Value = "Mittel";
+                dataGridView4[5, rowcount4 - 1].Value = ergebniszeile["Beschreibung"].ToString(); 
+                dataGridView4[4, rowcount4 - 1].Value = "Ja";
+                dataGridView4.Columns[0].Width = 300;
+                dataGridView4.Columns[3].Visible = false;
+                dataGridView4.Columns[4].Visible = false;
+                switch (ergebniszeilemetall["Metall"].ToString())
+                {
+                    case "Asterium":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.LightSteelBlue;
+                        break;
+                    case "Adamant":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Firebrick;
+                        break;
+                    case "Gold":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Gold;
+                        break;
+                    case "Bernstein":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.FromArgb(255,235, 163, 40);
+                        break;
+                    case "Elektrum":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.LightGray;
+                        break;
+                    case "Silber":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Silver;
+                        break;
+                    case "Bronze":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.DarkOrange;
+                        break;
+                    case "Messing":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Goldenrod;
+                        break;
+                    case "Kupfer":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Tomato;
+                        break;
+                }
+                if (metallgewicht == 0) { dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.White; }
+                switch (ergebniszeilezier["Schmuckstein"].ToString())
+                {
+                    case "Diamant":
+                        dataGridView4[0, rowcount4 - 1].Style.ForeColor = Color.PaleTurquoise;
+                        break;
+                    case "Rubin":
+                        dataGridView4[0, rowcount4 - 1].Style.ForeColor = Color.Red;
+                        break;
+                    case "Saphir":
+                        dataGridView4[0, rowcount4 - 1].Style.ForeColor = Color.SlateBlue;
+                        break;
+                    case "Smaragd":
+                        dataGridView4[0, rowcount4 - 1].Style.ForeColor = Color.LimeGreen;
+                        break;
+                    case "Bernstein":
+                        dataGridView4[0, rowcount4 - 1].Style.ForeColor = Color.FromArgb(255, 235, 163, 40);
+                        break;
+                    case "Jade":
+                        dataGridView4[0, rowcount4 - 1].Style.ForeColor = Color.Lime;
+                        break;
+                    case "Amethyst":
+                        dataGridView4[0, rowcount4 - 1].Style.ForeColor = Color.Orchid;
+                        break;
+                    case "Lapislazuli":
+                        dataGridView4[0, rowcount4 - 1].Style.ForeColor = Color.MediumBlue;
+                        break;
+                    case "Granat":
+                        dataGridView4[0, rowcount4 - 1].Style.ForeColor = Color.Crimson;
+                        break;
+                }
+            }
+
+            for (int i = 0; i < rohsteinzahl; i++)
+            {
+                dataGridView4.Rows.Add();
+                rowcount4++;
+                DataRow schmuckstein = ZierTB.Rows[zufall.Next(1, 100)]; 
+                int karatzahl = XwY(Convert.ToInt16(schmuckstein["RohWurfZahl"]), Convert.ToInt16(schmuckstein["RohWuerfel"]));
+                dataGridView4[0, rowcount4 - 1].Value = schmuckstein["Schmuckstein"].ToString() + " (" + karatzahl + " kt)";
+                double realwert = karatzahl * (double)schmuckstein["Preis"];
+                if (!checkBox2.Checked) //Preisschwankungen (sind bei Schmucksteinen weniger extrem als sonst)
+                {
+                    int preisschwank = zufall.Next(1, 21);
+                    switch (preisschwank)
+                    {
+                        case 1:
+                            realwert *= 0.5;
+                            dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
+                            break;
+                        case 2:
+                        case 3:
+                            realwert *= 0.7;
+                            dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
+                            break;
+                        case 4:
+                        case 5:
+                            realwert *= 0.9;
+                            dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
+                            break;
+                        case 13:
+                        case 14:
+                        case 15:
+                        case 16:
+                        case 17:
+                            realwert *= 1.2;
+                            dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.Orange;
+                            break;
+                        case 18:
+                        case 19:
+                            realwert *= 1.5;
+                            dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.Orange;
+                            break;
+                        case 20:
+                            realwert *= 2;
+                            dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.Orange;
+                            break;
+                    }
+                }
+                dataGridView4[1, rowcount4 - 1].Value = realwert;
+                dataGridView4[2, rowcount4 - 1].Value = Math.Round(karatzahl * 0.0004, 1);
+                if (!checkBox4.Checked) //Preisschwank verbergen
+                {
+                    dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.White;
+                }
+                switch (schmuckstein["Schmuckstein"].ToString())
+                {
+                    case "Diamant":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.PaleTurquoise;
+                        break;
+                    case "Rubin":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Red;
+                        break;
+                    case "Saphir":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.SlateBlue;
+                        break;
+                    case "Smaragd":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.LimeGreen;
+                        break;
+                    case "Bernstein":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.FromArgb(255, 235, 163, 40);
+                        break;
+                    case "Jade":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Lime;
+                        break;
+                    case "Amethyst":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Orchid;
+                        break;
+                    case "Lapislazuli":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.MediumBlue;
+                        dataGridView4[0, rowcount4 - 1].Style.ForeColor = Color.White;
+                        break;
+                    case "Granat":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Crimson;
+                        break;
+                }
+            }
+
+        }
+
+        public void WarenDurchsuchen(string Haendlertyp, string[] NurDieseWaren, double Haufigkeitsmod, bool Limit)
+        {
+            if (Haendlertyp == "Schmuck") { 
+                SchmuckGenerator();
+                return;
+            }
+            else if (Haendlertyp == "Zaubertrank") {
+                ZaubertrankGenerator();
+                return;
+            }
+            else if (Haendlertyp == "Zauberrolle")
+            {
+                ZauberrolleGenerator();
+                return;
+            }
+            else if (Haendlertyp == "Artefakte")
+            {
+                ArtefaktGenerator();
+                return;
+            }
+            else if (Haendlertyp == "Zaubersteine")
+            {
+                ZaubersteinGenerator();
+                return;
+            }
+
             foreach (DataRow row in WarenTB.Rows)
             {
-                if (row["Haendler"].ToString() == comboBox6.GetItemText(comboBox6.SelectedItem))
+                if (row["Haendler"].ToString() == Haendlertyp)
                 {
-                    if (row["Verweis"].ToString() == "")
+                    bool warenichtabbilden = false;
+                    if (NurDieseWaren != null) //Wenn es sich um einen Verweis mit nur exklusiven Waren handelt.
+                    {
+                        warenichtabbilden = true;
+                        for (int i = 0; i < NurDieseWaren.Length; i++)
+                        {
+                            if (NurDieseWaren[i] == " " + row["Ware"].ToString())
+                            {
+                                warenichtabbilden = false;
+                            }
+                        }
+                    }
+
+                    if (row["Verweis"].ToString() == "" && !warenichtabbilden)
                     {
                         string[] kulturkontexte = row["Kulturkontexte"].ToString().Split(',');
                         bool richtigekultur = false;
@@ -978,22 +1349,39 @@ namespace Tüfteltruhe
                             dataGridView4.Rows.Add();
                             rowcount4++;
                             dataGridView4[0, rowcount4 - 1].Value = row["Ware"].ToString();
-                            dataGridView4[2, rowcount4 - 1].Value = row["Gewicht"].ToString();
+                            dataGridView4[2, rowcount4 - 1].Value = row["Gewicht"].ToString();       
                             dataGridView4[3, rowcount4 - 1].Value = "Mittel";
                             dataGridView4[5, rowcount4 - 1].Value = row["Beschreibung"].ToString(); ;
                             dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.LightYellow;
                             double preis = (double)row["Realwert"];
+                            int gewichttemp = 0;
+                            if (row["Gewicht"].ToString() != "")
+                            {
+                                gewichttemp = Convert.ToInt32(row["Gewicht"]);
+                            }
+                            if (gewichttemp < -100) //Pferdegewichte (WX)
+                            {
+                                double zufallsgewicht = zufall.Next((int)(Math.Abs(gewichttemp) * 0.7), Math.Abs(gewichttemp) + 1);
+                                dataGridView4[2, rowcount4 - 1].Value = zufallsgewicht;
+                            }
+                            else if (gewichttemp < 0) //Negative Werte bedeuten Zufallswerte (WX)
+                            {
+                                double zufallsgewicht = zufall.Next(1, (int)(Math.Abs(gewichttemp)) + 1);
+                                dataGridView4[2, rowcount4 - 1].Value = zufallsgewicht;
+                                preis = (double)row["Realwert"] * zufallsgewicht;
+                            }
+                            
 
                             if (!checkBox3.Checked) //Qualitätsschwankungen
                             {
-                                int quali = zufall.Next(1, 20);
+                                int quali = zufall.Next(1, 21);
                                 switch (quali)
                                 {
                                     case 1:
                                     case 2:
                                         dataGridView4[3, rowcount4 - 1].Value = "Beschädigt, nicht verwendbar!";
                                         dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.OrangeRed;
-                                        preis*= 0.5;
+                                        preis *= 0.5;
                                         break;
                                     case 3:
                                     case 4:
@@ -1019,7 +1407,7 @@ namespace Tüfteltruhe
                             }
                             if (!checkBox2.Checked) //Preisschwankungen
                             {
-                                int preisschwank = zufall.Next(1, 20);
+                                int preisschwank = zufall.Next(1, 21);
                                 switch (preisschwank)
                                 {
                                     case 1:
@@ -1056,7 +1444,7 @@ namespace Tüfteltruhe
                                 }
                             }
 
-                            dataGridView4[1, rowcount4 - 1].Value = preis;
+                            dataGridView4[1, rowcount4 - 1].Value = Math.Round(preis, 2);
                             if (preis > (double)row["Realwert"])
                             {
                                 dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.Orange;
@@ -1065,34 +1453,66 @@ namespace Tüfteltruhe
                             {
                                 dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
                             }
-                            if(!checkBox4.Checked)
+                            if (!checkBox4.Checked) //Preisschwank verbergen
                             {
                                 dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.LightYellow;
                             }
 
-                            if ((double)row["Wahrscheinlichkeit"] >= zufall.Next(1, 10))
-                            {
-                                dataGridView4[4, rowcount4 - 1].Value = "Ja";
-                            }
-                            else
+                            double nettowahrscheinlichkeit = (double)row["Wahrscheinlichkeit"];
+                            if (Haufigkeitsmod != 1000) { nettowahrscheinlichkeit += Haufigkeitsmod; }
+
+                            if (nettowahrscheinlichkeit >= zufall.Next(1, 11) || checkBox5.Checked) { dataGridView4[4, rowcount4 - 1].Value = "Ja"; }
+                            else //Nicht verfügbar
                             {
                                 dataGridView4[4, rowcount4 - 1].Value = row["Dauer"].ToString();
-                                dataGridView4[1, rowcount4 - 1].Value = "";
-                                dataGridView4[2, rowcount4 - 1].Value = "";
-                                dataGridView4[3, rowcount4 - 1].Value = "";
-                                dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.LightCoral;
-                                dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.LightCoral;
-                                dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.LightCoral;
+                                if ((double)row["Wahrscheinlichkeit"] != 0)
+                                {
+                                    dataGridView4[1, rowcount4 - 1].Value = "";
+                                    dataGridView4[2, rowcount4 - 1].Value = "";
+                                    dataGridView4[3, rowcount4 - 1].Value = "";
+
+                                    dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.LightCoral;
+                                    dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.LightCoral;
+                                    dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.LightCoral;
+                                }
+                                else //Nur nach Auftrag
+                                {
+                                    dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.LightBlue;
+                                    dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.LightBlue;
+                                    dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.LightBlue;
+                                    dataGridView4[3, rowcount4 - 1].Value = "Nur nach Auftrag!";
+                                }
+                                if (Limit) //ergo: wenn diese Ware durch einen Verweis ins Inventar kommt...
+                                {
+                                    //BindingContext[dataGridView4].EndCurrentEdit();
+                                    dataGridView4.Rows[rowcount4 - 1].Visible = false;
+                                    //dataGridView4.Rows.RemoveAt(rowcount4 - 1); //=> ...gar nicht erst als Zeile anzeigen.
+                                }
                             }
-                            
                         }
                     }
-                    else 
+                    //Wenn es sich um einen Verweis handelt
+                    else if ((double)row["Wahrscheinlichkeit"] >= zufall.Next(1, 11) && !Limit)
                     {
-                        //++Verweise!
+                        double VHMod = 0;
+                        if (row["VerweisHaufigkeitsMod"].ToString() != "") { VHMod = (double)row["VerweisHaufigkeitsMod"]; }
+                        string[] VWaren = null;
+                        if (row["VerweisNurDieseWaren"].ToString() != "") { VWaren = row["VerweisNurDieseWaren"].ToString().Split(','); }
+                        WarenDurchsuchen(row["Verweis"].ToString(),VWaren , VHMod, true);
                     }
                 }
             }
+            dataGridView4.Columns[0].Width = 120;
+            dataGridView4.Columns[3].Visible = true;
+            dataGridView4.Columns[4].Visible = true;
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            dataGridView4.Rows.Clear();
+            rowcount4 = 0;
+            string[] leer = null;
+            WarenDurchsuchen(comboBox6.GetItemText(comboBox6.SelectedItem), leer, 1000, false);
         }
 
         //#################### ################################################
@@ -1158,10 +1578,16 @@ namespace Tüfteltruhe
                 oDoc.Application.Selection.InsertRowsAbove(1);
                 oDoc.Application.Selection.Tables[1].Rows[1].Select();
 
+                for (int d = 1; d <= RowCount - 1; d++)
+                {
+                    oDoc.Application.Selection.Tables[1].Rows[d].Range.Font.Size = 8;
+                    oDoc.Application.Selection.Tables[1].Rows[d].Range.Font.Name = "Book Antiqua";
+                    oDoc.Application.Selection.Tables[1].Rows[1].Range.Bold = 0;
+                }
+
                 //header row style
                 oDoc.Application.Selection.Tables[1].Rows[1].Range.Bold = 1;
-                oDoc.Application.Selection.Tables[1].Rows[1].Range.Font.Name = "Book Antiqua";
-                oDoc.Application.Selection.Tables[1].Rows[1].Range.Font.Size = 12;
+                oDoc.Application.Selection.Tables[1].Rows[1].Range.Font.Size = 10;
 
                 //add header row manually
                 for (int c = 0; c <= ColumnCount - 1; c++)
@@ -1171,6 +1597,7 @@ namespace Tüfteltruhe
 
                 //table style 
                 //oDoc.Application.Selection.Tables[1].set_Style("Grid Table 4 - Accent 5");
+                oDoc.Application.Selection.Tables[1].Borders.Enable = 1;
                 oDoc.Application.Selection.Tables[1].Rows[1].Select();
                 oDoc.Application.Selection.Cells.VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
 
@@ -1180,14 +1607,13 @@ namespace Tüfteltruhe
                     Word.Range headerRange = section.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
                     headerRange.Fields.Add(headerRange, Word.WdFieldType.wdFieldPage);
                     headerRange.Text = "Tüfteltruhe-Export";
-                    headerRange.Font.Size = 14;
+                    headerRange.Font.Size = 12;
                     headerRange.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
                 }
 
                 oDoc.SaveAs2(filename);
             }
         }
-
 
         private void AllgZutatensucheExp(object sender, EventArgs e)
         {
@@ -1233,16 +1659,16 @@ namespace Tüfteltruhe
 
         private void WarenangebotExp(object sender, EventArgs e)
         {
-        //    SaveFileDialog sfd = new SaveFileDialog();
+            SaveFileDialog sfd = new SaveFileDialog();
 
-        //    sfd.Filter = "Word Documents (*.docx)|*.docx";
+            sfd.Filter = "Word Documents (*.docx)|*.docx";
 
-        //    sfd.FileName = "Tüfteltruhe-Export Warenangebot.docx";
+            sfd.FileName = "Tüfteltruhe-Export Warenangebot.docx";
 
-        //    if (sfd.ShowDialog() == DialogResult.OK)
-        //    {
-        //        Export_Data_To_Word(dataGridView1, sfd.FileName);
-        //    }
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                Export_Data_To_Word(dataGridView4, sfd.FileName);
+            }
         }
 
         //#################### ################################################

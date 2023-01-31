@@ -126,22 +126,21 @@
 - Seereise-Schnellrechner
 
 ➤ Spielleitermodus:
-- Zutatensuche (zufällige Zutaten)
-- Zufällige Marktzusammensetzung
-- Zufälliges Warenangebot (mit Qualität und natürlicher Preisschwankung)
+- Zutatensuche (zufällige Pflanzen und Pilze)
+- Zufälliger Markt
+- Zufälliges Warenangebot
 - Zufällige Begegnung
 - Zufälliger NSC
-- Zufälliger Name
 
 ➤ Feldherrenkampagne
 ➤ Schlacht-Simulator
-➤ Interaktive Weltkarte, die pro Stamm die Daten anzeigt</value>
+➤ Interaktive Weltkarte</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAp8AAADeCAYAAAB7c2voAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wAAADsABataJCQAAO2xJREFUeF7tnQeYVcXZx41YEBOMLZjPiBqNGLGBCipFoyYaa1CjIdaoEY1GyCeJ
+        vwAADr8BOAVTJAAAO2xJREFUeF7tnQeYVcXZx41YEBOMLZjPiBqNGLGBCipFoyYaa1CjIdaoEY1GyCeJ
         RiNEsXesqNhii8aGNbYofXdhC2xjG7uwnW0ssL3Md9/r7JfL8O5yzpw5c8+95/97nt/zKNzzztwzl3P/
         95SZbQQAAAAAAACWQPgEAAAAAADWQPgEAAAAAADWQPgEAAAAAADWQPgEAAAAAADWQPgEAAAAAADWQPgE
         AAAAAADWQPgEAAAAAADWQPgEAAAAAADWQPgEAAAAAADWQPgEAAAAAADWQPgEAAAAAADWQPgEAAAAAADW

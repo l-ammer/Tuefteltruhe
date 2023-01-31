@@ -415,7 +415,7 @@ namespace Tüfteltruhe
                             orientierungszw = 10;
                             break;
                         case "Dickicht (Urwald, Gebirge, Sumpf, Tiefschnee":
-                            reisegeschwindigkeit = zufall.Next(1, 2);
+                            reisegeschwindigkeit = zufall.Next(1, 3);
                             orientierungszw = 12;
                             break;
                     }
@@ -479,11 +479,11 @@ namespace Tüfteltruhe
                     switch (gewaehltes_terrain)
                     {
                         case "Straße/Weg":
-                            reisegeschwindigkeit = zufall.Next(2,6);
+                            reisegeschwindigkeit = zufall.Next(2,7);
                             orientierungszw = 0;
                             break;
                         case "Gelände (Wiesen, lichter Wald, verschneite Straße)":
-                            reisegeschwindigkeit = zufall.Next(1,3);
+                            reisegeschwindigkeit = zufall.Next(1,4);
                             orientierungszw = 10;
                             break;
                         case "Dickicht (Urwald, Gebirge, Sumpf, Tiefschnee":
@@ -655,8 +655,6 @@ namespace Tüfteltruhe
             dataGridView2[5, rowcount2 - 1].Value = (extremerfolg);
             if (extremerfolg > 0) dataGridView2[5, rowcount2 - 1].Style.BackColor = Color.LightGreen;
             if (extremfehl > 0) dataGridView2[4, rowcount2 - 1].Style.BackColor = Color.LightCoral;
-
-
         }
 
         // ###### Seereisetest ######
@@ -1085,7 +1083,6 @@ namespace Tüfteltruhe
             spielermodus.Show();
         }
 
-
         private void neuesFensterSpielermodusToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Spielermodus spielermodus = new Spielermodus();
@@ -1100,7 +1097,6 @@ namespace Tüfteltruhe
 
         private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
             foreach (DataRow reihe in SchiffstypenTB.Rows)
             {
                 if (comboBox5.GetItemText(this.comboBox5.SelectedItem) != "Auswählen...")
@@ -1110,6 +1106,7 @@ namespace Tüfteltruhe
                 }
             }
         }
+
         private void erforderlichebesatzungaktualisieren()
         {
             int gewrudersoll = 0;
@@ -1130,7 +1127,6 @@ namespace Tüfteltruhe
             }
             if (radioButton5.Checked) label19.Text = "Erforderlich: " + gewrudersoll.ToString();
             else if (radioButton6.Checked) label19.Text = "Erforderlich: " + gewsegelsoll.ToString();
-
         }
 
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
