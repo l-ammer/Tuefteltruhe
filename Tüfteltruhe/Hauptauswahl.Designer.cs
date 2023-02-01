@@ -96,10 +96,9 @@ namespace Tüfteltruhe
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(211, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(216, 221);
+            this.label1.Size = new System.Drawing.Size(216, 234);
             this.label1.TabIndex = 5;
             this.label1.Text = resources.GetString("label1.Text");
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // pictureBox1
             // 
@@ -110,7 +109,6 @@ namespace Tüfteltruhe
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // Hauptauswahl
             // 

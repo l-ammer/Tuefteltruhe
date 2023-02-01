@@ -28,6 +28,7 @@ namespace Tüfteltruhe
         public DataTable SchmuckTB = new DataTable();
         public DataTable MetallTB = new DataTable();
         public DataTable ZierTB = new DataTable();
+        public DataTable ZauberTB = new DataTable();
         public Bereich Region = new Bereich(0, "", null, null, null, null);
         public Bereich Umgebung = new Bereich(0, "", null, null, null, null);
         public Bereich Region2 = new Bereich(0, "", null, null, null, null);
@@ -106,6 +107,7 @@ namespace Tüfteltruhe
             OleDbDataReader reader14 = null;
             OleDbDataReader reader15 = null;
             OleDbDataReader reader16 = null;
+            OleDbDataReader reader17 = null;
             OleDbCommand command = new OleDbCommand("SELECT * FROM ZutatenRegion", connection);
             OleDbCommand command2 = new OleDbCommand("SELECT * FROM ZutatenRegion", connection);
             OleDbCommand command3 = new OleDbCommand("SELECT * FROM ZutatenUmgebung", connection);
@@ -122,6 +124,7 @@ namespace Tüfteltruhe
             OleDbCommand command14 = new OleDbCommand("SELECT * FROM Schmuck", connection);
             OleDbCommand command15 = new OleDbCommand("SELECT * FROM Metall", connection);
             OleDbCommand command16 = new OleDbCommand("SELECT * FROM Zier", connection);
+            OleDbCommand command17 = new OleDbCommand("SELECT * FROM Zauber", connection);
             reader = command.ExecuteReader();
             reader2 = command2.ExecuteReader();
             reader3 = command3.ExecuteReader();
@@ -138,6 +141,7 @@ namespace Tüfteltruhe
             reader14 = command14.ExecuteReader();
             reader15 = command15.ExecuteReader();
             reader16 = command16.ExecuteReader();
+            reader17 = command17.ExecuteReader();
             comboBox5.Items.Clear();
             comboBox1.Items.Clear();
             comboBox2.Items.Clear();
@@ -178,6 +182,7 @@ namespace Tüfteltruhe
             DataTable SchmuckTabelle = new DataTable();
             DataTable MetallTabelle = new DataTable();
             DataTable ZierTabelle = new DataTable();
+            DataTable ZauberTabelle = new DataTable();
 
             ZutatenRegionTabelle.Load(reader2);
             ZutatenUmgebungTabelle.Load(reader4);
@@ -190,6 +195,7 @@ namespace Tüfteltruhe
             SchmuckTabelle.Load(reader14);
             MetallTabelle.Load(reader15);
             ZierTabelle.Load(reader16);
+            ZauberTabelle.Load(reader17);
 
             ZutatenRegionTB = ZutatenRegionTabelle;
             ZutatenUmgebungTB = ZutatenUmgebungTabelle;
@@ -202,6 +208,7 @@ namespace Tüfteltruhe
             SchmuckTB = SchmuckTabelle;
             MetallTB = MetallTabelle;
             ZierTB = ZierTabelle;
+            ZauberTB = ZauberTabelle;
 
             connection.Close();
         }
@@ -983,15 +990,182 @@ namespace Tüfteltruhe
             return ergebnis;
         }
 
-        public string ZufaelligerZauber()
+        public string ZufaelligerZauberNachArt(string art)
         {
-            //+++
-            return "";
+            //alle einmal durchgehen und korrekte zeilenindizes in ein array werfen, dann array per zufall finden
+            int[] auswahl = new int[100];
+            int stelle = 0;
+            DataRow ergebniszeile = ZauberTB.Rows[0];
+            for (int i = 0; i < 285; i++)
+            {
+                ergebniszeile = ZauberTB.Rows[i];
+                if (ergebniszeile["Art"].ToString() == art)
+                {
+                    auswahl[stelle] = Convert.ToInt16(ergebniszeile["ID"]);
+                    stelle++;
+                }
+            }
+            ergebniszeile = ZauberTB.Rows[auswahl[zufall.Next(0, auswahl.Length)]];
+
+            return ergebniszeile["Zauber"].ToString();
+        }
+
+        public int ZufaelligerZauber(string art, int komplexstufe)
+        {
+            DataRow ergebniszeile = ZauberTB.Rows[0];
+            for (int i = 0; i < 285; i++)
+            {
+                if (ergebniszeile["Art"].ToString() == art && Convert.ToInt16(ergebniszeile["Stufe"]) == komplexstufe)
+                {
+                    ergebniszeile = ZauberTB.Rows[i];
+                }
+            }
+            return Convert.ToInt16(ergebniszeile["ID"]) -1;
+        }
+
+        public int ZufaelligerZauberNachKomplex(string komplex)
+        {
+            int[] auswahlzauber = new int[100];
+            int stelle = 0;
+            DataRow ergebniszeile = ZauberTB.Rows[0];
+            for (int i = 0; i < 284; i++)
+            {
+                ergebniszeile = ZauberTB.Rows[i];
+                if (ergebniszeile["Komplex"].ToString() == komplex)
+                {
+                    auswahlzauber[stelle] = Convert.ToInt16(ergebniszeile["ID"]);
+                    stelle++;
+                }
+            }
+            ergebniszeile = ZauberTB.Rows[auswahlzauber[zufall.Next(0, stelle)]];
+
+            return Convert.ToInt16(ergebniszeile["ID"]) -1;
+        }
+
+        public int ZauberFinden(string komplex, int komplexstufe)
+        {
+            DataRow ergebniszeile = ZauberTB.Rows[0];
+            DataRow zeile = ZauberTB.Rows[0];
+            for (int i = 0; i < 284; i++)
+            {
+                zeile = ZauberTB.Rows[i];
+                if (zeile["Komplex"].ToString() == komplex && Convert.ToInt16(zeile["Komplexstufe"]) == komplexstufe)
+                {
+                    ergebniszeile = ZauberTB.Rows[i];
+                }
+            }
+            return Convert.ToInt16(ergebniszeile["ID"]) -1;
+        }
+
+        public string ZufaelligerRegulaererKomplex()
+        {
+            DataRow ergebniszeile = ZauberTB.Rows[zufall.Next(1, 159)];
+
+            return ergebniszeile["Komplex"].ToString();
         }
 
         public void ZaubertrankGenerator()
         {
-            //+++
+            int trankzahl = zufall.Next(1, 11) + zufall.Next(1, 11) + zufall.Next(1, 11);
+            for (int i = 0; i < trankzahl; i++)
+            {
+                dataGridView4.Rows.Add();
+                rowcount4++;
+                dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.LightYellow;
+                //Zauber ermitteln
+                string komplex = ZufaelligerRegulaererKomplex();
+                int wurf = zufall.Next(1, 101);
+                if (wurf == 98)
+                {
+                    komplex = "Lebenszauber";
+                    //dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.DarkRed;
+                    dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Black;
+                    dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.ForeColor = Color.GhostWhite;
+                }
+                else if (wurf == 99)
+                {
+                    komplex = "Totenzauber";
+                    dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Black;
+                    dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.ForeColor = Color.GhostWhite;
+                }
+                else if (wurf == 100)
+                {
+                    komplex = "Seelenzauber";
+                    //dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.LightGray;
+                    dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Black;
+                    dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.ForeColor = Color.GhostWhite;
+                }
+                int stufezufall = zufall.Next(1, 11);
+                int komplexstufe = 0;
+                DataRow ergebniszeile = ZauberTB.Rows[0];
+                if (komplex != "Seelenzauber" && komplex != "Totenzauber" && komplex != "Lebenszauber")
+                {
+                    switch (stufezufall)
+                    {
+                        case 1:
+                        case 2:
+                        case 3:
+                            komplexstufe = 1;
+                            break;
+                        case 4:
+                        case 5:
+                        case 6:
+                            komplexstufe = 2;
+                            break;
+                        case 7:
+                        case 8:
+                            komplexstufe = 3;
+                            break;
+                        case 9:
+                            komplexstufe = 4;
+                            dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Goldenrod;
+                            break;
+                        case 10:
+                            komplexstufe = 5;
+                            dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Goldenrod;
+                            break;
+                    }
+                    ergebniszeile = ZauberTB.Rows[ZauberFinden(komplex, komplexstufe)];
+                }
+                else
+                {
+                    ergebniszeile = ZauberTB.Rows[ZufaelligerZauberNachKomplex(komplex)];
+                    while (ergebniszeile["Zauber"].ToString() == "Zauberhaut") //Zauberhaut darf nicht als Trank existieren, nur als Artefakt
+                    { 
+                        ergebniszeile = ZauberTB.Rows[ZufaelligerZauberNachKomplex(komplex)]; 
+                    }
+                    
+                }     
+
+                //Zauber anzeigen
+                double bonusstufen = 0; 
+                double bonusstufenmöglichkeiten = Convert.ToDouble(ergebniszeile["Bonusstufen"]);
+                for (int a = 0; a < bonusstufenmöglichkeiten; a++)
+                {
+                    bonusstufen += zufall.Next(0, 3);
+                }
+                bonusstufenmöglichkeiten *= 2;
+                double bonusquote = (bonusstufen / bonusstufenmöglichkeiten) * 100;
+                if (bonusstufenmöglichkeiten == 0) { bonusquote = 0; }
+                else if (bonusquote == 100)
+                {
+                    dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
+                    dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
+                }
+                else if (bonusquote == 0)
+                {
+                    dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Orange;
+                    dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
+                }
+                dataGridView4[0, rowcount4 - 1].Value = "Zaubertrank: " + ergebniszeile["Zauber"].ToString() + " (" + ergebniszeile["Stufe"].ToString() + ")";
+                int gesamtstufe = (int)bonusstufen + Convert.ToInt16(ergebniszeile["Stufe"]);
+                if (komplex == "Seelenzauber" || komplex == "Totenzauber" || komplex == "Lebenszauber") { gesamtstufe *= 3; } //dreifacher Preis für verbotene Zauberei
+                dataGridView4[1, rowcount4 - 1].Value = (20 * gesamtstufe).ToString();
+                dataGridView4[2, rowcount4 - 1].Value = "1";
+                dataGridView4[3, rowcount4 - 1].Value = "Bonusstufen: " + Convert.ToString(bonusstufen) + " von " + Convert.ToString(bonusstufenmöglichkeiten) + " (" + Math.Round(bonusquote) + "%)";
+                dataGridView4[4, rowcount4 - 1].Value = "Ja";
+                dataGridView4[5, rowcount4 - 1].Value = "Komplex: " + komplex;
+            }
         }
 
         public void ZauberrolleGenerator()
@@ -1097,12 +1271,12 @@ namespace Tüfteltruhe
                     switch (preisschwank)
                     {
                         case 1:
-                            realwert *= 0.5;
+                            realwert *= 0.7;
                             dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
                             break;
                         case 2:
                         case 3:
-                            realwert *= 0.7;
+                            realwert *= 0.8;
                             dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
                             break;
                         case 4:
@@ -1133,7 +1307,8 @@ namespace Tüfteltruhe
                 {
                     dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.LightYellow;
                 }
-                dataGridView4[1, rowcount4 - 1].Value = Math.Round(realwert, 2); 
+                dataGridView4[1, rowcount4 - 1].Value = Math.Round(realwert, 2);
+                if (realwert > 20) { dataGridView4[1, rowcount4 - 1].Value = Math.Round(realwert); } //Hohe Preise sollen keine Kommabeträge mehr haben
                 dataGridView4[2, rowcount4 - 1].Value = Math.Round(gesamtgewicht, 1) + Convert.ToInt16(ergebniszeile["Zusatzgewicht"]);
                 dataGridView4[3, rowcount4 - 1].Value = "Mittel";
                 dataGridView4[5, rowcount4 - 1].Value = ergebniszeile["Beschreibung"].ToString(); 
@@ -1219,12 +1394,12 @@ namespace Tüfteltruhe
                     switch (preisschwank)
                     {
                         case 1:
-                            realwert *= 0.5;
+                            realwert *= 0.7;
                             dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
                             break;
                         case 2:
                         case 3:
-                            realwert *= 0.7;
+                            realwert *= 0.8;
                             dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
                             break;
                         case 4:
@@ -1251,7 +1426,8 @@ namespace Tüfteltruhe
                             break;
                     }
                 }
-                dataGridView4[1, rowcount4 - 1].Value = realwert;
+                dataGridView4[1, rowcount4 - 1].Value = Math.Round(realwert, 2);
+                if (realwert > 20) { dataGridView4[1, rowcount4 - 1].Value = Math.Round(realwert); } //Hohe Preise sollen keine Kommabeträge mehr haben
                 dataGridView4[2, rowcount4 - 1].Value = Math.Round(karatzahl * 0.0004, 1);
                 if (!checkBox4.Checked) //Preisschwank verbergen
                 {
@@ -1289,7 +1465,7 @@ namespace Tüfteltruhe
                         break;
                 }
             }
-
+            //dataGridView4.Sort(dataGridView4.Columns[4], ListSortDirection.Descending);
         }
 
         public void WarenDurchsuchen(string Haendlertyp, string[] NurDieseWaren, double Haufigkeitsmod, bool Limit)
@@ -1389,18 +1565,18 @@ namespace Tüfteltruhe
                                     case 4:
                                     case 5:
                                     case 6:
-                                        dataGridView4[3, rowcount4 - 1].Value = "Niedrige Qualität: -1 auf Aktionen";
+                                        dataGridView4[3, rowcount4 - 1].Value = "Niedrige Qualität: -1 auf Aktionen (bei Waffen: auf Schaden)";
                                         dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Orange;
                                         preis *= 0.5;
                                         break;
                                     case 18:
                                     case 19:
-                                        dataGridView4[3, rowcount4 - 1].Value = "Hohe Qualität: +1 auf Aktionen";
+                                        dataGridView4[3, rowcount4 - 1].Value = "Hohe Qualität: +1 auf Aktionen (bei Waffen: auf Schaden)";
                                         dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
                                         preis *= 1.5;
                                         break;
                                     case 20:
-                                        dataGridView4[3, rowcount4 - 1].Value = "Herausragende Qualität: +3 auf Aktionen";
+                                        dataGridView4[3, rowcount4 - 1].Value = "Herausragende Qualität: +3 auf Aktionen (bei Waffen: auf Schaden)";
                                         dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Gold;
                                         preis *= 3;
                                         break;
@@ -1413,17 +1589,17 @@ namespace Tüfteltruhe
                                 switch (preisschwank)
                                 {
                                     case 1:
-                                        preis *= 0.25;
+                                        preis *= 0.5;
                                         //dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.Gold;
                                         break;
                                     case 2:
                                     case 3:
-                                        preis *= 0.5;
+                                        preis *= 0.7;
                                         //dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
                                         break;
                                     case 4:
                                     case 5:
-                                        preis *= 0.75;
+                                        preis *= 0.9;
                                         //dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.LightGreen;
                                         break;
                                     case 13:
@@ -1447,6 +1623,7 @@ namespace Tüfteltruhe
                             }
 
                             dataGridView4[1, rowcount4 - 1].Value = Math.Round(preis, 2);
+                            if (preis > 20) { dataGridView4[1, rowcount4 - 1].Value = Math.Round(preis); } //Hohe Preise sollen keine Kommabeträge mehr haben
                             if (preis > (double)row["Realwert"])
                             {
                                 dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.Orange;
@@ -1507,6 +1684,7 @@ namespace Tüfteltruhe
             dataGridView4.Columns[0].Width = 120;
             dataGridView4.Columns[3].Visible = true;
             dataGridView4.Columns[4].Visible = true;
+            //dataGridView4.Sort(dataGridView4.Columns[4], ListSortDirection.Descending);
         }
 
         private void button9_Click(object sender, EventArgs e)

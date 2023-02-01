@@ -28,25 +28,10 @@ namespace Tüfteltruhe
             spielermodus.Show();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             Spielleitermodus spielleitermodus = new Spielleitermodus();
             spielleitermodus.Show();
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

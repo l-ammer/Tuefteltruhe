@@ -18,6 +18,7 @@ Sammlung an kleinen Hilfsanwendungen für das PNP-Spiel [Alt-Europa](https://alb
 - [x] **Zufälliges Warenangebot**
 - [ ] Zufällige Begegnung
 - [ ] Zufälliger NSC und Name
+- [ ] Zufälliger Zauber
 
 ###### Weitere:
 - [ ] Feldherrenkampagne
