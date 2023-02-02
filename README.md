@@ -8,9 +8,9 @@ Sammlung an kleinen Hilfsanwendungen für das PNP-Spiel [Alt-Europa](https://alb
 # Fertige und geplante Anwendungen
 
 ###### Spielermodus:
-- [x] **Waffentest-Schnellrechner**
-- [x] **Reisetest-Schnellrechner**
-- [x] **Seereise-Schnellrechner**
+- [x] **Waffentest**
+- [x] **Reisetest**
+- [x] **Seereise**
 
 ###### Spielleitermodus:
 - [x] **Zutatensuche (zufällige Pflanzen und Pilze)**

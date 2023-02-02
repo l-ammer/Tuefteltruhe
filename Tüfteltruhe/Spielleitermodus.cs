@@ -186,7 +186,7 @@ namespace Tüfteltruhe
 
             ZutatenRegionTabelle.Load(reader2);
             ZutatenUmgebungTabelle.Load(reader4);
-            ZutatenTabelle.Load(reader);
+            ZutatenTabelle.Load(reader6);
             HaendlerTabelle.Load(reader7);
             SondergewerbeTabelle.Load(reader8);
             WarenTabelle.Load(reader9);
@@ -293,7 +293,7 @@ namespace Tüfteltruhe
             for (int i = 0; i < suchstunden; i++)
             {
                 gesamtstunden++;
-                label8.Text = "Ges. Stunden: " + gesamtstunden;
+                label8.Text = "Bereits gesuchte Stunden: " + gesamtstunden;
                 testergebnis = zufall.Next(1, 7) + zufall.Next(1, 7) + zufall.Next(1, 7) + sammeln;
                 label13.Text = "Letzter Wurf: " + (testergebnis - sammeln) + " + " + sammeln + " = " + testergebnis;
 
@@ -414,6 +414,14 @@ namespace Tüfteltruhe
                         dataGridView1[3, rowcount - 1].Value = "Unbekannt!";
                         dataGridView1[3, rowcount - 1].Style.BackColor = Color.Orange;
                     }
+                    foreach (DataRow row in ZutatenTB.Rows)
+                    {
+                        if (" " + row["Zutat"].ToString() == ergebniszutat)
+                        {
+                            dataGridView1[4, rowcount - 1].Value = row["Aussehen"].ToString(); 
+                            dataGridView1[5, rowcount - 1].Value = row["Fundort"].ToString();
+                        }
+                    }
                 }
             }
 
@@ -450,6 +458,14 @@ namespace Tüfteltruhe
                         dataGridView1[3, rowcount - 1].Value = "Unbekannt!";
                         dataGridView1[3, rowcount - 1].Style.BackColor = Color.Orange;
                     }
+                    foreach (DataRow row in ZutatenTB.Rows)
+                    {
+                        if (" " + row["Zutat"].ToString() == ergebniszutat)
+                        {
+                            dataGridView1[4, rowcount - 1].Value = row["Aussehen"].ToString();
+                            dataGridView1[5, rowcount - 1].Value = row["Fundort"].ToString();
+                        }
+                    }
                 }
             }
 
@@ -481,10 +497,18 @@ namespace Tüfteltruhe
                     dataGridView1[0, rowcount - 1].Value = ergebniszutat;
                     dataGridView1[2, rowcount - 1].Value = "Gewöhnlich";
                     dataGridView1[1, rowcount - 1].Value = zufall.Next(1, 8);
-                    if (zufall.Next(1, 11) > kenntniszw + 1)
+                    if (zufall.Next(1, 11) > kenntniszw + 4)
                     {
                         dataGridView1[3, rowcount - 1].Value = "Unbekannt!";
                         dataGridView1[3, rowcount - 1].Style.BackColor = Color.Orange;
+                    }
+                    foreach (DataRow reihe in ZutatenTB.Rows)
+                    {
+                        if (" " + reihe["Zutat"].ToString() == ergebniszutat)
+                        {
+                            dataGridView1[4, rowcount - 1].Value = reihe["Aussehen"].ToString();
+                            dataGridView1[5, rowcount - 1].Value = reihe["Fundort"].ToString();
+                        }
                     }
                 }
             }
@@ -551,14 +575,14 @@ namespace Tüfteltruhe
             dataGridView1.Rows.Clear();
             rowcount = 0;
             gesamtstunden = 0;
-            label8.Text = "Ges. Stunden: " + gesamtstunden;
+            label8.Text = "Bereits gesuchte Stunden: " + gesamtstunden;
         }
 
         private void button1_Click(object sender, EventArgs e) // 1 Stunde suchen
         {
             erforderlichesuchstunden--;
             heutigesuchstunden++;
-            label14.Text = "Ges. Stunden: " + heutigesuchstunden;
+            label14.Text = "Gesuchte Stunden: " + heutigesuchstunden;
 
             if (erforderlichesuchstunden < 1)
             {
@@ -623,7 +647,7 @@ namespace Tüfteltruhe
         private void button4_Click(object sender, EventArgs e) //Neuer Tag
         {
             heutigesuchstunden = 0;
-            label14.Text = "Ges. Stunden: " + heutigesuchstunden;
+            label14.Text = "Gesuchte Stunden: " + heutigesuchstunden;
         }
 
         public void neuesuche()
@@ -825,7 +849,7 @@ namespace Tüfteltruhe
         private void button5_Click(object sender, EventArgs e) //Ergebnisse zurücksetzen
         {
             heutigesuchstunden = 0;
-            label14.Text = "Ges. Stunden: " + heutigesuchstunden;
+            label14.Text = "Gesuchte Stunden: " + heutigesuchstunden;
 
             comboBox2.SelectedIndex = -1;
             label15.Text = "";
@@ -1164,7 +1188,8 @@ namespace Tüfteltruhe
                 dataGridView4[2, rowcount4 - 1].Value = "1";
                 dataGridView4[3, rowcount4 - 1].Value = "Bonusstufen: " + Convert.ToString(bonusstufen) + " von " + Convert.ToString(bonusstufenmöglichkeiten) + " (" + Math.Round(bonusquote) + "%)";
                 dataGridView4[4, rowcount4 - 1].Value = "Ja";
-                dataGridView4[5, rowcount4 - 1].Value = "Komplex: " + komplex;
+                dataGridView4[5, rowcount4 - 1].Value = "Komplex: " + komplex + " (" + komplexstufe + ")";
+                if (komplexstufe == 0) { dataGridView4[5, rowcount4 - 1].Value = "Komplex: " + komplex; }
             }
         }
 
@@ -1313,7 +1338,7 @@ namespace Tüfteltruhe
                 dataGridView4[3, rowcount4 - 1].Value = "Mittel";
                 dataGridView4[5, rowcount4 - 1].Value = ergebniszeile["Beschreibung"].ToString(); 
                 dataGridView4[4, rowcount4 - 1].Value = "Ja";
-                dataGridView4.Columns[0].Width = 300;
+                dataGridView4.Columns[0].Width = 500;
                 dataGridView4.Columns[3].Visible = false;
                 dataGridView4.Columns[4].Visible = false;
                 switch (ergebniszeilemetall["Metall"].ToString())
@@ -1681,7 +1706,7 @@ namespace Tüfteltruhe
                     }
                 }
             }
-            dataGridView4.Columns[0].Width = 120;
+            dataGridView4.Columns[0].Width = 200;
             dataGridView4.Columns[3].Visible = true;
             dataGridView4.Columns[4].Visible = true;
             //dataGridView4.Sort(dataGridView4.Columns[4], ListSortDirection.Descending);
