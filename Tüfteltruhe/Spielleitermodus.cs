@@ -1244,6 +1244,9 @@ namespace Tüfteltruhe
 
         public void ArtefaktGenerator()
         {
+            //+++
+            //+++
+            //+++
             dataGridView4.Rows.Add();
             rowcount4++;
             dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Red;

@@ -59,6 +59,7 @@ Hier entsteht eine genauere Bedienungsanleitung...
 
 ###### v0.9
 - **Warenangebot** korrigiert und abgeschlossen.
+- Optische Aufbesserungen.
 ###### v0.8
 - **Warenangebot**  hinzugefügt.
 ###### v0.7
