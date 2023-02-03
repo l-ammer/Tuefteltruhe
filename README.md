@@ -19,6 +19,7 @@ Sammlung an kleinen Hilfsanwendungen für das PNP-Spiel [Alt-Europa](https://alb
 - [ ] Zufällige Begegnung
 - [ ] Zufälliger NSC und Name
 - [ ] Zufälliger Zauber
+- [ ] Zufälliges Artefakt
 
 ###### Weitere:
 - [ ] Feldherrenkampagne
@@ -51,9 +52,13 @@ Hier entsteht eine genauere Bedienungsanleitung...
 ![Beispielbild](https://alberich-verlag.de/pngs/ttruhe/Bild5.png)
 ###### Marktzusammensetzung
 ![Beispielbild](https://alberich-verlag.de/pngs/ttruhe/Bild6.png)
+###### Warenangebot
+![Beispielbild](https://alberich-verlag.de/pngs/ttruhe/Bild8.png)
 
 # Versionshistorie
 
+###### v0.9
+- **Warenangebot** korrigiert und abgeschlossen.
 ###### v0.8
 - **Warenangebot**  hinzugefügt.
 ###### v0.7
