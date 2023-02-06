@@ -16,9 +16,8 @@ Sammlung an kleinen Hilfsanwendungen für das PNP-Spiel [Alt-Europa](https://alb
 - [x] **Zutatensuche (zufällige Pflanzen und Pilze)**
 - [x] **Zufällige Marktzusammensetzung**
 - [x] **Zufälliges Warenangebot**
-- [ ] Zufällige Begegnung
-- [ ] Zufälliger NSC und Name
 - [ ] Zufälliger Zauber
+- [ ] Zufälliger Name
 - [ ] Zufälliges Artefakt
 
 ###### Weitere:
@@ -33,6 +32,7 @@ Sammlung an kleinen Hilfsanwendungen für das PNP-Spiel [Alt-Europa](https://alb
 3. Ggf. prüfen, ob **Tüfteltruhe.exe** und **TTruheAccess.accdb** vorhanden und im selben Ordner sind.
 4. Ggf. prüfen, ob **TTruheAccess.accdb** entsperrt und von Windows als vertrauenswürdig eingestuft ist.
 5. Ausführen der **Tüfteltruhe.exe**.
+6. Falls Windows einen fehenden "ACE.OLEDB 12.0 Provider" meldet, kann dieser [**hier**](https://www.microsoft.com/de-DE/download/details.aspx?id=13255) nachinstalliert werden.
 
 # Anleitung
 

@@ -129,9 +129,9 @@
 - Zutatensuche (zufällige Pflanzen und Pilze)
 - Zufälliger Markt
 - Zufälliges Warenangebot
-- Zufällige Begegnung
-- Zufälliger NSC
-- Zufälliger Zauber
+- Zufällige Zauberformel
+- Zufälliger Name
+- Zufälliges Artefakt
 
 ➤ Feldherrenkampagne
 ➤ Schlacht-Simulator
@@ -141,7 +141,7 @@
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAp8AAADeCAYAAAB7c2voAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAAO2xJREFUeF7tnQeYVcXZx41YEBOMLZjPiBqNGLGBCipFoyYaa1CjIdaoEY1GyCeJ
+        vQAADr0BR/uQrQAAO2xJREFUeF7tnQeYVcXZx41YEBOMLZjPiBqNGLGBCipFoyYaa1CjIdaoEY1GyCeJ
         RiNEsXesqNhii8aGNbYofXdhC2xjG7uwnW0ssL3Md9/r7JfL8O5yzpw5c8+95/97nt/zKNzzztwzl3P/
         95SZbQQAAAAAAACWQPgEAAAAAADWQPgEAAAAAADWQPgEAAAAAADWQPgEAAAAAADWQPgEAAAAAADWQPgE
         AAAAAADWQPgEAAAAAADWQPgEAAAAAADWQPgEAAAAAADWQPgEAAAAAADWQPgEAAAAAADWQPgEAAAAAADW
