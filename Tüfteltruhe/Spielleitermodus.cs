@@ -414,19 +414,20 @@ namespace Tüfteltruhe
                     rowcount++;
                     dataGridView1.Rows[rowcount - 1].DefaultCellStyle.BackColor = Color.YellowGreen;
                     dataGridView1[0, rowcount - 1].Value = ergebniszutat;
-                    dataGridView1[2, rowcount - 1].Value = "Selten";
+                    dataGridView1[3, rowcount - 1].Value = "Selten";
                     dataGridView1[1, rowcount - 1].Value = zufall.Next(1, 4);
                     if (zufall.Next(1, 11) > kenntniszw)
                     {
-                        dataGridView1[3, rowcount - 1].Value = "Unbekannt!";
-                        dataGridView1[3, rowcount - 1].Style.BackColor = Color.Orange;
+                        dataGridView1[4, rowcount - 1].Value = "Unbekannt!";
+                        dataGridView1[4, rowcount - 1].Style.BackColor = Color.Orange;
                     }
                     foreach (DataRow row in ZutatenTB.Rows)
                     {
                         if (" " + row["Zutat"].ToString() == ergebniszutat)
                         {
-                            dataGridView1[4, rowcount - 1].Value = row["Aussehen"].ToString(); 
-                            dataGridView1[5, rowcount - 1].Value = row["Fundort"].ToString();
+                            dataGridView1[2, rowcount - 1].Value = row["Portionsgewicht"].ToString() + " Pfund";
+                            dataGridView1[5, rowcount - 1].Value = row["Aussehen"].ToString(); 
+                            dataGridView1[6, rowcount - 1].Value = row["Fundort"].ToString();
                         }
                     }
                 }
@@ -458,19 +459,20 @@ namespace Tüfteltruhe
                     rowcount++;
                     dataGridView1.Rows[rowcount - 1].DefaultCellStyle.BackColor = Color.LightGreen;
                     dataGridView1[0, rowcount - 1].Value = ergebniszutat;
-                    dataGridView1[2, rowcount - 1].Value = "Ungewöhnlich";
+                    dataGridView1[3, rowcount - 1].Value = "Ungewöhnlich";
                     dataGridView1[1, rowcount - 1].Value = zufall.Next(1, 6);
                     if (zufall.Next(1, 11) > kenntniszw + 1)
                     {
-                        dataGridView1[3, rowcount - 1].Value = "Unbekannt!";
-                        dataGridView1[3, rowcount - 1].Style.BackColor = Color.Orange;
+                        dataGridView1[4, rowcount - 1].Value = "Unbekannt!";
+                        dataGridView1[4, rowcount - 1].Style.BackColor = Color.Orange;
                     }
                     foreach (DataRow row in ZutatenTB.Rows)
                     {
                         if (" " + row["Zutat"].ToString() == ergebniszutat)
                         {
-                            dataGridView1[4, rowcount - 1].Value = row["Aussehen"].ToString();
-                            dataGridView1[5, rowcount - 1].Value = row["Fundort"].ToString();
+                            dataGridView1[2, rowcount - 1].Value = row["Portionsgewicht"].ToString() + " Pfund";
+                            dataGridView1[5, rowcount - 1].Value = row["Aussehen"].ToString();
+                            dataGridView1[6, rowcount - 1].Value = row["Fundort"].ToString();
                         }
                     }
                 }
@@ -502,19 +504,20 @@ namespace Tüfteltruhe
                     rowcount++;
                     dataGridView1.Rows[rowcount - 1].DefaultCellStyle.BackColor = Color.LightYellow;
                     dataGridView1[0, rowcount - 1].Value = ergebniszutat;
-                    dataGridView1[2, rowcount - 1].Value = "Gewöhnlich";
+                    dataGridView1[3, rowcount - 1].Value = "Gewöhnlich";
                     dataGridView1[1, rowcount - 1].Value = zufall.Next(1, 8);
                     if (zufall.Next(1, 11) > kenntniszw + 4)
                     {
-                        dataGridView1[3, rowcount - 1].Value = "Unbekannt!";
-                        dataGridView1[3, rowcount - 1].Style.BackColor = Color.Orange;
+                        dataGridView1[4, rowcount - 1].Value = "Unbekannt!";
+                        dataGridView1[4, rowcount - 1].Style.BackColor = Color.Orange;
                     }
                     foreach (DataRow reihe in ZutatenTB.Rows)
                     {
                         if (" " + reihe["Zutat"].ToString() == ergebniszutat)
                         {
-                            dataGridView1[4, rowcount - 1].Value = reihe["Aussehen"].ToString();
-                            dataGridView1[5, rowcount - 1].Value = reihe["Fundort"].ToString();
+                            dataGridView1[2, rowcount - 1].Value = reihe["Portionsgewicht"].ToString() +  " Pfund";
+                            dataGridView1[5, rowcount - 1].Value = reihe["Aussehen"].ToString();
+                            dataGridView1[6, rowcount - 1].Value = reihe["Fundort"].ToString();
                         }
                     }
                 }
@@ -1233,7 +1236,7 @@ namespace Tüfteltruhe
                 dataGridView4[0, rowcount4 - 1].Value = objekt + ergebniszeile["Zauber"].ToString() + " (" + ergebniszeile["Stufe"].ToString() + ")";
                 int gesamtstufe = (int)bonusstufen + Convert.ToInt16(ergebniszeile["Stufe"]);
                 if (komplex == "Seelenzauber" || komplex == "Totenzauber" || komplex == "Lebenszauber") { gesamtstufe *= 3; } //dreifacher Preis für verbotene Zauberei
-                dataGridView4[1, rowcount4 - 1].Value = preismod * gesamtstufe;
+                dataGridView4[1, rowcount4 - 1].Value = (double)(preismod * gesamtstufe);
                 dataGridView4[2, rowcount4 - 1].Value = "1";
                 dataGridView4[3, rowcount4 - 1].Value = "Bonusstufen: " + Convert.ToString(bonusstufen) + " von " + Convert.ToString(bonusstufenmöglichkeiten) + " (" + Math.Round(bonusquote) + "%)";
                 dataGridView4[4, rowcount4 - 1].Value = "Ja";
@@ -1251,7 +1254,7 @@ namespace Tüfteltruhe
             rowcount4++;
             dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Red;
             dataGridView4[0, rowcount4 - 1].Value = "Artefakt";
-            dataGridView4[1, rowcount4 - 1].Value = 999;
+            dataGridView4[1, rowcount4 - 1].Value = (double)999;
             dataGridView4[2, rowcount4 - 1].Value = 1;
             dataGridView4[3, rowcount4 - 1].Value = "Mittel";
             dataGridView4[4, rowcount4 - 1].Value = "Zukünftige TTruhe-Version...";
@@ -1384,9 +1387,9 @@ namespace Tüfteltruhe
 
                 //Zauberstein anzeigen
                 dataGridView4[0, rowcount4 - 1].Value = "Zauberstein: " + ergebniszeile["Name"].ToString();
-                dataGridView4[1, rowcount4 - 1].Value = 50 + zufall.Next(1, 51) + edelsteinwert;
+                dataGridView4[1, rowcount4 - 1].Value = (double)(50 + zufall.Next(1, 51) + edelsteinwert);
                 dataGridView4[2, rowcount4 - 1].Value = 0.1;
-                dataGridView4[3, rowcount4 - 1].Value = steinname;
+                dataGridView4[3, rowcount4 - 1].Value = steinname + " (" + karatzahl + " kt)";
                 dataGridView4[4, rowcount4 - 1].Value = "Ja";
                 dataGridView4[5, rowcount4 - 1].Value = ergebniszeile["Wirkung"].ToString() + " (" + ergebniszeile["Komplex"].ToString() + ")";
             }
@@ -1527,8 +1530,8 @@ namespace Tüfteltruhe
                 {
                     dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.LightYellow;
                 }
-                dataGridView4[1, rowcount4 - 1].Value = (int)Math.Round(preis, 2);
-                if (realwert > 20) { dataGridView4[1, rowcount4 - 1].Value = (int)Math.Round(preis); } //Hohe Preise sollen keine Kommabeträge mehr haben
+                dataGridView4[1, rowcount4 - 1].Value = (double)Math.Round(preis, 2);
+                if (realwert > 20) { dataGridView4[1, rowcount4 - 1].Value = (double)Math.Round(preis); } //Hohe Preise sollen keine Kommabeträge mehr haben
                 dataGridView4[2, rowcount4 - 1].Value = Math.Round(gesamtgewicht, 1) + Convert.ToInt16(ergebniszeile["Zusatzgewicht"]);
                 dataGridView4[3, rowcount4 - 1].Value = "Mittel";
                 dataGridView4[5, rowcount4 - 1].Value = ergebniszeile["Beschreibung"].ToString(); 
@@ -1659,8 +1662,8 @@ namespace Tüfteltruhe
                 {
                     dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
                 }
-                dataGridView4[1, rowcount4 - 1].Value = (int)Math.Round(preis, 2);
-                if (preis > 20) { dataGridView4[1, rowcount4 - 1].Value = (int)Math.Round(preis); } //Hohe Preise sollen keine Kommabeträge mehr haben
+                dataGridView4[1, rowcount4 - 1].Value = (double)Math.Round(preis, 2);
+                if (preis > 20) { dataGridView4[1, rowcount4 - 1].Value = (double)Math.Round(preis); } //Hohe Preise sollen keine Kommabeträge mehr haben
                 dataGridView4[2, rowcount4 - 1].Value = Math.Round(karatzahl * 0.0004, 1);
                 if (!checkBox4.Checked) //Preisschwank verbergen
                 {
@@ -1880,8 +1883,8 @@ namespace Tüfteltruhe
                                 preis *= 0.7;
                             }
 
-                            dataGridView4[1, rowcount4 - 1].Value = (int)Math.Round(preis, 2);
-                            if (preis > 20) { dataGridView4[1, rowcount4 - 1].Value = (int)Math.Round(preis); } //Hohe Preise sollen keine Kommabeträge mehr haben
+                            dataGridView4[1, rowcount4 - 1].Value = (double)Math.Round(preis, 2);
+                            if (preis > 20) { dataGridView4[1, rowcount4 - 1].Value = (double)Math.Round(preis); } //Hohe Preise sollen keine Kommabeträge mehr haben
                             if (preis > (double)row["Realwert"])
                             {
                                 dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.Orange;
@@ -1904,7 +1907,7 @@ namespace Tüfteltruhe
                                 dataGridView4[4, rowcount4 - 1].Value = row["Dauer"].ToString();
                                 if ((double)row["Wahrscheinlichkeit"] != 0)
                                 {
-                                    dataGridView4[1, rowcount4 - 1].Value = 0;
+                                    dataGridView4[1, rowcount4 - 1].Value = (double)0;
                                     dataGridView4[2, rowcount4 - 1].Value = "";
                                     dataGridView4[3, rowcount4 - 1].Value = "";
 
