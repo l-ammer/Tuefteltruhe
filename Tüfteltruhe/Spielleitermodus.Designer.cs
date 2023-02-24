@@ -113,6 +113,13 @@
             this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -175,13 +182,6 @@
             this.label32 = new System.Windows.Forms.Label();
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -1016,6 +1016,55 @@
             this.dataGridView1.Size = new System.Drawing.Size(747, 611);
             this.dataGridView1.TabIndex = 16;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Zutat";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Anzahl der Portionen";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 60;
+            // 
+            // Column37
+            // 
+            this.Column37.HeaderText = "Gewicht einer Portion";
+            this.Column37.Name = "Column37";
+            this.Column37.ReadOnly = true;
+            this.Column37.Width = 60;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Seltenheit";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 80;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Kenntnis";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 80;
+            // 
+            // Column14
+            // 
+            this.Column14.HeaderText = "Aussehen";
+            this.Column14.Name = "Column14";
+            this.Column14.ReadOnly = true;
+            this.Column14.Width = 140;
+            // 
+            // Column15
+            // 
+            this.Column15.HeaderText = "Fundort";
+            this.Column15.Name = "Column15";
+            this.Column15.ReadOnly = true;
+            this.Column15.Width = 140;
+            // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1382,6 +1431,7 @@
             this.button11.TabIndex = 26;
             this.button11.Text = "Suche (alle zutreffenden Zauber)";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // label22
             // 
@@ -1401,6 +1451,7 @@
             this.button10.TabIndex = 3;
             this.button10.Text = "1 zufälligen Zauber generieren";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // comboBox8
             // 
@@ -1410,7 +1461,13 @@
             "Zauberrolle",
             "Zaubertrank",
             "Zauberstein",
-            "Zauberkundiger"});
+            "Repertoire eines Zauberers",
+            "Repertoire eines Druiden",
+            "Repertoire eines Priesters",
+            "Repertoire eines Schamanen",
+            "Repertoire eines Runenmeisters",
+            "Repertoire eines Sterndeuters",
+            "Repertoire eines Kultmeisters"});
             this.comboBox8.Location = new System.Drawing.Point(385, 42);
             this.comboBox8.Name = "comboBox8";
             this.comboBox8.Size = new System.Drawing.Size(204, 21);
@@ -1635,55 +1692,6 @@
             this.button14.TabIndex = 23;
             this.button14.Text = "Alles zurücksetzen";
             this.button14.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Zutat";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Anzahl der Portionen";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 60;
-            // 
-            // Column37
-            // 
-            this.Column37.HeaderText = "Gewicht einer Portion";
-            this.Column37.Name = "Column37";
-            this.Column37.ReadOnly = true;
-            this.Column37.Width = 60;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Seltenheit";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 80;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Kenntnis";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 80;
-            // 
-            // Column14
-            // 
-            this.Column14.HeaderText = "Aussehen";
-            this.Column14.Name = "Column14";
-            this.Column14.ReadOnly = true;
-            this.Column14.Width = 140;
-            // 
-            // Column15
-            // 
-            this.Column15.HeaderText = "Fundort";
-            this.Column15.Name = "Column15";
-            this.Column15.ReadOnly = true;
-            this.Column15.Width = 140;
             // 
             // Spielleitermodus
             // 
