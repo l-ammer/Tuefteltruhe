@@ -16,7 +16,7 @@ Sammlung an kleinen Hilfsanwendungen für das PNP-Spiel [Alt-Europa](https://alb
 - [x] **Zutatensuche (zufällige Pflanzen und Pilze)**
 - [x] **Zufällige Marktzusammensetzung**
 - [x] **Zufälliges Warenangebot**
-- [ ] Zufällige Zauberformel
+- [X] **Zufällige Zauberformel**
 - [ ] Zufälliger Name
 - [ ] Zufälliges Artefakt
 
@@ -57,6 +57,8 @@ Hier entsteht eine genauere Bedienungsanleitung...
 
 # Versionshistorie
 
+###### v0.10
+- **Zaubersuche** hinzugefügt.
 ###### v0.9
 - **Warenangebot** korrigiert und abgeschlossen.
 - Optische Aufbesserungen.
