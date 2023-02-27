@@ -1077,18 +1077,6 @@ namespace Tüfteltruhe
             tag++;
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            Spielermodus spielermodus = new Spielermodus();
-            spielermodus.Show();
-        }
-
-        private void neuesFensterSpielermodusToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Spielermodus spielermodus = new Spielermodus();
-            spielermodus.Show();
-        }
-
         private void button6_Click(object sender, EventArgs e)
         {
             dataGridView3.Rows.Clear();
@@ -1192,7 +1180,13 @@ namespace Tüfteltruhe
             radioButton11.BackColor = Color.White;
         }
 
-        private void neuesFensterSpielleitermodusToolStripMenuItem_Click(object sender, EventArgs e)
+        private void neuerSpielermodusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Spielermodus spielermodus = new Spielermodus();
+            spielermodus.Show();
+        }
+
+        private void neuerSLModusToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Spielleitermodus spielleitermodus = new Spielleitermodus();
             spielleitermodus.Show();

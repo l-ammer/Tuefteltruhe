@@ -916,7 +916,6 @@ namespace Tüfteltruhe
         //###### MARKT ####### ################################################
         //#################### ################################################
 
-
         private void button7_Click(object sender, EventArgs e) //Alles zurücksetzen
         {
             dataGridView2.Rows.Clear();
@@ -2895,7 +2894,7 @@ namespace Tüfteltruhe
                 {
                     oDoc.Application.Selection.Tables[1].Rows[d].Range.Font.Size = 8;
                     oDoc.Application.Selection.Tables[1].Rows[d].Range.Font.Name = "Book Antiqua";
-                    oDoc.Application.Selection.Tables[1].Rows[1].Range.Bold = 0;
+                    oDoc.Application.Selection.Tables[1].Rows[d].Range.Bold = 0;
                 }
 
                 //header row style
@@ -2984,23 +2983,52 @@ namespace Tüfteltruhe
             }
         }
 
+        private void ZauberlisteExp(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            sfd.Filter = "Word Documents (*.docx)|*.docx";
+
+            sfd.FileName = "Tüfteltruhe-Export Zauberliste.docx";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                Export_Data_To_Word(dataGridView5, sfd.FileName);
+            }
+        }
+
+        private void NamenslisteExp(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            sfd.Filter = "Word Documents (*.docx)|*.docx";
+
+            sfd.FileName = "Tüfteltruhe-Export Namnesliste.docx";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                Export_Data_To_Word(dataGridView7, sfd.FileName);
+                Cursor.Current = Cursors.Default;
+                MessageBox.Show("Export von " + sfd.FileName + " erfolgreich"); 
+            }
+        }
 
         //#################### ################################################
         //### NEUE FENSTER ### ################################################
         //#################### ################################################
 
-        private void neuesFensterSpielermodusToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void neuerSpielermodusToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Spielermodus spielermodus = new Spielermodus();
             spielermodus.Show();
         }
 
-        private void neuesFensterSpielleitermodusToolStripMenuItem_Click(object sender, EventArgs e)
+        private void neuerSLModusToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Spielleitermodus spielleitermodus = new Spielleitermodus();
             spielleitermodus.Show();
         }
-
-
     }
 }

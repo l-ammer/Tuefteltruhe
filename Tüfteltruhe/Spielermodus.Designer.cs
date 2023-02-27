@@ -120,13 +120,9 @@
             this.Modifikator = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Aktion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.neuesFensterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.neuesFensterSpielermodusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.neuesFensterSpielleitermodusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.neuesFensterFeldherrenkampagneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.neuesFensterSchlachtenSimulatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.neuesFensterInteraktiveWeltkarteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.neuerSpielermodusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.neuerSLModusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -222,7 +218,6 @@
             this.label10.Size = new System.Drawing.Size(108, 14);
             this.label10.TabIndex = 29;
             this.label10.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.Icon = Properties.Resources.TT_Logo_Kiste2;
             // 
             // label4
             // 
@@ -1179,59 +1174,13 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.neuesFensterToolStripMenuItem});
+            this.neuerSpielermodusToolStripMenuItem,
+            this.neuerSLModusToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1201, 24);
             this.menuStrip1.TabIndex = 31;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // neuesFensterToolStripMenuItem
-            // 
-            this.neuesFensterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.neuesFensterSpielermodusToolStripMenuItem,
-            this.neuesFensterSpielleitermodusToolStripMenuItem,
-            this.neuesFensterFeldherrenkampagneToolStripMenuItem,
-            this.neuesFensterSchlachtenSimulatorToolStripMenuItem,
-            this.neuesFensterInteraktiveWeltkarteToolStripMenuItem});
-            this.neuesFensterToolStripMenuItem.Name = "neuesFensterToolStripMenuItem";
-            this.neuesFensterToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
-            this.neuesFensterToolStripMenuItem.Text = "Neues Fenster";
-            // 
-            // neuesFensterSpielermodusToolStripMenuItem
-            // 
-            this.neuesFensterSpielermodusToolStripMenuItem.Name = "neuesFensterSpielermodusToolStripMenuItem";
-            this.neuesFensterSpielermodusToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
-            this.neuesFensterSpielermodusToolStripMenuItem.Text = "Neues Fenster: Spielermodus";
-            this.neuesFensterSpielermodusToolStripMenuItem.Click += new System.EventHandler(this.neuesFensterSpielermodusToolStripMenuItem_Click);
-            // 
-            // neuesFensterSpielleitermodusToolStripMenuItem
-            // 
-            this.neuesFensterSpielleitermodusToolStripMenuItem.Name = "neuesFensterSpielleitermodusToolStripMenuItem";
-            this.neuesFensterSpielleitermodusToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
-            this.neuesFensterSpielleitermodusToolStripMenuItem.Text = "Neues Fenster: Spielleitermodus";
-            this.neuesFensterSpielleitermodusToolStripMenuItem.Click += new System.EventHandler(this.neuesFensterSpielleitermodusToolStripMenuItem_Click);
-            // 
-            // neuesFensterFeldherrenkampagneToolStripMenuItem
-            // 
-            this.neuesFensterFeldherrenkampagneToolStripMenuItem.Enabled = false;
-            this.neuesFensterFeldherrenkampagneToolStripMenuItem.Name = "neuesFensterFeldherrenkampagneToolStripMenuItem";
-            this.neuesFensterFeldherrenkampagneToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
-            this.neuesFensterFeldherrenkampagneToolStripMenuItem.Text = "Neues Fenster: Feldherrenkampagne";
-            // 
-            // neuesFensterSchlachtenSimulatorToolStripMenuItem
-            // 
-            this.neuesFensterSchlachtenSimulatorToolStripMenuItem.Enabled = false;
-            this.neuesFensterSchlachtenSimulatorToolStripMenuItem.Name = "neuesFensterSchlachtenSimulatorToolStripMenuItem";
-            this.neuesFensterSchlachtenSimulatorToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
-            this.neuesFensterSchlachtenSimulatorToolStripMenuItem.Text = "Neues Fenster: Schlachten-Simulator";
-            // 
-            // neuesFensterInteraktiveWeltkarteToolStripMenuItem
-            // 
-            this.neuesFensterInteraktiveWeltkarteToolStripMenuItem.Enabled = false;
-            this.neuesFensterInteraktiveWeltkarteToolStripMenuItem.Name = "neuesFensterInteraktiveWeltkarteToolStripMenuItem";
-            this.neuesFensterInteraktiveWeltkarteToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
-            this.neuesFensterInteraktiveWeltkarteToolStripMenuItem.Text = "Neues Fenster: Interaktive Weltkarte";
             // 
             // toolTip1
             // 
@@ -1240,6 +1189,20 @@
             this.toolTip1.InitialDelay = 200;
             this.toolTip1.ReshowDelay = 100;
             // 
+            // neuerSpielermodusToolStripMenuItem
+            // 
+            this.neuerSpielermodusToolStripMenuItem.Name = "neuerSpielermodusToolStripMenuItem";
+            this.neuerSpielermodusToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
+            this.neuerSpielermodusToolStripMenuItem.Text = "Neuer Spielermodus";
+            this.neuerSpielermodusToolStripMenuItem.Click += new System.EventHandler(this.neuerSpielermodusToolStripMenuItem_Click);
+            // 
+            // neuerSLModusToolStripMenuItem
+            // 
+            this.neuerSLModusToolStripMenuItem.Name = "neuerSLModusToolStripMenuItem";
+            this.neuerSLModusToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
+            this.neuerSLModusToolStripMenuItem.Text = "Neuer SL-Modus";
+            this.neuerSLModusToolStripMenuItem.Click += new System.EventHandler(this.neuerSLModusToolStripMenuItem_Click);
+            // 
             // Spielermodus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1247,6 +1210,7 @@
             this.ClientSize = new System.Drawing.Size(1201, 601);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = global::Tüfteltruhe.Properties.Resources.TT_Logo_Kiste2;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Spielermodus";
             this.Text = "Tüfteltruhe: Spielermodus";
@@ -1360,12 +1324,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem neuesFensterToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem neuesFensterSpielermodusToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem neuesFensterSpielleitermodusToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem neuesFensterFeldherrenkampagneToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem neuesFensterSchlachtenSimulatorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem neuesFensterInteraktiveWeltkarteToolStripMenuItem;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.DataGridView dataGridView4;
@@ -1383,6 +1341,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.ToolStripMenuItem neuerSpielermodusToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem neuerSLModusToolStripMenuItem;
     }
 }
 

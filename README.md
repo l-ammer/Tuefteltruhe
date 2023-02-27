@@ -20,11 +20,6 @@ Sammlung an kleinen Hilfsanwendungen für das PNP-Spiel [Alt-Europa](https://alb
 - [X] **Zufälliger Name**
 - [ ] Zufälliges Artefakt
 
-###### Weitere:
-- [ ] Feldherrenkampagne
-- [ ] Schlacht-Simulator
-- [ ] Interaktive Weltkarte, die für Stämme und Orte alle Informationen anzeigt
-
 # Installation
 
 1. Herunterladen.
@@ -58,16 +53,20 @@ Hier entsteht eine genauere Bedienungsanleitung...
 # Versionshistorie
 
 ###### v0.10
-- **Zufällige Zauberformel** und **Zufälliger Name** hinzugefügt.
+- **Zufällige Zauberformel** hinzugefügt.
+- **Zufälliger Name** hinzugefügt.
 ###### v0.9
-- **Zufälliges Warenangebot** korrigiert und abgeschlossen.
+- **Zufälliges Warenangebot** abgeschlossen.
+- Exportfunktion hinzugefügt.
 - Optische Aufbesserungen.
 ###### v0.8
 - **Zufälliges Warenangebot**  hinzugefügt.
 ###### v0.7
-- **Zutatensuche** abgeschlossen und **Zufällige Marktzusammensetzung** hinzugefügt.
+- **Zutatensuche** abgeschlossen.
+- **Zufällige Marktzusammensetzung** hinzugefügt.
 ###### v0.6
-- **Spielermodus** korrigiert und **Zutatensuche** hinzugefügt.
+- **Spielermodus** korrigiert.
+- **Zutatensuche** hinzugefügt.
 ###### v0.5
 - **Spielermodus** abgeschlossen.
 

@@ -29,17 +29,13 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.neuesFensterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.neuesFensterSpielermodusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.neuesFensterSpielleitermodusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.neuesFensterFeldherrenkampagneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.neuesFensterSchlachtenSimulatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.neuesFensterInteraktiveWeltkarteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBox2 = new System.Windows.Forms.ToolStripMenuItem();
             this.marktzusammensetzungExportierenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.warenangebotExportierenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zauberlisteExportierenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.namenslisteExportierenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label30 = new System.Windows.Forms.Label();
@@ -175,16 +171,18 @@
             this.button15 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.dataGridView7 = new System.Windows.Forms.DataGridView();
+            this.Column32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.label33 = new System.Windows.Forms.Label();
             this.comboBox12 = new System.Windows.Forms.ComboBox();
             this.label32 = new System.Windows.Forms.Label();
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.Column32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.neuerSpielermodusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.neuerSLModusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -220,7 +218,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.neuesFensterToolStripMenuItem,
+            this.neuerSpielermodusToolStripMenuItem,
+            this.neuerSLModusToolStripMenuItem,
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -228,60 +227,15 @@
             this.menuStrip1.TabIndex = 32;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // neuesFensterToolStripMenuItem
-            // 
-            this.neuesFensterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.neuesFensterSpielermodusToolStripMenuItem,
-            this.neuesFensterSpielleitermodusToolStripMenuItem,
-            this.neuesFensterFeldherrenkampagneToolStripMenuItem,
-            this.neuesFensterSchlachtenSimulatorToolStripMenuItem,
-            this.neuesFensterInteraktiveWeltkarteToolStripMenuItem});
-            this.neuesFensterToolStripMenuItem.Name = "neuesFensterToolStripMenuItem";
-            this.neuesFensterToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
-            this.neuesFensterToolStripMenuItem.Text = "Neues Fenster";
-            // 
-            // neuesFensterSpielermodusToolStripMenuItem
-            // 
-            this.neuesFensterSpielermodusToolStripMenuItem.Name = "neuesFensterSpielermodusToolStripMenuItem";
-            this.neuesFensterSpielermodusToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
-            this.neuesFensterSpielermodusToolStripMenuItem.Text = "Neues Fenster: Spielermodus";
-            this.neuesFensterSpielermodusToolStripMenuItem.Click += new System.EventHandler(this.neuesFensterSpielermodusToolStripMenuItem_Click);
-            // 
-            // neuesFensterSpielleitermodusToolStripMenuItem
-            // 
-            this.neuesFensterSpielleitermodusToolStripMenuItem.Name = "neuesFensterSpielleitermodusToolStripMenuItem";
-            this.neuesFensterSpielleitermodusToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
-            this.neuesFensterSpielleitermodusToolStripMenuItem.Text = "Neues Fenster: Spielleitermodus";
-            this.neuesFensterSpielleitermodusToolStripMenuItem.Click += new System.EventHandler(this.neuesFensterSpielleitermodusToolStripMenuItem_Click);
-            // 
-            // neuesFensterFeldherrenkampagneToolStripMenuItem
-            // 
-            this.neuesFensterFeldherrenkampagneToolStripMenuItem.Enabled = false;
-            this.neuesFensterFeldherrenkampagneToolStripMenuItem.Name = "neuesFensterFeldherrenkampagneToolStripMenuItem";
-            this.neuesFensterFeldherrenkampagneToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
-            this.neuesFensterFeldherrenkampagneToolStripMenuItem.Text = "Neues Fenster: Feldherrenkampagne";
-            // 
-            // neuesFensterSchlachtenSimulatorToolStripMenuItem
-            // 
-            this.neuesFensterSchlachtenSimulatorToolStripMenuItem.Enabled = false;
-            this.neuesFensterSchlachtenSimulatorToolStripMenuItem.Name = "neuesFensterSchlachtenSimulatorToolStripMenuItem";
-            this.neuesFensterSchlachtenSimulatorToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
-            this.neuesFensterSchlachtenSimulatorToolStripMenuItem.Text = "Neues Fenster: Schlachten-Simulator";
-            // 
-            // neuesFensterInteraktiveWeltkarteToolStripMenuItem
-            // 
-            this.neuesFensterInteraktiveWeltkarteToolStripMenuItem.Enabled = false;
-            this.neuesFensterInteraktiveWeltkarteToolStripMenuItem.Name = "neuesFensterInteraktiveWeltkarteToolStripMenuItem";
-            this.neuesFensterInteraktiveWeltkarteToolStripMenuItem.Size = new System.Drawing.Size(268, 22);
-            this.neuesFensterInteraktiveWeltkarteToolStripMenuItem.Text = "Neues Fenster: Interaktive Weltkarte";
-            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripTextBox1,
             this.toolStripTextBox2,
             this.marktzusammensetzungExportierenToolStripMenuItem,
-            this.warenangebotExportierenToolStripMenuItem});
+            this.warenangebotExportierenToolStripMenuItem,
+            this.zauberlisteExportierenToolStripMenuItem,
+            this.namenslisteExportierenToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(119, 20);
             this.toolStripMenuItem1.Text = "Exportieren (Word)";
@@ -313,6 +267,20 @@
             this.warenangebotExportierenToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
             this.warenangebotExportierenToolStripMenuItem.Text = "Warenangebot exportieren...";
             this.warenangebotExportierenToolStripMenuItem.Click += new System.EventHandler(this.WarenangebotExp);
+            // 
+            // zauberlisteExportierenToolStripMenuItem
+            // 
+            this.zauberlisteExportierenToolStripMenuItem.Name = "zauberlisteExportierenToolStripMenuItem";
+            this.zauberlisteExportierenToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.zauberlisteExportierenToolStripMenuItem.Text = "Zauberliste exportieren...";
+            this.zauberlisteExportierenToolStripMenuItem.Click += new System.EventHandler(this.ZauberlisteExp);
+            // 
+            // namenslisteExportierenToolStripMenuItem
+            // 
+            this.namenslisteExportierenToolStripMenuItem.Name = "namenslisteExportierenToolStripMenuItem";
+            this.namenslisteExportierenToolStripMenuItem.Size = new System.Drawing.Size(281, 22);
+            this.namenslisteExportierenToolStripMenuItem.Text = "Namensliste exportieren...";
+            this.namenslisteExportierenToolStripMenuItem.Click += new System.EventHandler(this.NamenslisteExp);
             // 
             // tabPage4
             // 
@@ -1637,6 +1605,18 @@
             this.dataGridView7.Size = new System.Drawing.Size(309, 611);
             this.dataGridView7.TabIndex = 14;
             // 
+            // Column32
+            // 
+            this.Column32.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column32.HeaderText = "Name";
+            this.Column32.Name = "Column32";
+            // 
+            // Column33
+            // 
+            this.Column33.HeaderText = "Volk";
+            this.Column33.Name = "Column33";
+            this.Column33.Width = 140;
+            // 
             // panel7
             // 
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1651,6 +1631,29 @@
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(309, 90);
             this.panel7.TabIndex = 13;
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(261, 64);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(36, 17);
+            this.radioButton6.TabIndex = 28;
+            this.radioButton6.TabStop = true;
+            this.radioButton6.Text = "W";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Checked = true;
+            this.radioButton5.Location = new System.Drawing.Point(223, 64);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(34, 17);
+            this.radioButton5.TabIndex = 27;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Text = "M";
+            this.radioButton5.UseVisualStyleBackColor = true;
             // 
             // label33
             // 
@@ -1699,40 +1702,19 @@
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
-            // radioButton5
+            // neuerSpielermodusToolStripMenuItem
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Checked = true;
-            this.radioButton5.Location = new System.Drawing.Point(223, 64);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(34, 17);
-            this.radioButton5.TabIndex = 27;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "M";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.neuerSpielermodusToolStripMenuItem.Name = "neuerSpielermodusToolStripMenuItem";
+            this.neuerSpielermodusToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
+            this.neuerSpielermodusToolStripMenuItem.Text = "Neuer Spielermodus";
+            this.neuerSpielermodusToolStripMenuItem.Click += new System.EventHandler(this.neuerSpielermodusToolStripMenuItem_Click);
             // 
-            // radioButton6
+            // neuerSLModusToolStripMenuItem
             // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(261, 64);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(36, 17);
-            this.radioButton6.TabIndex = 28;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "W";
-            this.radioButton6.UseVisualStyleBackColor = true;
-            // 
-            // Column32
-            // 
-            this.Column32.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column32.HeaderText = "Name";
-            this.Column32.Name = "Column32";
-            // 
-            // Column33
-            // 
-            this.Column33.HeaderText = "Volk";
-            this.Column33.Name = "Column33";
-            this.Column33.Width = 140;
+            this.neuerSLModusToolStripMenuItem.Name = "neuerSLModusToolStripMenuItem";
+            this.neuerSLModusToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
+            this.neuerSLModusToolStripMenuItem.Text = "Neuer SL-Modus";
+            this.neuerSLModusToolStripMenuItem.Click += new System.EventHandler(this.neuerSLModusToolStripMenuItem_Click);
             // 
             // Spielleitermodus
             // 
@@ -1793,12 +1775,6 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem neuesFensterToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem neuesFensterSpielermodusToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem neuesFensterSpielleitermodusToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem neuesFensterFeldherrenkampagneToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem neuesFensterSchlachtenSimulatorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem neuesFensterInteraktiveWeltkarteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripTextBox1;
         private System.Windows.Forms.ToolStripMenuItem toolStripTextBox2;
@@ -1949,5 +1925,9 @@
         private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column32;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column33;
+        private System.Windows.Forms.ToolStripMenuItem zauberlisteExportierenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem namenslisteExportierenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem neuerSpielermodusToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem neuerSLModusToolStripMenuItem;
     }
 }
