@@ -143,6 +143,7 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tapPage2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label36 = new System.Windows.Forms.Label();
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
             this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -174,15 +175,16 @@
             this.button15 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.dataGridView7 = new System.Windows.Forms.DataGridView();
-            this.Column32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label33 = new System.Windows.Forms.Label();
             this.comboBox12 = new System.Windows.Forms.ComboBox();
             this.label32 = new System.Windows.Forms.Label();
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
-            this.label36 = new System.Windows.Forms.Label();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.Column32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -616,7 +618,6 @@
             // 
             this.label21.AutoSize = true;
             this.label21.ForeColor = System.Drawing.Color.BlueViolet;
-            this.label36.ForeColor = System.Drawing.Color.BlueViolet;
             this.label21.Location = new System.Drawing.Point(518, 15);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(0, 13);
@@ -1324,6 +1325,15 @@
             this.tabPage3.Text = "Zauber";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.ForeColor = System.Drawing.Color.BlueViolet;
+            this.label36.Location = new System.Drawing.Point(335, 23);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(0, 13);
+            this.label36.TabIndex = 33;
+            // 
             // dataGridView5
             // 
             this.dataGridView5.AllowUserToAddRows = false;
@@ -1385,7 +1395,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(605, 76);
+            this.label26.Location = new System.Drawing.Point(555, 76);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(111, 13);
             this.label26.TabIndex = 31;
@@ -1394,7 +1404,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(608, 45);
+            this.label25.Location = new System.Drawing.Point(558, 45);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(108, 13);
             this.label25.TabIndex = 30;
@@ -1403,7 +1413,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(287, 74);
+            this.label24.Location = new System.Drawing.Point(237, 74);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(92, 13);
             this.label24.TabIndex = 29;
@@ -1412,16 +1422,16 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(208, 45);
+            this.label23.Location = new System.Drawing.Point(203, 45);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(171, 13);
+            this.label23.Size = new System.Drawing.Size(126, 13);
             this.label23.TabIndex = 28;
-            this.label23.Text = "Optional: Kontext der Zauberformel";
+            this.label23.Text = "Kontext der Zauberformel";
             // 
             // comboBox9
             // 
             this.comboBox9.FormattingEnabled = true;
-            this.comboBox9.Location = new System.Drawing.Point(385, 71);
+            this.comboBox9.Location = new System.Drawing.Point(335, 71);
             this.comboBox9.Name = "comboBox9";
             this.comboBox9.Size = new System.Drawing.Size(204, 21);
             this.comboBox9.TabIndex = 27;
@@ -1471,14 +1481,14 @@
             "Repertoire eines Runenmeisters",
             "Repertoire eines Sterndeuters",
             "Repertoire eines Kultmeisters"});
-            this.comboBox8.Location = new System.Drawing.Point(385, 42);
+            this.comboBox8.Location = new System.Drawing.Point(335, 42);
             this.comboBox8.Name = "comboBox8";
             this.comboBox8.Size = new System.Drawing.Size(204, 21);
             this.comboBox8.TabIndex = 2;
             // 
             // numericUpDown6
             // 
-            this.numericUpDown6.Location = new System.Drawing.Point(722, 43);
+            this.numericUpDown6.Location = new System.Drawing.Point(672, 43);
             this.numericUpDown6.Minimum = new decimal(new int[] {
             1,
             0,
@@ -1495,7 +1505,7 @@
             // 
             // numericUpDown4
             // 
-            this.numericUpDown4.Location = new System.Drawing.Point(722, 72);
+            this.numericUpDown4.Location = new System.Drawing.Point(672, 72);
             this.numericUpDown4.Maximum = new decimal(new int[] {
             20,
             0,
@@ -1627,20 +1637,11 @@
             this.dataGridView7.Size = new System.Drawing.Size(309, 611);
             this.dataGridView7.TabIndex = 14;
             // 
-            // Column32
-            // 
-            this.Column32.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column32.HeaderText = "Name";
-            this.Column32.Name = "Column32";
-            // 
-            // Column33
-            // 
-            this.Column33.HeaderText = "Volk";
-            this.Column33.Name = "Column33";
-            // 
             // panel7
             // 
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Controls.Add(this.radioButton6);
+            this.panel7.Controls.Add(this.radioButton5);
             this.panel7.Controls.Add(this.label33);
             this.panel7.Controls.Add(this.comboBox12);
             this.panel7.Controls.Add(this.label32);
@@ -1665,7 +1666,7 @@
             this.comboBox12.FormattingEnabled = true;
             this.comboBox12.Location = new System.Drawing.Point(45, 61);
             this.comboBox12.Name = "comboBox12";
-            this.comboBox12.Size = new System.Drawing.Size(250, 21);
+            this.comboBox12.Size = new System.Drawing.Size(168, 21);
             this.comboBox12.TabIndex = 25;
             // 
             // label32
@@ -1686,6 +1687,7 @@
             this.button13.TabIndex = 20;
             this.button13.Text = "Neuen Namen generieren";
             this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button14
             // 
@@ -1695,14 +1697,42 @@
             this.button14.TabIndex = 23;
             this.button14.Text = "Alles zurücksetzen";
             this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
-            // label36
+            // radioButton5
             // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(385, 23);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(0, 13);
-            this.label36.TabIndex = 33;
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Checked = true;
+            this.radioButton5.Location = new System.Drawing.Point(223, 64);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(34, 17);
+            this.radioButton5.TabIndex = 27;
+            this.radioButton5.TabStop = true;
+            this.radioButton5.Text = "M";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            // 
+            // radioButton6
+            // 
+            this.radioButton6.AutoSize = true;
+            this.radioButton6.Location = new System.Drawing.Point(261, 64);
+            this.radioButton6.Name = "radioButton6";
+            this.radioButton6.Size = new System.Drawing.Size(36, 17);
+            this.radioButton6.TabIndex = 28;
+            this.radioButton6.TabStop = true;
+            this.radioButton6.Text = "W";
+            this.radioButton6.UseVisualStyleBackColor = true;
+            // 
+            // Column32
+            // 
+            this.Column32.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column32.HeaderText = "Name";
+            this.Column32.Name = "Column32";
+            // 
+            // Column33
+            // 
+            this.Column33.HeaderText = "Volk";
+            this.Column33.Name = "Column33";
+            this.Column33.Width = 140;
             // 
             // Spielleitermodus
             // 
@@ -1907,8 +1937,6 @@
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column32;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column33;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column37;
@@ -1917,5 +1945,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
         private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column32;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column33;
     }
 }

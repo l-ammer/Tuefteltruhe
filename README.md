@@ -17,7 +17,7 @@ Sammlung an kleinen Hilfsanwendungen für das PNP-Spiel [Alt-Europa](https://alb
 - [x] **Zufällige Marktzusammensetzung**
 - [x] **Zufälliges Warenangebot**
 - [X] **Zufällige Zauberformel**
-- [ ] Zufälliger Name
+- [X] **Zufälliger Name**
 - [ ] Zufälliges Artefakt
 
 ###### Weitere:
@@ -58,14 +58,14 @@ Hier entsteht eine genauere Bedienungsanleitung...
 # Versionshistorie
 
 ###### v0.10
-- **Zauberformelsuche** hinzugefügt.
+- **Zufällige Zauberformel** und **Zufälliger Name** hinzugefügt.
 ###### v0.9
-- **Warenangebot** korrigiert und abgeschlossen.
+- **Zufälliges Warenangebot** korrigiert und abgeschlossen.
 - Optische Aufbesserungen.
 ###### v0.8
-- **Warenangebot**  hinzugefügt.
+- **Zufälliges Warenangebot**  hinzugefügt.
 ###### v0.7
-- **Zutatensuche** abgeschlossen und **Marktzusammensetzung** hinzugefügt.
+- **Zutatensuche** abgeschlossen und **Zufällige Marktzusammensetzung** hinzugefügt.
 ###### v0.6
 - **Spielermodus** korrigiert und **Zutatensuche** hinzugefügt.
 ###### v0.5

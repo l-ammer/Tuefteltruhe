@@ -31,6 +31,7 @@ namespace Tüfteltruhe
         public DataTable ZauberTB = new DataTable();
         public DataTable ZaubersteinTB = new DataTable();
         public DataTable ZauberkomplexTB = new DataTable();
+        public DataTable NamenTB = new DataTable();
         public Bereich Region = new Bereich(0, "", null, null, null, null);
         public Bereich Umgebung = new Bereich(0, "", null, null, null, null);
         public Bereich Region2 = new Bereich(0, "", null, null, null, null);
@@ -50,6 +51,7 @@ namespace Tüfteltruhe
         public int rowcount3 = 0;
         public int rowcount4 = 0;
         public int rowcount5 = 0;
+        public int rowcount7 = 0;
         public int portionenerhöht = 0;
         public int bisherigeportionenzahl = 0;
         public int gesamtstunden = 0;
@@ -113,6 +115,8 @@ namespace Tüfteltruhe
             OleDbDataReader reader17 = null;
             OleDbDataReader reader18 = null;
             OleDbDataReader reader19 = null;
+            OleDbDataReader reader20 = null;
+            OleDbDataReader reader21 = null;
             OleDbCommand command = new OleDbCommand("SELECT * FROM ZutatenRegion", connection);
             OleDbCommand command2 = new OleDbCommand("SELECT * FROM ZutatenRegion", connection);
             OleDbCommand command3 = new OleDbCommand("SELECT * FROM ZutatenUmgebung", connection);
@@ -132,6 +136,8 @@ namespace Tüfteltruhe
             OleDbCommand command17 = new OleDbCommand("SELECT * FROM Zauber", connection);
             OleDbCommand command18 = new OleDbCommand("SELECT * FROM Zauberstein", connection);
             OleDbCommand command19 = new OleDbCommand("SELECT * FROM Zauberkomplex", connection);
+            OleDbCommand command20 = new OleDbCommand("SELECT * FROM Namen", connection);
+            OleDbCommand command21 = new OleDbCommand("SELECT * FROM Namen", connection);
             reader = command.ExecuteReader();
             reader2 = command2.ExecuteReader();
             reader3 = command3.ExecuteReader();
@@ -151,12 +157,15 @@ namespace Tüfteltruhe
             reader17 = command17.ExecuteReader();
             reader18 = command18.ExecuteReader();
             reader19 = command19.ExecuteReader();
+            reader20 = command20.ExecuteReader();
+            reader21 = command21.ExecuteReader();
             comboBox5.Items.Clear();
             comboBox1.Items.Clear();
             comboBox2.Items.Clear();
             comboBox6.Items.Clear();
             comboBox7.Items.Clear();
             comboBox9.Items.Clear();
+            comboBox12.Items.Clear();
 
             while (reader.Read())
             {
@@ -184,6 +193,10 @@ namespace Tüfteltruhe
             {
                 comboBox9.Items.Add(reader19[1].ToString());
             }
+            while (reader20.Read())
+            {
+                comboBox12.Items.Add(reader20[1].ToString());
+            }
 
             DataTable ZutatenRegionTabelle = new DataTable();
             DataTable ZutatenUmgebungTabelle = new DataTable();
@@ -198,6 +211,7 @@ namespace Tüfteltruhe
             DataTable ZierTabelle = new DataTable();
             DataTable ZauberTabelle = new DataTable();
             DataTable ZaubersteinTabelle = new DataTable();
+            DataTable NamenTabelle = new DataTable();
 
             ZutatenRegionTabelle.Load(reader2);
             ZutatenUmgebungTabelle.Load(reader4);
@@ -212,6 +226,7 @@ namespace Tüfteltruhe
             ZierTabelle.Load(reader16);
             ZauberTabelle.Load(reader17);
             ZaubersteinTabelle.Load(reader18);
+            NamenTabelle.Load(reader21);
 
             ZutatenRegionTB = ZutatenRegionTabelle;
             ZutatenUmgebungTB = ZutatenUmgebungTabelle;
@@ -226,6 +241,7 @@ namespace Tüfteltruhe
             ZierTB = ZierTabelle;
             ZauberTB = ZauberTabelle;
             ZaubersteinTB = ZaubersteinTabelle;
+            NamenTB = NamenTabelle;
 
             connection.Close();
         }
@@ -2342,162 +2358,6 @@ namespace Tüfteltruhe
         }
 
         //#################### ################################################
-        //##### EXPORTE ###### ################################################
-        //#################### ################################################
-
-        public void Export_Data_To_Word(DataGridView DGV, string filename)
-        {
-            if (DGV.Rows.Count != 0)
-            {
-                int RowCount = DGV.Rows.Count;
-                int ColumnCount = DGV.Columns.Count;
-                Object[,] DataArray = new object[RowCount + 1, ColumnCount + 1];
-
-                //add rows
-                int r = 0;
-                for (int c = 0; c <= ColumnCount - 1; c++)
-                {
-                    for (r = 0; r <= RowCount - 1; r++)
-                    {
-                        DataArray[r, c] = DGV.Rows[r].Cells[c].Value;
-                    } //end row loop
-                } //end column loop
-
-                Word.Document oDoc = new Word.Document();
-                oDoc.Application.Visible = true;
-
-                //page orintation
-                oDoc.PageSetup.Orientation = Word.WdOrientation.wdOrientLandscape;
-
-
-                dynamic oRange = oDoc.Content.Application.Selection.Range;
-                string oTemp = "";
-                for (r = 0; r <= RowCount - 1; r++)
-                {
-                    for (int c = 0; c <= ColumnCount - 1; c++)
-                    {
-                        oTemp = oTemp + DataArray[r, c] + "\t";
-
-                    }
-                }
-
-                //table format
-                oRange.Text = oTemp;
-
-                object Separator = Word.WdTableFieldSeparator.wdSeparateByTabs;
-                object ApplyBorders = true;
-                object AutoFit = true;
-                object AutoFitBehavior = Word.WdAutoFitBehavior.wdAutoFitContent;
-
-                oRange.ConvertToTable(ref Separator, ref RowCount, ref ColumnCount,
-                                      Type.Missing, Type.Missing, ref ApplyBorders,
-                                      Type.Missing, Type.Missing, Type.Missing,
-                                      Type.Missing, Type.Missing, Type.Missing,
-                                      Type.Missing, ref AutoFit, ref AutoFitBehavior, Type.Missing);
-
-                oRange.Select();
-
-                oDoc.Application.Selection.Tables[1].Select();
-                oDoc.Application.Selection.Tables[1].Rows.AllowBreakAcrossPages = 0;
-                oDoc.Application.Selection.Tables[1].Rows.Alignment = 0;
-                oDoc.Application.Selection.Tables[1].Rows[1].Select();
-                oDoc.Application.Selection.InsertRowsAbove(1);
-                oDoc.Application.Selection.Tables[1].Rows[1].Select();
-
-                for (int d = 1; d <= RowCount - 1; d++)
-                {
-                    oDoc.Application.Selection.Tables[1].Rows[d].Range.Font.Size = 8;
-                    oDoc.Application.Selection.Tables[1].Rows[d].Range.Font.Name = "Book Antiqua";
-                    oDoc.Application.Selection.Tables[1].Rows[1].Range.Bold = 0;
-                }
-
-                //header row style
-                oDoc.Application.Selection.Tables[1].Rows[1].Range.Bold = 1;
-                oDoc.Application.Selection.Tables[1].Rows[1].Range.Font.Size = 10;
-
-                //add header row manually
-                for (int c = 0; c <= ColumnCount - 1; c++)
-                {
-                    oDoc.Application.Selection.Tables[1].Cell(1, c + 1).Range.Text = DGV.Columns[c].HeaderText;
-                }
-
-                //table style 
-                //oDoc.Application.Selection.Tables[1].set_Style("Grid Table 4 - Accent 5");
-                oDoc.Application.Selection.Tables[1].Borders.Enable = 1;
-                oDoc.Application.Selection.Tables[1].Rows[1].Select();
-                oDoc.Application.Selection.Cells.VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
-
-                //header text
-                foreach (Word.Section section in oDoc.Application.ActiveDocument.Sections)
-                {
-                    Word.Range headerRange = section.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
-                    headerRange.Fields.Add(headerRange, Word.WdFieldType.wdFieldPage);
-                    headerRange.Text = "Tüfteltruhe-Export";
-                    headerRange.Font.Size = 12;
-                    headerRange.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
-                }
-
-                oDoc.SaveAs2(filename);
-            }
-        }
-
-        private void AllgZutatensucheExp(object sender, EventArgs e)
-        {
-            SaveFileDialog sfd = new SaveFileDialog();
-
-            sfd.Filter = "Word Documents (*.docx)|*.docx";
-
-            sfd.FileName = "Tüfteltruhe-Export Allgemeine Zutatensuche.docx";
-
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                Export_Data_To_Word(dataGridView1, sfd.FileName);
-            }
-        }
-
-        private void SpzZutatensucheExp(object sender, EventArgs e)
-        {
-            SaveFileDialog sfd = new SaveFileDialog();
-
-            sfd.Filter = "Word Documents (*.docx)|*.docx";
-
-            sfd.FileName = "Tüfteltruhe-Export Spezielle Zutatensuche.docx";
-
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                Export_Data_To_Word(dataGridView3, sfd.FileName);
-            }
-        }
-
-        private void MarktzusammensetzungExp(object sender, EventArgs e)
-        {
-            SaveFileDialog sfd = new SaveFileDialog();
-
-            sfd.Filter = "Word Documents (*.docx)|*.docx";
-
-            sfd.FileName = "Tüfteltruhe-Export Marktzusammensetzung.docx";
-
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                Export_Data_To_Word(dataGridView2, sfd.FileName);
-            }
-        }
-
-        private void WarenangebotExp(object sender, EventArgs e)
-        {
-            SaveFileDialog sfd = new SaveFileDialog();
-
-            sfd.Filter = "Word Documents (*.docx)|*.docx";
-
-            sfd.FileName = "Tüfteltruhe-Export Warenangebot.docx";
-
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                Export_Data_To_Word(dataGridView4, sfd.FileName);
-            }
-        }
-
-        //#################### ################################################
         //###### ZAUBER ###### ################################################
         //#################### ################################################
 
@@ -2927,6 +2787,203 @@ namespace Tüfteltruhe
                 }
             }      
         }
+
+        //#################### ################################################
+        //####### NAMEN ###### ################################################
+        //#################### ################################################
+
+        private void button13_Click(object sender, EventArgs e) //Namen generieren
+        {
+            dataGridView7.Rows.Add();
+            rowcount7++;
+            string gewaehltes_volk = comboBox12.GetItemText(comboBox12.SelectedItem);
+            string ergebnisname = "";
+            foreach (DataRow row in NamenTB.Rows)
+            {
+                if (row["Volk"].ToString() == gewaehltes_volk)
+                {
+                    string[] array = row["VornameM"].ToString().Split(',');
+                    dataGridView7.Rows[rowcount7 - 1].DefaultCellStyle.BackColor = Color.PowderBlue;
+                    if (radioButton6.Checked)
+                    {
+                        array = row["VornameW"].ToString().Split(',');
+                        dataGridView7.Rows[rowcount7 - 1].DefaultCellStyle.BackColor = Color.Pink;
+                    }
+                    ergebnisname = array[zufall.Next(0, array.Length)];
+                }
+            }
+            if (ergebnisname.StartsWith(" "))
+            {
+                ergebnisname = ergebnisname.TrimStart(' ');
+            }
+
+            dataGridView7[0, rowcount7 - 1].Value = ergebnisname;
+            dataGridView7[1, rowcount7 - 1].Value = gewaehltes_volk;
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            dataGridView7.Rows.Clear();
+            rowcount7 = 0;
+        }
+
+
+        //#################### ################################################
+        //##### EXPORTE ###### ################################################
+        //#################### ################################################
+
+        public void Export_Data_To_Word(DataGridView DGV, string filename)
+        {
+            if (DGV.Rows.Count != 0)
+            {
+                int RowCount = DGV.Rows.Count;
+                int ColumnCount = DGV.Columns.Count;
+                Object[,] DataArray = new object[RowCount + 1, ColumnCount + 1];
+
+                //add rows
+                int r = 0;
+                for (int c = 0; c <= ColumnCount - 1; c++)
+                {
+                    for (r = 0; r <= RowCount - 1; r++)
+                    {
+                        DataArray[r, c] = DGV.Rows[r].Cells[c].Value;
+                    } //end row loop
+                } //end column loop
+
+                Word.Document oDoc = new Word.Document();
+                oDoc.Application.Visible = true;
+
+                //page orintation
+                oDoc.PageSetup.Orientation = Word.WdOrientation.wdOrientLandscape;
+
+
+                dynamic oRange = oDoc.Content.Application.Selection.Range;
+                string oTemp = "";
+                for (r = 0; r <= RowCount - 1; r++)
+                {
+                    for (int c = 0; c <= ColumnCount - 1; c++)
+                    {
+                        oTemp = oTemp + DataArray[r, c] + "\t";
+
+                    }
+                }
+
+                //table format
+                oRange.Text = oTemp;
+
+                object Separator = Word.WdTableFieldSeparator.wdSeparateByTabs;
+                object ApplyBorders = true;
+                object AutoFit = true;
+                object AutoFitBehavior = Word.WdAutoFitBehavior.wdAutoFitContent;
+
+                oRange.ConvertToTable(ref Separator, ref RowCount, ref ColumnCount,
+                                      Type.Missing, Type.Missing, ref ApplyBorders,
+                                      Type.Missing, Type.Missing, Type.Missing,
+                                      Type.Missing, Type.Missing, Type.Missing,
+                                      Type.Missing, ref AutoFit, ref AutoFitBehavior, Type.Missing);
+
+                oRange.Select();
+
+                oDoc.Application.Selection.Tables[1].Select();
+                oDoc.Application.Selection.Tables[1].Rows.AllowBreakAcrossPages = 0;
+                oDoc.Application.Selection.Tables[1].Rows.Alignment = 0;
+                oDoc.Application.Selection.Tables[1].Rows[1].Select();
+                oDoc.Application.Selection.InsertRowsAbove(1);
+                oDoc.Application.Selection.Tables[1].Rows[1].Select();
+
+                for (int d = 1; d <= RowCount - 1; d++)
+                {
+                    oDoc.Application.Selection.Tables[1].Rows[d].Range.Font.Size = 8;
+                    oDoc.Application.Selection.Tables[1].Rows[d].Range.Font.Name = "Book Antiqua";
+                    oDoc.Application.Selection.Tables[1].Rows[1].Range.Bold = 0;
+                }
+
+                //header row style
+                oDoc.Application.Selection.Tables[1].Rows[1].Range.Bold = 1;
+                oDoc.Application.Selection.Tables[1].Rows[1].Range.Font.Size = 10;
+
+                //add header row manually
+                for (int c = 0; c <= ColumnCount - 1; c++)
+                {
+                    oDoc.Application.Selection.Tables[1].Cell(1, c + 1).Range.Text = DGV.Columns[c].HeaderText;
+                }
+
+                //table style 
+                //oDoc.Application.Selection.Tables[1].set_Style("Grid Table 4 - Accent 5");
+                oDoc.Application.Selection.Tables[1].Borders.Enable = 1;
+                oDoc.Application.Selection.Tables[1].Rows[1].Select();
+                oDoc.Application.Selection.Cells.VerticalAlignment = Word.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+
+                //header text
+                foreach (Word.Section section in oDoc.Application.ActiveDocument.Sections)
+                {
+                    Word.Range headerRange = section.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                    headerRange.Fields.Add(headerRange, Word.WdFieldType.wdFieldPage);
+                    headerRange.Text = "Tüfteltruhe-Export";
+                    headerRange.Font.Size = 12;
+                    headerRange.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                }
+
+                oDoc.SaveAs2(filename);
+            }
+        }
+
+        private void AllgZutatensucheExp(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            sfd.Filter = "Word Documents (*.docx)|*.docx";
+
+            sfd.FileName = "Tüfteltruhe-Export Allgemeine Zutatensuche.docx";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                Export_Data_To_Word(dataGridView1, sfd.FileName);
+            }
+        }
+
+        private void SpzZutatensucheExp(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            sfd.Filter = "Word Documents (*.docx)|*.docx";
+
+            sfd.FileName = "Tüfteltruhe-Export Spezielle Zutatensuche.docx";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                Export_Data_To_Word(dataGridView3, sfd.FileName);
+            }
+        }
+
+        private void MarktzusammensetzungExp(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            sfd.Filter = "Word Documents (*.docx)|*.docx";
+
+            sfd.FileName = "Tüfteltruhe-Export Marktzusammensetzung.docx";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                Export_Data_To_Word(dataGridView2, sfd.FileName);
+            }
+        }
+
+        private void WarenangebotExp(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            sfd.Filter = "Word Documents (*.docx)|*.docx";
+
+            sfd.FileName = "Tüfteltruhe-Export Warenangebot.docx";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                Export_Data_To_Word(dataGridView4, sfd.FileName);
+            }
+        }
+
 
         //#################### ################################################
         //### NEUE FENSTER ### ################################################
