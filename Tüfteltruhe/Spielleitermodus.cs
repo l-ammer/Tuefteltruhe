@@ -1180,6 +1180,312 @@ namespace Tüfteltruhe
             return ergebniszeile["Komplex"].ToString();
         }
 
+        public string ZufaelligerRegulaererKomplex(string zauberweg)
+        {
+            bool legit = false;
+            string komplex = "";
+
+            while (!legit)
+            {
+                DataRow ergebniszeile = ZauberTB.Rows[zufall.Next(1, 159)];
+                komplex = ergebniszeile["Komplex"].ToString();
+
+                switch (zauberweg)
+                {
+                    case "Naturzauberei":
+                        switch (komplex)
+                        {
+                            case "Leben":
+                            case "Reinigung":
+                            case "Erkenntnis":
+                            case "Heilung":
+                            case "Pflanzen":
+                            case "Erde":
+                            case "Wasser":
+                            case "Sonne":
+                            case "Wind":
+                            case "Telepathie":
+                                legit = true;
+                                break;
+                        }
+                        break;
+                    case "Ahnenzauberei1":
+                        switch (komplex)
+                        {
+                            case "Telekinese":
+                            case "Telepathie":
+                            case "Erkenntnis":
+                            case "Verhüllung":
+                            case "Erleuchtung":
+                                legit = true;
+                                break;
+                        }
+                        break;
+                    case "Ahnenzauberei2":
+                        switch (komplex)
+                        {
+                            case "Widerstand":
+                            case "Schutz":
+                            case "Reinigung":
+                            case "Ruhe":
+                            case "Leben":
+                                legit = true;
+                                break;
+                        }
+                        break;
+                    case "Baldan":
+                        switch (komplex)
+                        {
+                            case "Widerstand":
+                            case "Sonne":
+                            case "Erleuchtung":
+                            case "Reinigung":
+                            case "Heilung":
+                            case "Leben":
+                                legit = true;
+                                break;
+                        }
+                        break;
+                    case "Diwan":
+                        switch (komplex)
+                        {
+                            case "Erleuchtung":
+                            case "Schutz":
+                            case "Blitz":
+                            case "Feuer":
+                            case "Kraft":
+                            case "Schaden":
+                                legit = true;
+                                break;
+                        }
+                        break;
+                    case "Erda":
+                        switch (komplex)
+                        {
+                            case "Pflanzen":
+                            case "Erde":
+                            case "Heilung":
+                            case "Materie":
+                            case "Verwandlung":
+                            case "Leben":
+                                legit = true;
+                                break;
+                        }
+                        break;
+                    case "Fria":
+                        switch (komplex)
+                        {
+                            case "Geist":
+                            case "Sonne":
+                            case "Heilung":
+                            case "Reinigung":
+                            case "Spielerei":
+                            case "Illusion":
+                                legit = true;
+                                break;
+                        }
+                        break;
+                    case "Halla":
+                        switch (komplex)
+                        {
+                            case "Frost":
+                            case "Erde":
+                            case "Materie":
+                            case "Illusion":
+                            case "Verhüllung":
+                            case "Schaden":
+                                legit = true;
+                                break;
+                        }
+                        break;
+                    case "Heimdan":
+                        switch (komplex)
+                        {
+                            case "Schutz":
+                            case "Ruhe":
+                            case "Erkenntnis":
+                            case "Frost":
+                            case "Zeit":
+                            case "Illusion":
+                                legit = true;
+                                break;
+                        }
+                        break;
+                    case "Ingan":
+                        switch (komplex)
+                        {
+                            case "Widerstand":
+                            case "Feuer":
+                            case "Sonne":
+                            case "Pflanzen":
+                            case "Schabernack":
+                            case "Spielerei":
+                                legit = true;
+                                break;
+                        }
+                        break;
+                    case "Lukan":
+                        switch (komplex)
+                        {
+                            case "Blitz":
+                            case "Feuer":
+                            case "Erde":
+                            case "Schabernack":
+                            case "Materie":
+                            case "Verhüllung":
+                                legit = true;
+                                break;
+                        }
+                        break;
+                    case "Nertan":
+                        switch (komplex)
+                        {
+                            case "Wind":
+                            case "Wasser":
+                            case "Ruhe":
+                            case "Reinigung":
+                            case "Schabernack":
+                            case "Leben":
+                                legit = true;
+                                break;
+                        }
+                        break;
+                    case "Saga":
+                        switch (komplex)
+                        {
+                            case "Schutz":
+                            case "Geist":
+                            case "Ruhe":
+                            case "Erleuchtung":
+                            case "Erkenntnis":
+                            case "Zeit":
+                                legit = true;
+                                break;
+                        }
+                        break;
+                    case "Skanda":
+                        switch (komplex)
+                        {
+                            case "Wasser":
+                            case "Frost":
+                            case "Pflanzen":
+                            case "Kraft":
+                            case "Jagd":
+                            case "Spielerei":
+                                legit = true;
+                                break;
+                        }
+                        break;
+                    case "Tunan":
+                        switch (komplex)
+                        {
+                            case "Widerstand":
+                            case "Wind":
+                            case "Blitz":
+                            case "Jagd":
+                            case "Kraft":
+                            case "Schaden":
+                                legit = true;
+                                break;
+                        }
+                        break;
+                    case "Wodan":
+                        switch (komplex)
+                        {
+                            case "Wind":
+                            case "Geist":
+                            case "Erkenntnis":
+                            case "Jagd":
+                            case "Verwandlung":
+                            case "Verhüllung":
+                                legit = true;
+                                break;
+                        }
+                        break;
+                }
+                switch (zauberweg)
+                { 
+                    case "Baldan":
+                    case "Diwan":
+                    case "Erda":
+                    case "Fria":
+                    case "Halla":
+                    case "Heimdan":
+                    case "Ingan":
+                    case "Lukan":
+                    case "Nertan":
+                    case "Saga":
+                    case "Skanda":
+                    case "Tunan":
+                    case "Wodan":
+                        switch (komplex)
+                        {
+                            case "Teleportation":
+                            case "Telekinese":
+                            case "Telepathie":
+                            case "Kontrolle":
+                            case "Störung":
+                                legit = true;
+                                break;
+                        }
+                        break;
+                }
+            }
+
+            return komplex;
+        }
+
+        public string ZufälligeGottheit()
+        {
+            int zuf = zufall.Next(1, 14);
+            string gh = "";
+
+            switch (zuf)
+            {
+                case 1:
+                    gh = "Baldan";
+                    break;
+                case 2:
+                    gh = "Diwan";
+                    break;
+                case 3:
+                    gh = "Erda";
+                    break;
+                case 4:
+                    gh = "Fria";
+                    break;
+                case 5:
+                    gh = "Halla";
+                    break;
+                case 6:
+                    gh = "Heimdan";
+                    break;
+                case 7:
+                    gh = "Ingan";
+                    break;
+                case 8:
+                    gh = "Lukan";
+                    break;
+                case 9:
+                    gh = "Nertan";
+                    break;
+                case 10:
+                    gh = "Saga";
+                    break;
+                case 11:
+                    gh = "Skanda";
+                    break;
+                case 12:
+                    gh = "Tunan";
+                    break;
+                case 13:
+                    gh = "Wodan";
+                    break;
+            }
+
+            return gh;
+        }
+
         public void ZauberTrankRolleGenerator(string modus)
         {
             int trankzahl = zufall.Next(1, 11) + zufall.Next(1, 11) + zufall.Next(1, 11);
@@ -2429,6 +2735,7 @@ namespace Tüfteltruhe
         private void button10_Click(object sender, EventArgs e) //1 Zauber generieren
         {
             string komplex = "";
+            string gottheit = "";
             if (comboBox9.GetItemText(comboBox9.SelectedItem) != "") //wenn Komplex gewählt
             {
                 komplex = comboBox9.GetItemText(comboBox9.SelectedItem);
@@ -2457,7 +2764,6 @@ namespace Tüfteltruhe
                         for (int i = 0; i < zufallszahl; i++)
                         {
                             komplex = ZufaelligerRegulaererKomplex();
-                            
                             foreach (int idx in AlleZauberEinesKomplexes(komplex)) //Duplikate vermeiden
                             {
                                 if (!zauberliste.Contains(idx)) zauberliste.Add(idx);
@@ -2465,16 +2771,49 @@ namespace Tüfteltruhe
                         }
                         break;
                     case "Repertoire eines Druiden":
-                        // +++
-                        // 3-9 Naturrufe + 0-4 Komplexe (nur bestimmte!)
+                        zufallszahl = zufall.Next(3, 10); //beherrscht 3-9 Naturrufe
+                        while (zauberliste.Count < zufallszahl)
+                        {
+                            id = ZufaelligerZauberNachKomplex("Naturruf") - 1;
+                            if (!zauberliste.Contains(id)) zauberliste.Add(id);
+                        }
+                        zufallszahl2 = zufall.Next(0, 5); //beherrscht 0-4 Komplexe (nur bestimmte!)
+                        for (int i = 0; i < zufallszahl2; i++)
+                        {
+                            komplex = ZufaelligerRegulaererKomplex("Naturzauberei");
+                            foreach (int idx in AlleZauberEinesKomplexes(komplex))
+                            {
+                                if (!zauberliste.Contains(idx)) zauberliste.Add(idx);
+                            }
+                        }
                         break;
                     case "Repertoire eines Priesters":
-                        // +++
-                        // 1-6 Komplexe einer bestimmten Gottheit (+ Anzeigetext, um welchen Gott es sich handelt)
+                        gottheit = ZufälligeGottheit();
+                        for (int i = 0; i < 11; i++) //beherrscht alle 11 Komplexe einer bestimmten Gottheit 
+                        {
+                            komplex = ZufaelligerRegulaererKomplex(gottheit);
+                            foreach (int idx in AlleZauberEinesKomplexes(komplex))
+                            {
+                                if (!zauberliste.Contains(idx)) zauberliste.Add(idx);
+                            }
+                        }
                         break;
                     case "Repertoire eines Schamanen":
-                        //+++
-                        //4-16 Ahnenzauber + 1-2 Komplexe (nur bestimmte!)
+                        zufallszahl = zufall.Next(4, 17); //beherrscht 4-16 Ahnenzauber
+                        while (zauberliste.Count < zufallszahl)
+                        {
+                            id = ZufaelligerZauberNachKomplex("Ahnenzauber") - 1;
+                            if (!zauberliste.Contains(id)) zauberliste.Add(id);
+                        }
+                        //2 Komplexe (nur bestimmte!)
+                        foreach (int idx in AlleZauberEinesKomplexes(ZufaelligerRegulaererKomplex("Ahnenzauberei1")))
+                        {
+                            if (!zauberliste.Contains(idx)) zauberliste.Add(idx);
+                        }
+                        foreach (int idx in AlleZauberEinesKomplexes(ZufaelligerRegulaererKomplex("Ahnenzauberei2")))
+                        {
+                            if (!zauberliste.Contains(idx)) zauberliste.Add(idx);
+                        }
                         break;
                     case "Repertoire eines Runenmeisters":
                         zufallszahl = zufall.Next(8, 25); //beherrscht 8-24 Runenzauber
@@ -2538,6 +2877,10 @@ namespace Tüfteltruhe
                     ZauberAbbilden(ergebniszeile, ergebniszeile["Komplex"].ToString());
                 }
             }
+
+            if (comboBox8.GetItemText(comboBox8.SelectedItem) == "Repertoire eines Priesters" && gottheit != "") 
+            { label36.Text = "Der Priester dient der Gottheit " + gottheit + "."; }
+            else { label36.Text = ""; }
         }
 
         private void button11_Click(object sender, EventArgs e) //Alle betreffenden Zauber auflisten

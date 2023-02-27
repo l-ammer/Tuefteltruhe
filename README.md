@@ -58,7 +58,7 @@ Hier entsteht eine genauere Bedienungsanleitung...
 # Versionshistorie
 
 ###### v0.10
-- **Zaubersuche** hinzugefügt.
+- **Zauberformelsuche** hinzugefügt.
 ###### v0.9
 - **Warenangebot** korrigiert und abgeschlossen.
 - Optische Aufbesserungen.

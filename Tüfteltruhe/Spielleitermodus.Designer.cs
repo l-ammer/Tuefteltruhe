@@ -182,6 +182,7 @@
             this.label32 = new System.Windows.Forms.Label();
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
+            this.label36 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -615,6 +616,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.ForeColor = System.Drawing.Color.BlueViolet;
+            this.label36.ForeColor = System.Drawing.Color.BlueViolet;
             this.label21.Location = new System.Drawing.Point(518, 15);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(0, 13);
@@ -1301,6 +1303,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label36);
             this.tabPage3.Controls.Add(this.dataGridView5);
             this.tabPage3.Controls.Add(this.label26);
             this.tabPage3.Controls.Add(this.label25);
@@ -1693,6 +1696,14 @@
             this.button14.Text = "Alles zurücksetzen";
             this.button14.UseVisualStyleBackColor = true;
             // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(385, 23);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(0, 13);
+            this.label36.TabIndex = 33;
+            // 
             // Spielleitermodus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1905,5 +1916,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
+        private System.Windows.Forms.Label label36;
     }
 }
