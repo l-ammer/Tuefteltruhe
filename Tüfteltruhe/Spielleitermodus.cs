@@ -1069,41 +1069,41 @@ namespace Tüfteltruhe
             return ergebniszeile["Zauber"].ToString();
         }
 
-        public int ZufaelligerZauber(string art, int komplexstufe)
-        {
-            int[] auswahlzauber = new int[100];
-            int stelle = 0;
-            DataRow ergebniszeile = ZauberTB.Rows[0];
-            for (int i = 0; i < ZauberTB.Rows.Count - 1; i++)
-            {
-                ergebniszeile = ZauberTB.Rows[i];
-                if (ergebniszeile["Art"].ToString() == art && Convert.ToInt16(ergebniszeile["Stufe"]) == komplexstufe)
-                {
-                    auswahlzauber[stelle] = Convert.ToInt16(ergebniszeile["ID"]);
-                    stelle++;
-                }
-            }
-            ergebniszeile = ZauberTB.Rows[auswahlzauber[zufall.Next(0, stelle)]];
+        //public int ZufaelligerZauber(string art, int komplexstufe)
+        //{
+        //    int[] auswahlzauber = new int[100];
+        //    int stelle = 0;
+        //    DataRow ergebniszeile = ZauberTB.Rows[0];
+        //    for (int i = 0; i < ZauberTB.Rows.Count - 1; i++)
+        //    {
+        //        ergebniszeile = ZauberTB.Rows[i];
+        //        if (ergebniszeile["Art"].ToString() == art && Convert.ToInt16(ergebniszeile["Stufe"]) == komplexstufe)
+        //        {
+        //            auswahlzauber[stelle] = Convert.ToInt16(ergebniszeile["ID"]);
+        //            stelle++;
+        //        }
+        //    }
+        //    ergebniszeile = ZauberTB.Rows[auswahlzauber[zufall.Next(0, stelle)]];
 
-            return Convert.ToInt16(ergebniszeile["ID"]) - 1;
+        //    return Convert.ToInt16(ergebniszeile["ID"]) - 1;
 
-        }
+        //}
 
-        public int ZufaelligerZauber()
-        {
-            int[] auswahlzauber = new int[300];
-            int stelle = 0;
-            DataRow ergebniszeile = ZauberTB.Rows[0]; 
-            for (int i = 0; i < ZauberTB.Rows.Count - 1; i++)
-            {
-                ergebniszeile = ZauberTB.Rows[i];
-                auswahlzauber[stelle] = Convert.ToInt16(ergebniszeile["ID"]);
-                stelle++;
-            }
-            ergebniszeile = ZauberTB.Rows[auswahlzauber[zufall.Next(0, stelle)]];
+        //public int ZufaelligerZauber()
+        //{
+        //    int[] auswahlzauber = new int[300];
+        //    int stelle = 0;
+        //    DataRow ergebniszeile = ZauberTB.Rows[0]; 
+        //    for (int i = 0; i < ZauberTB.Rows.Count - 1; i++)
+        //    {
+        //        ergebniszeile = ZauberTB.Rows[i];
+        //        auswahlzauber[stelle] = Convert.ToInt16(ergebniszeile["ID"]);
+        //        stelle++;
+        //    }
+        //    ergebniszeile = ZauberTB.Rows[auswahlzauber[zufall.Next(0, stelle)]];
 
-            return Convert.ToInt16(ergebniszeile["ID"]) - 1;
-        }
+        //    return Convert.ToInt16(ergebniszeile["ID"]) - 2;
+        //}
 
         public int ZufaelligerZauberNachKomplex(string komplex)
         {
@@ -1121,7 +1121,7 @@ namespace Tüfteltruhe
             }
             ergebniszeile = ZauberTB.Rows[auswahlzauber[zufall.Next(0, stelle)]];
 
-            return Convert.ToInt16(ergebniszeile["ID"]) -1;
+            return Convert.ToInt16(ergebniszeile["ID"]) -2; //warum auch immer...
         }
 
         public List<int> AlleZauberEinesKomplexes(string komplex)
@@ -1207,6 +1207,62 @@ namespace Tüfteltruhe
 
                 switch (zauberweg)
                 {
+                    case "Feuer":
+                        legit = true;
+                        switch (komplex)
+                        {
+                            case "Blitz":
+                            case "Wind":
+                            case "Wasser":
+                            case "Frost":
+                            case "Pflanzen":
+                            case "Erde":
+                                legit = false;
+                                break;
+                        }
+                        break;
+                    case "Wasser":
+                        legit = true;
+                        switch (komplex)
+                        {
+                            case "Blitz":
+                            case "Wind":
+                            case "Feuer":
+                            case "Sonne":
+                            case "Pflanzen":
+                            case "Erde":
+                                legit = false;
+                                break;
+                        }
+                        break;
+                    case "Erde":
+                        legit = true;
+                        switch (komplex)
+                        {
+                            case "Blitz":
+                            case "Wind":
+                            case "Wasser":
+                            case "Frost":
+                            case "Feuer":
+                            case "Sonne":
+                                legit = false;
+                                break;
+                        }
+                        break;
+                    case "Luft":
+                        legit = true;
+                        switch (komplex)
+                        {
+                            case "Feuer":
+                            case "Sonne":
+                            case "Wasser":
+                            case "Frost":
+                            case "Pflanzen":
+                            case "Erde":
+                                legit = false;
+                                break;
+                        }
+                        break;
                     case "Naturzauberei":
                         switch (komplex)
                         {
@@ -2588,13 +2644,14 @@ namespace Tüfteltruhe
             dataGridView5[3, rowcount5 - 1].Value = ergebniszeile["Zauber"].ToString();
             dataGridView5[4, rowcount5 - 1].Value = ergebniszeile["Stufe"].ToString();
             dataGridView5[5, rowcount5 - 1].Value = ergebniszeile["Bonusstufen"].ToString();
-            dataGridView5[5, rowcount5 - 1].Value = ergebniszeile["Wirkung"].ToString();
+            dataGridView5[6, rowcount5 - 1].Value = ergebniszeile["Wirkung"].ToString();
         }
 
         private void button10_Click(object sender, EventArgs e) //1 Zauber generieren
         {
             string komplex = "";
             string gottheit = "";
+            string element = "";
             if (comboBox9.GetItemText(comboBox9.SelectedItem) != "") //wenn Komplex gewählt
             {
                 komplex = comboBox9.GetItemText(comboBox9.SelectedItem);
@@ -2613,6 +2670,7 @@ namespace Tüfteltruhe
                 rowcount5 = 0;
                 int zufallszahl = 0;
                 int zufallszahl2 = 0;
+                int zufallszahl3 = 0;
                 int id = 0;
                 List<int> zauberliste = new List<int>();
                 DataRow ergebniszeile = ZauberTB.Rows[0];
@@ -2620,20 +2678,36 @@ namespace Tüfteltruhe
                 {
                     case "Repertoire eines Zauberers":
                         zufallszahl = zufall.Next(2, 8); //beherrscht 2 bis 7 Komplexe
+                        zufallszahl3 = zufall.Next(1, 5);
+                        switch (zufallszahl3)
+                        {
+                            case 1:
+                                element = "Feuer";
+                                break;
+                            case 2:
+                                element = "Wasser";
+                                break;
+                            case 3:
+                                element = "Erde";
+                                break;
+                            case 4:
+                                element = "Luft";
+                                break;
+                        }
                         for (int i = 0; i < zufallszahl; i++)
                         {
-                            komplex = ZufaelligerRegulaererKomplex();
-                            foreach (int idx in AlleZauberEinesKomplexes(komplex)) //Duplikate vermeiden
+                            komplex = ZufaelligerRegulaererKomplex(element);
+                            foreach (int idx in AlleZauberEinesKomplexes(komplex))
                             {
                                 if (!zauberliste.Contains(idx)) zauberliste.Add(idx);
                             }
                         }
                         break;
                     case "Repertoire eines Druiden":
-                        zufallszahl = zufall.Next(3, 10); //beherrscht 3-9 Naturrufe
+                        zufallszahl = zufall.Next(4, 10); //beherrscht 4-9 Naturrufe
                         while (zauberliste.Count < zufallszahl)
                         {
-                            id = ZufaelligerZauberNachKomplex("Naturruf") - 1;
+                            id = ZufaelligerZauberNachKomplex("Naturruf");
                             if (!zauberliste.Contains(id)) zauberliste.Add(id);
                         }
                         zufallszahl2 = zufall.Next(0, 5); //beherrscht 0-4 Komplexe (nur bestimmte!)
@@ -2648,7 +2722,7 @@ namespace Tüfteltruhe
                         break;
                     case "Repertoire eines Priesters":
                         gottheit = ZufälligeGottheit();
-                        for (int i = 0; i < 11; i++) //beherrscht alle 11 Komplexe einer bestimmten Gottheit 
+                        while (zauberliste.Count < 55) //beherrscht alle 11 Komplexe einer bestimmten Gottheit 
                         {
                             komplex = ZufaelligerRegulaererKomplex(gottheit);
                             foreach (int idx in AlleZauberEinesKomplexes(komplex))
@@ -2661,7 +2735,7 @@ namespace Tüfteltruhe
                         zufallszahl = zufall.Next(4, 17); //beherrscht 4-16 Ahnenzauber
                         while (zauberliste.Count < zufallszahl)
                         {
-                            id = ZufaelligerZauberNachKomplex("Ahnenzauber") - 1;
+                            id = ZufaelligerZauberNachKomplex("Ahnenzauber");
                             if (!zauberliste.Contains(id)) zauberliste.Add(id);
                         }
                         //2 Komplexe (nur bestimmte!)
@@ -2675,32 +2749,32 @@ namespace Tüfteltruhe
                         }
                         break;
                     case "Repertoire eines Runenmeisters":
-                        zufallszahl = zufall.Next(8, 25); //beherrscht 8-24 Runenzauber
+                        zufallszahl = zufall.Next(15, 25); //beherrscht 15-24 Runenzauber
                         while (zauberliste.Count < zufallszahl)
                         {
-                            id = ZufaelligerZauberNachKomplex("Runenzauber") - 1;
+                            id = ZufaelligerZauberNachKomplex("Runenzauber");
                             if (!zauberliste.Contains(id)) zauberliste.Add(id);
                         }
                         break;
                     case "Repertoire eines Sterndeuters":
-                        zufallszahl = zufall.Next(5, 21); //beherrscht 5-20 Sternbilder
+                        zufallszahl = zufall.Next(13, 27); //beherrscht 13-26 Sternbilder (nach Regeln 6W6 + INT)
                         while (zauberliste.Count < zufallszahl)
                         {
-                            id = ZufaelligerZauberNachKomplex("Sternbild") - 1;
+                            id = ZufaelligerZauberNachKomplex("Sternbild");
                             if (!zauberliste.Contains(id)) zauberliste.Add(id);
                         }
                         break;
                     case "Repertoire eines Kultmeisters":
-                        zufallszahl = zufall.Next(3, 16); //beherrscht 3-15 Bannwörter
+                        zufallszahl = zufall.Next(6, 16); //beherrscht 6-15 Bannwörter
                         while (zauberliste.Count < zufallszahl)
                         {
-                            id = ZufaelligerZauberNachKomplex("Bannwort") - 1;
+                            id = ZufaelligerZauberNachKomplex("Bannwort");
                             if (!zauberliste.Contains(id)) zauberliste.Add(id);
                         }
-                        zufallszahl2 = zufall.Next(0, 3) + zufall.Next(0, 3); //beherrscht 0-4 Titanenkräfte
+                        zufallszahl2 = zufall.Next(0, 3) + zufall.Next(1, 3); //beherrscht 1-4 Titanenkräfte
                         while (zauberliste.Count < zufallszahl + zufallszahl2)
                         {
-                            id = ZufaelligerZauberNachKomplex("Titanenkraft") - 1;
+                            id = ZufaelligerZauberNachKomplex("Titanenkraft");
                             if (!zauberliste.Contains(id)) zauberliste.Add(id);
                         }
                         break;
@@ -2723,7 +2797,7 @@ namespace Tüfteltruhe
             {
                 DataRow ergebniszeile = ZauberTB.Rows[0];
                 ergebniszeile = ZauberTB.Rows[ZufaelligerZauberNachKomplex(komplex)];
-                if (numericUpDown6.Value > numericUpDown4.Value)
+                if (numericUpDown6.Value > numericUpDown4.Value || Convert.ToDecimal(ergebniszeile["Stufe"].ToString()) == 0)
                 {
                     ZauberAbbilden(ergebniszeile, ergebniszeile["Komplex"].ToString());
                 }
@@ -2739,6 +2813,8 @@ namespace Tüfteltruhe
 
             if (comboBox8.GetItemText(comboBox8.SelectedItem) == "Repertoire eines Priesters" && gottheit != "") 
             { label36.Text = "Der Priester dient der Gottheit " + gottheit + "."; }
+            else if (comboBox8.GetItemText(comboBox8.SelectedItem) == "Repertoire eines Zauberers" && element != "")
+            { label36.Text = "Der Zauberer hat das Element " + element + "."; }
             else { label36.Text = ""; }
         }
 
@@ -3003,7 +3079,7 @@ namespace Tüfteltruhe
 
             sfd.Filter = "Word Documents (*.docx)|*.docx";
 
-            sfd.FileName = "Tüfteltruhe-Export Namnesliste.docx";
+            sfd.FileName = "Tüfteltruhe-Export Namensliste.docx";
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
