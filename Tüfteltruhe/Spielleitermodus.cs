@@ -1154,6 +1154,21 @@ namespace Tüfteltruhe
             return auswahlzauber;
         }
 
+        public List<string> AlleKomplexeEinerArt(string art)
+        {
+            List<string> auswahlkomplexe = new List<string>();
+            DataRow ergebniszeile = ZauberTB.Rows[0];
+            for (int i = 0; i < ZauberTB.Rows.Count - 1; i++)
+            {
+                ergebniszeile = ZauberTB.Rows[i];
+                if (ergebniszeile["Art"].ToString() == art)
+                {
+                    auswahlkomplexe.Add(ergebniszeile["Komplex"].ToString());
+                }
+            }
+            return auswahlkomplexe;
+        }
+
         public int ZauberFinden(string komplex, int komplexstufe)
         {
             DataRow ergebniszeile = ZauberTB.Rows[0];
@@ -2416,7 +2431,7 @@ namespace Tüfteltruhe
         //###### ZAUBER ###### ################################################
         //#################### ################################################
 
-        private string KomplexnachKontext(string kontext)
+        private string ZufälligerKomplexnachKontext(string kontext)
         {
             string komplex = "";
             int wurf = zufall.Next(1, 101);
@@ -2535,65 +2550,96 @@ namespace Tüfteltruhe
             return komplex;   
         }
 
-        private List<string> ArtennachKontext(string kontext)
+        private List<string> AlleKomplexeNachKontext(string kontext)
         {
-            List<string> artenliste = new List<string>();
+            List<string> komplexliste = new List<string>();
             switch (kontext)
             {
                 case "":
                     break;
                 case "Gesprochene Formel":
-                    artenliste.Add("Regulär");
-                    artenliste.Add("Ahnenzauber");
-                    artenliste.Add("Naturruf");
-                    artenliste.Add("Runenzauber");
-                    artenliste.Add("Sternbild");
-                    artenliste.Add("Bannwort");
-                    artenliste.Add("Titanenkraft");
-                    artenliste.Add("Lebenszauber");
-                    artenliste.Add("Totenzauber");
-                    artenliste.Add("Seelenzauber");
+                    komplexliste.AddRange(AlleKomplexeEinerArt("Regulär"));
+                    komplexliste.Add("Ahnenzauber");
+                    komplexliste.Add("Naturruf");
+                    komplexliste.Add("Runenzauber");
+                    komplexliste.Add("Sternbild");
+                    komplexliste.Add("Bannwort");
+                    komplexliste.Add("Titanenkraft");
+                    komplexliste.Add("Lebenszauber");
+                    komplexliste.Add("Totenzauber");
+                    komplexliste.Add("Seelenzauber");
                     break;
                 case "Zauberrolle":
-                    artenliste.Add("Regulär");
-                    artenliste.Add("Sternbild");
-                    artenliste.Add("Lebenszauber");
-                    artenliste.Add("Totenzauber");
-                    artenliste.Add("Seelenzauber");
+                    komplexliste.AddRange(AlleKomplexeEinerArt("Regulär"));
+                    komplexliste.Add("Sternbild");
+                    komplexliste.Add("Lebenszauber");
+                    komplexliste.Add("Totenzauber");
+                    komplexliste.Add("Seelenzauber");
                     break;
                 case "Zaubertrank":
-                    artenliste.Add("Regulär");
-                    artenliste.Add("Lebenszauber");
-                    artenliste.Add("Totenzauber");
-                    artenliste.Add("Seelenzauber");
+                    komplexliste.AddRange(AlleKomplexeEinerArt("Regulär"));
+                    komplexliste.Add("Lebenszauber");
+                    komplexliste.Add("Totenzauber");
+                    komplexliste.Add("Seelenzauber");
                     break;
                 case "Zauberstein":
-                    artenliste.Add("Regulär");
-                    artenliste.Add("Ahnenzauber");
-                    artenliste.Add("Runenzauber");
-                    artenliste.Add("Bannwort");
-                    artenliste.Add("Lebenszauber");
-                    artenliste.Add("Totenzauber");
-                    artenliste.Add("Seelenzauber");
+                    komplexliste.AddRange(AlleKomplexeEinerArt("Regulär"));
+                    komplexliste.Add("Ahnenzauber");
+                    komplexliste.Add("Runenzauber");
+                    komplexliste.Add("Bannwort");
+                    komplexliste.Add("Lebenszauber");
+                    komplexliste.Add("Totenzauber");
+                    komplexliste.Add("Seelenzauber");
                     break;
                 case "Repertoire eines Zauberers":
+                    komplexliste.AddRange(AlleKomplexeEinerArt("Regulär"));
+                    komplexliste.Add("Lebenszauber");
+                    komplexliste.Add("Totenzauber");
+                    komplexliste.Add("Seelenzauber");
                     break;
                 case "Repertoire eines Druiden":
+                    komplexliste.Add("Naturruf");
+                    komplexliste.Add("Leben");
+                    komplexliste.Add("Reinigung");
+                    komplexliste.Add("Erkenntnis");
+                    komplexliste.Add("Heilung");
+                    komplexliste.Add("Pflanzen");
+                    komplexliste.Add("Erde");
+                    komplexliste.Add("Wasser");
+                    komplexliste.Add("Sonne");
+                    komplexliste.Add("Wind");
+                    komplexliste.Add("Telepathie");
                     break;
                 case "Repertoire eines Priesters":
+                    komplexliste.AddRange(AlleKomplexeEinerArt("Regulär"));
                     break;
                 case "Repertoire eines Schamanen":
+                    komplexliste.Add("Ahnenzauber");
+                    komplexliste.Add("Telekinese");
+                    komplexliste.Add("Telepathie");
+                    komplexliste.Add("Erkenntnis");
+                    komplexliste.Add("Verhüllung");
+                    komplexliste.Add("Erleuchtung");
+                    komplexliste.Add("Widerstand");
+                    komplexliste.Add("Schutz");
+                    komplexliste.Add("Reinigung");
+                    komplexliste.Add("Ruhe");
+                    komplexliste.Add("Leben");
                     break;
                 case "Repertoire eines Runenmeisters":
+                    komplexliste.Add("Runenzauber");
                     break;
                 case "Repertoire eines Sterndeuters":
+                    komplexliste.Add("Sternbild");
                     break;
                 case "Repertoire eines Kultmeisters":
+                    komplexliste.Add("Bannwort");
+                    komplexliste.Add("Titanenkraft");
                     break;
                 default:
                     break;
             }
-            return artenliste;
+            return komplexliste;
         }
 
         private void ZauberAbbilden(DataRow ergebniszeile, string komplex)
@@ -2652,17 +2698,23 @@ namespace Tüfteltruhe
             string komplex = "";
             string gottheit = "";
             string element = "";
+
+            if (label37.Text != "") //Wenn schon das Ergebnis einer Zaubersuche abgebildet ist. => Zurücksetzen
+            {
+                dataGridView5.Rows.Clear();
+                rowcount5 = 0;
+            }
             if (comboBox9.GetItemText(comboBox9.SelectedItem) != "") //wenn Komplex gewählt
             {
                 komplex = comboBox9.GetItemText(comboBox9.SelectedItem);
             }
             else //wenn kein Komplex gewählt
             {
-                komplex = KomplexnachKontext(comboBox8.GetItemText(comboBox8.SelectedItem)); 
+                komplex = ZufälligerKomplexnachKontext(comboBox8.GetItemText(comboBox8.SelectedItem)); 
             }
             if (comboBox9.GetItemText(comboBox9.SelectedItem) == "" && comboBox8.GetItemText(comboBox8.SelectedItem) == "") // wenn weder Komplex noch Kontext gewählt
             {
-                komplex = KomplexnachKontext("Gesprochene Formel");
+                komplex = ZufälligerKomplexnachKontext("Gesprochene Formel");
             }
             if (komplex == "rep")
             {
@@ -2816,6 +2868,7 @@ namespace Tüfteltruhe
             else if (comboBox8.GetItemText(comboBox8.SelectedItem) == "Repertoire eines Zauberers" && element != "")
             { label36.Text = "Der Zauberer hat das Element " + element + "."; }
             else { label36.Text = ""; }
+            label37.Text = "";
         }
 
         private void button11_Click(object sender, EventArgs e) //Alle betreffenden Zauber auflisten
@@ -2837,30 +2890,32 @@ namespace Tüfteltruhe
             //Nur den Kontext abbilden
             else if (comboBox8.GetItemText(comboBox8.SelectedItem) != "")
             {
-                artenliste = ArtennachKontext(comboBox8.GetItemText(comboBox8.SelectedItem));
-                for (int i = 0; i < artenliste.Count; i++)
+                komplexliste = AlleKomplexeNachKontext(comboBox8.GetItemText(comboBox8.SelectedItem));
+                for (int i = 0; i < komplexliste.Count; i++)
                 {
-                    zauberliste.AddRange(AlleZauberEinerArt(artenliste[i]));
+                    zauberliste.AddRange(AlleZauberEinesKomplexes(komplexliste[i]));
                 }
             }
             //Alle Zauberformeln abbilden
             else 
             {
-                artenliste = ArtennachKontext("Gesprochene Formel");
-                for (int i = 0; i < artenliste.Count; i++)
+                komplexliste = AlleKomplexeNachKontext("Gesprochene Formel");
+                for (int i = 0; i < komplexliste.Count; i++)
                 {
-                    zauberliste.AddRange(AlleZauberEinerArt(artenliste[i]));
+                    zauberliste.AddRange(AlleZauberEinesKomplexes(komplexliste[i]));
                 }
             }
 
             for (int a = 0; a < zauberliste.Count; a++)
             {
                 ergebniszeile = ZauberTB.Rows[zauberliste[a]];
-                if (Convert.ToDecimal(ergebniszeile["Stufe"].ToString()) >= numericUpDown6.Value && Convert.ToDecimal(ergebniszeile["Stufe"].ToString()) <= numericUpDown4.Value)
+                if (Convert.ToDecimal(ergebniszeile["Stufe"].ToString()) >= numericUpDown6.Value && Convert.ToDecimal(ergebniszeile["Stufe"].ToString()) <= numericUpDown4.Value
+                    || Convert.ToDecimal(ergebniszeile["Stufe"].ToString()) == 0)
                 {
                     ZauberAbbilden(ergebniszeile, ergebniszeile["Komplex"].ToString());
                 }
-            }      
+            }
+            label37.Text = rowcount5.ToString();
         }
 
 
@@ -2888,6 +2943,24 @@ namespace Tüfteltruhe
             rowcount7++;
             string gewaehltes_volk = comboBox12.GetItemText(comboBox12.SelectedItem);
             string ergebnisname = "";
+
+            if (radioButton6.Checked) //Weiblich
+            {
+                if (gewaehltes_volk == "Zwerge (Schwarzalben)")
+                {
+                    radioButton5.Checked = true;
+                    radioButton6.Checked = false;
+                }
+            }
+            else //Männlich
+            {
+                if (gewaehltes_volk == "Nymphen" || gewaehltes_volk == "Feen (Lichtalben)")
+                {
+                    radioButton6.Checked = true;
+                    radioButton5.Checked = false;
+                }
+            }
+
             foreach (DataRow row in NamenTB.Rows)
             {
                 if (row["Volk"].ToString() == gewaehltes_volk)

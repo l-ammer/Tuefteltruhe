@@ -141,6 +141,7 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tapPage2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.label36 = new System.Windows.Forms.Label();
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
             this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -183,7 +184,7 @@
             this.label32 = new System.Windows.Forms.Label();
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.label37 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -1287,6 +1288,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label37);
             this.tabPage3.Controls.Add(this.checkBox6);
             this.tabPage3.Controls.Add(this.label36);
             this.tabPage3.Controls.Add(this.dataGridView5);
@@ -1309,10 +1311,22 @@
             this.tabPage3.Text = "Zauber";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // checkBox6
+            // 
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Location = new System.Drawing.Point(1389, 76);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(153, 17);
+            this.checkBox6.TabIndex = 34;
+            this.checkBox6.Text = "Zeilenumbruch einschalten";
+            this.checkBox6.UseVisualStyleBackColor = true;
+            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
+            // 
             // label36
             // 
             this.label36.AutoSize = true;
             this.label36.ForeColor = System.Drawing.Color.BlueViolet;
+            this.label37.ForeColor = System.Drawing.Color.BlueViolet;
             this.label36.Location = new System.Drawing.Point(335, 23);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(0, 13);
@@ -1446,7 +1460,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(180, 23);
             this.button10.TabIndex = 3;
-            this.button10.Text = "1 zufälligen Zauber generieren";
+            this.button10.Text = "1 zufälligen Fall generieren";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -1718,16 +1732,13 @@
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
-            // checkBox6
+            // label37
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(1389, 76);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(153, 17);
-            this.checkBox6.TabIndex = 34;
-            this.checkBox6.Text = "Zeilenumbruch einschalten";
-            this.checkBox6.UseVisualStyleBackColor = true;
-            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(196, 75);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(0, 13);
+            this.label37.TabIndex = 35;
             // 
             // Spielleitermodus
             // 
@@ -1943,5 +1954,6 @@
         private System.Windows.Forms.ToolStripMenuItem neuerSpielermodusToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem neuerSLModusToolStripMenuItem;
         private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.Label label37;
     }
 }
