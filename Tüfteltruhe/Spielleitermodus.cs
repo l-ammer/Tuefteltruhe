@@ -2863,6 +2863,21 @@ namespace Tüfteltruhe
             }      
         }
 
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e) //Zeilenumbrüche
+        {
+            if (checkBox6.Checked)
+            {
+                dataGridView5.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                dataGridView5.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+                dataGridView5.Columns[6].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            }
+            else
+            {
+                dataGridView5.Columns[6].DefaultCellStyle.WrapMode = DataGridViewTriState.False;
+            }
+        }
+
         //#################### ################################################
         //####### NAMEN ###### ################################################
         //#################### ################################################
@@ -3106,5 +3121,7 @@ namespace Tüfteltruhe
             Spielleitermodus spielleitermodus = new Spielleitermodus();
             spielleitermodus.Show();
         }
+
+        
     }
 }

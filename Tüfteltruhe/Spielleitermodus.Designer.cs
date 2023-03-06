@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.neuerSpielermodusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.neuerSLModusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBox2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -181,8 +183,7 @@
             this.label32 = new System.Windows.Forms.Label();
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
-            this.neuerSpielermodusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.neuerSLModusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -226,6 +227,20 @@
             this.menuStrip1.Size = new System.Drawing.Size(1580, 24);
             this.menuStrip1.TabIndex = 32;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // neuerSpielermodusToolStripMenuItem
+            // 
+            this.neuerSpielermodusToolStripMenuItem.Name = "neuerSpielermodusToolStripMenuItem";
+            this.neuerSpielermodusToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
+            this.neuerSpielermodusToolStripMenuItem.Text = "Neuer Spielermodus";
+            this.neuerSpielermodusToolStripMenuItem.Click += new System.EventHandler(this.neuerSpielermodusToolStripMenuItem_Click);
+            // 
+            // neuerSLModusToolStripMenuItem
+            // 
+            this.neuerSLModusToolStripMenuItem.Name = "neuerSLModusToolStripMenuItem";
+            this.neuerSLModusToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
+            this.neuerSLModusToolStripMenuItem.Text = "Neuer SL-Modus";
+            this.neuerSLModusToolStripMenuItem.Click += new System.EventHandler(this.neuerSLModusToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -1272,6 +1287,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.checkBox6);
             this.tabPage3.Controls.Add(this.label36);
             this.tabPage3.Controls.Add(this.dataGridView5);
             this.tabPage3.Controls.Add(this.label26);
@@ -1702,19 +1718,16 @@
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
-            // neuerSpielermodusToolStripMenuItem
+            // checkBox6
             // 
-            this.neuerSpielermodusToolStripMenuItem.Name = "neuerSpielermodusToolStripMenuItem";
-            this.neuerSpielermodusToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
-            this.neuerSpielermodusToolStripMenuItem.Text = "Neuer Spielermodus";
-            this.neuerSpielermodusToolStripMenuItem.Click += new System.EventHandler(this.neuerSpielermodusToolStripMenuItem_Click);
-            // 
-            // neuerSLModusToolStripMenuItem
-            // 
-            this.neuerSLModusToolStripMenuItem.Name = "neuerSLModusToolStripMenuItem";
-            this.neuerSLModusToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
-            this.neuerSLModusToolStripMenuItem.Text = "Neuer SL-Modus";
-            this.neuerSLModusToolStripMenuItem.Click += new System.EventHandler(this.neuerSLModusToolStripMenuItem_Click);
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Location = new System.Drawing.Point(1389, 76);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(153, 17);
+            this.checkBox6.TabIndex = 34;
+            this.checkBox6.Text = "Zeilenumbruch einschalten";
+            this.checkBox6.UseVisualStyleBackColor = true;
+            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
             // 
             // Spielleitermodus
             // 
@@ -1929,5 +1942,6 @@
         private System.Windows.Forms.ToolStripMenuItem namenslisteExportierenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem neuerSpielermodusToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem neuerSLModusToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBox6;
     }
 }
