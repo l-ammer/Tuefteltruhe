@@ -18,7 +18,7 @@ Sammlung an kleinen Hilfsanwendungen für das PNP-Spiel [Alt-Europa](https://alb
 - [x] **Zufälliges Warenangebot**
 - [X] **Zufällige Zauberformel**
 - [X] **Zufälliger Name**
-- [ ] Zufälliges Artefakt
+- [X] **Zufälliger Schatz**
 
 # Installation
 
@@ -52,6 +52,16 @@ Hier entsteht eine genauere Bedienungsanleitung...
 
 # Versionshistorie
 
+
+###### v1.0
+- **Zufälliger Schatz** hinzugefügt.
+- **Zutatensuche** erweitert.
+- **Reisetest** erweitert.
+- **Seereisetest** erweitert.
+- Optische Aufbesserungen.
+- Vorausgewählte Standardwerte.
+- Benutzerfreundlichkeit erhöht.
+- An die aktualisierten Alt-Europa-Spielregeln angepasst.
 ###### v0.10
 - **Zufällige Zauberformel** hinzugefügt.
 - **Zufälliger Name** hinzugefügt.

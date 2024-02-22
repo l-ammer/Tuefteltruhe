@@ -32,6 +32,11 @@ namespace Tüfteltruhe
         public DataTable ZaubersteinTB = new DataTable();
         public DataTable ZauberkomplexTB = new DataTable();
         public DataTable NamenTB = new DataTable();
+        public DataTable SchatzTB = new DataTable();
+        public DataTable SchatzGegenstandTB = new DataTable();
+        public DataTable SchatzAlltagMusikTB = new DataTable();
+        public DataTable SchatzWaffeTB = new DataTable();
+        public DataTable SchatzRuestungTB = new DataTable();
         public Bereich Region = new Bereich(0, "", null, null, null, null);
         public Bereich Umgebung = new Bereich(0, "", null, null, null, null);
         public Bereich Region2 = new Bereich(0, "", null, null, null, null);
@@ -52,6 +57,7 @@ namespace Tüfteltruhe
         public int rowcount4 = 0;
         public int rowcount5 = 0;
         public int rowcount7 = 0;
+        public int rowcount8 = 0;
         public int portionenerhöht = 0;
         public int bisherigeportionenzahl = 0;
         public int gesamtstunden = 0;
@@ -117,6 +123,11 @@ namespace Tüfteltruhe
             OleDbDataReader reader19 = null;
             OleDbDataReader reader20 = null;
             OleDbDataReader reader21 = null;
+            OleDbDataReader reader22 = null;
+            OleDbDataReader reader23 = null;
+            OleDbDataReader reader24 = null;
+            OleDbDataReader reader25 = null;
+            OleDbDataReader reader26 = null;
             OleDbCommand command = new OleDbCommand("SELECT * FROM ZutatenRegion", connection);
             OleDbCommand command2 = new OleDbCommand("SELECT * FROM ZutatenRegion", connection);
             OleDbCommand command3 = new OleDbCommand("SELECT * FROM ZutatenUmgebung", connection);
@@ -138,6 +149,9 @@ namespace Tüfteltruhe
             OleDbCommand command19 = new OleDbCommand("SELECT * FROM Zauberkomplex", connection);
             OleDbCommand command20 = new OleDbCommand("SELECT * FROM Namen", connection);
             OleDbCommand command21 = new OleDbCommand("SELECT * FROM Namen", connection);
+            OleDbCommand command22 = new OleDbCommand("SELECT * FROM Schatz", connection);
+            OleDbCommand command23 = new OleDbCommand("SELECT * FROM SchatzGegenstand", connection);
+            OleDbCommand command24 = new OleDbCommand("SELECT * FROM SchatzAlltagMusik", connection);
             reader = command.ExecuteReader();
             reader2 = command2.ExecuteReader();
             reader3 = command3.ExecuteReader();
@@ -159,6 +173,9 @@ namespace Tüfteltruhe
             reader19 = command19.ExecuteReader();
             reader20 = command20.ExecuteReader();
             reader21 = command21.ExecuteReader();
+            reader22 = command22.ExecuteReader();
+            reader23 = command23.ExecuteReader();
+            reader24 = command24.ExecuteReader();
             comboBox5.Items.Clear();
             comboBox1.Items.Clear();
             comboBox2.Items.Clear();
@@ -212,6 +229,9 @@ namespace Tüfteltruhe
             DataTable ZauberTabelle = new DataTable();
             DataTable ZaubersteinTabelle = new DataTable();
             DataTable NamenTabelle = new DataTable();
+            DataTable SchatzTabelle = new DataTable();
+            DataTable SchatzGegenstandTabelle = new DataTable();
+            DataTable SchatzAlltagMusikTabelle = new DataTable();
 
             ZutatenRegionTabelle.Load(reader2);
             ZutatenUmgebungTabelle.Load(reader4);
@@ -227,6 +247,9 @@ namespace Tüfteltruhe
             ZauberTabelle.Load(reader17);
             ZaubersteinTabelle.Load(reader18);
             NamenTabelle.Load(reader21);
+            SchatzTabelle.Load(reader22);
+            SchatzGegenstandTabelle.Load(reader23);
+            SchatzAlltagMusikTabelle.Load(reader24);
 
             ZutatenRegionTB = ZutatenRegionTabelle;
             ZutatenUmgebungTB = ZutatenUmgebungTabelle;
@@ -242,6 +265,19 @@ namespace Tüfteltruhe
             ZauberTB = ZauberTabelle;
             ZaubersteinTB = ZaubersteinTabelle;
             NamenTB = NamenTabelle;
+            SchatzTB = SchatzTabelle;
+            SchatzGegenstandTB = SchatzGegenstandTabelle;
+            SchatzAlltagMusikTB = SchatzAlltagMusikTabelle;
+
+            //comboBox2.SelectedIndex = 0;
+            //comboBox3.SelectedIndex = 0;
+            //comboBox4.SelectedIndex = 0;
+            //comboBox5.SelectedIndex = 0;
+            comboBox6.SelectedIndex = 0;
+            comboBox7.SelectedIndex = 0;
+            comboBox8.SelectedIndex = 0;
+            comboBox9.SelectedIndex = 0;
+            comboBox12.SelectedIndex = 0;
 
             connection.Close();
         }
@@ -328,6 +364,7 @@ namespace Tüfteltruhe
                 gesamtstunden++;
                 label8.Text = "Bereits gesuchte Stunden: " + gesamtstunden;
                 testergebnis = zufall.Next(1, 7) + zufall.Next(1, 7) + zufall.Next(1, 7) + sammeln;
+                if (numericUpDown10.Value != 0) testergebnis = (int)numericUpDown10.Value;
                 label13.Text = "Letzter Wurf: " + (testergebnis - sammeln) + " + " + sammeln + " = " + testergebnis;
 
                 switch (testergebnis)
@@ -582,28 +619,32 @@ namespace Tüfteltruhe
         {
             gewaehlte_umgebung = comboBox5.GetItemText(comboBox5.SelectedItem);
 
-            foreach (DataRow row in ZutatenUmgebungTB.Rows)
+            if (gewaehlte_umgebung != null && Umgebung != null)
             {
-                if (row["Umgebung"].ToString() == gewaehlte_umgebung)
+
+                foreach (DataRow row in ZutatenUmgebungTB.Rows)
                 {
-                    string[] tmp = row["Gewöhnlich"].ToString().Split(',');
-                    if (tmp != null) Umgebung.gewöhnlich = tmp;
-                    else Umgebung.gewöhnlich = null;
+                    if (row["Umgebung"].ToString() == gewaehlte_umgebung)
+                    {
+                        string[] tmp = row["Gewöhnlich"].ToString().Split(',');
+                        if (tmp != null) Umgebung.gewöhnlich = tmp;
+                        else Umgebung.gewöhnlich = null;
 
-                    tmp = row["Ungewöhnlich"].ToString().Split(',');
-                    if (tmp != null) Umgebung.ungewöhnlich = tmp;
-                    else Umgebung.ungewöhnlich = null;
+                        tmp = row["Ungewöhnlich"].ToString().Split(',');
+                        if (tmp != null) Umgebung.ungewöhnlich = tmp;
+                        else Umgebung.ungewöhnlich = null;
 
-                    tmp = row["Selten"].ToString().Split(',');
-                    if (tmp != null) Umgebung.selten = tmp;
-                    else Umgebung.selten = null;
+                        tmp = row["Selten"].ToString().Split(',');
+                        if (tmp != null) Umgebung.selten = tmp;
+                        else Umgebung.selten = null;
 
-                    tmp = row["Sehr selten"].ToString().Split(',');
-                    if (tmp != null) Umgebung.sehrselten = tmp;
-                    else Umgebung.sehrselten = null;
+                        tmp = row["Sehr selten"].ToString().Split(',');
+                        if (tmp != null) Umgebung.sehrselten = tmp;
+                        else Umgebung.sehrselten = null;
+                    }
                 }
+                MessageBox.Show("Zutaten der Umgebung:" + string.Join(", ", Umgebung.gewöhnlich) + ", " + string.Join(", ", Umgebung.ungewöhnlich) + ", " + string.Join(", ", Umgebung.selten) + ", " + string.Join(", ", Umgebung.sehrselten), gewaehlte_umgebung);
             }
-            MessageBox.Show("Zutaten der Umgebung:" + string.Join(", ", Umgebung.gewöhnlich) + ", " + string.Join(", ", Umgebung.ungewöhnlich) + ", " + string.Join(", ", Umgebung.selten) + ", " + string.Join(", ", Umgebung.sehrselten), gewaehlte_umgebung);
         }
 
         private void button3_Click(object sender, EventArgs e) //Ergebnisse zurücksetzen
@@ -866,6 +907,10 @@ namespace Tüfteltruhe
 
             testergebnis2 = (int)numericUpDown5.Value + zufall.Next(1, 7) + zufall.Next(1, 7) + zufall.Next(1, 7);
             label15.Text = "Letzter Wurf: " + (testergebnis2 - (int)numericUpDown5.Value) + " + " + (int)numericUpDown5.Value + " = " + testergebnis2;
+
+            if (numericUpDown9.Value != 0) testergebnis2 = (int)numericUpDown9.Value;
+            label15.Text = "Letzter Wurf: " + (int)numericUpDown9.Value + " + " + (int)numericUpDown5.Value + " = " + testergebnis2;
+
             if (testergebnis2 < 11)
             {
                 erforderlichesuchstunden *= 2;
@@ -1069,41 +1114,6 @@ namespace Tüfteltruhe
             return ergebniszeile["Zauber"].ToString();
         }
 
-        //public int ZufaelligerZauber(string art, int komplexstufe)
-        //{
-        //    int[] auswahlzauber = new int[100];
-        //    int stelle = 0;
-        //    DataRow ergebniszeile = ZauberTB.Rows[0];
-        //    for (int i = 0; i < ZauberTB.Rows.Count - 1; i++)
-        //    {
-        //        ergebniszeile = ZauberTB.Rows[i];
-        //        if (ergebniszeile["Art"].ToString() == art && Convert.ToInt16(ergebniszeile["Stufe"]) == komplexstufe)
-        //        {
-        //            auswahlzauber[stelle] = Convert.ToInt16(ergebniszeile["ID"]);
-        //            stelle++;
-        //        }
-        //    }
-        //    ergebniszeile = ZauberTB.Rows[auswahlzauber[zufall.Next(0, stelle)]];
-
-        //    return Convert.ToInt16(ergebniszeile["ID"]) - 1;
-
-        //}
-
-        //public int ZufaelligerZauber()
-        //{
-        //    int[] auswahlzauber = new int[300];
-        //    int stelle = 0;
-        //    DataRow ergebniszeile = ZauberTB.Rows[0]; 
-        //    for (int i = 0; i < ZauberTB.Rows.Count - 1; i++)
-        //    {
-        //        ergebniszeile = ZauberTB.Rows[i];
-        //        auswahlzauber[stelle] = Convert.ToInt16(ergebniszeile["ID"]);
-        //        stelle++;
-        //    }
-        //    ergebniszeile = ZauberTB.Rows[auswahlzauber[zufall.Next(0, stelle)]];
-
-        //    return Convert.ToInt16(ergebniszeile["ID"]) - 2;
-        //}
 
         public int ZufaelligerZauberNachKomplex(string komplex)
         {
@@ -1161,7 +1171,7 @@ namespace Tüfteltruhe
             for (int i = 0; i < ZauberTB.Rows.Count - 1; i++)
             {
                 ergebniszeile = ZauberTB.Rows[i];
-                if (ergebniszeile["Art"].ToString() == art)
+                if (ergebniszeile["Art"].ToString() == art && !auswahlkomplexe.Contains(ergebniszeile["Komplex"].ToString()))
                 {
                     auswahlkomplexe.Add(ergebniszeile["Komplex"].ToString());
                 }
@@ -2704,7 +2714,7 @@ namespace Tüfteltruhe
                 dataGridView5.Rows.Clear();
                 rowcount5 = 0;
             }
-            if (comboBox9.GetItemText(comboBox9.SelectedItem) != "") //wenn Komplex gewählt
+            if (comboBox9.GetItemText(comboBox9.SelectedItem) != "(alle)") //wenn Komplex gewählt
             {
                 komplex = comboBox9.GetItemText(comboBox9.SelectedItem);
             }
@@ -2712,7 +2722,7 @@ namespace Tüfteltruhe
             {
                 komplex = ZufälligerKomplexnachKontext(comboBox8.GetItemText(comboBox8.SelectedItem)); 
             }
-            if (comboBox9.GetItemText(comboBox9.SelectedItem) == "" && comboBox8.GetItemText(comboBox8.SelectedItem) == "") // wenn weder Komplex noch Kontext gewählt
+            if (comboBox9.GetItemText(comboBox9.SelectedItem) == "(alle)" && comboBox8.GetItemText(comboBox8.SelectedItem) == "") // wenn weder Komplex noch Kontext gewählt
             {
                 komplex = ZufälligerKomplexnachKontext("Gesprochene Formel");
             }
@@ -2882,7 +2892,7 @@ namespace Tüfteltruhe
             DataRow ergebniszeile = ZauberTB.Rows[0];
 
             //Nur den Komplex abbilden
-            if (comboBox9.GetItemText(comboBox9.SelectedItem) != "")
+            if (comboBox9.GetItemText(comboBox9.SelectedItem) != "(alle)")
             {
                 komplex = comboBox9.GetItemText(comboBox9.SelectedItem);
                 zauberliste = AlleZauberEinesKomplexes(komplex);
@@ -2990,6 +3000,386 @@ namespace Tüfteltruhe
             rowcount7 = 0;
         }
 
+        //#################### ################################################
+        //###### SCHÄTZE ##### ################################################
+        //#################### ################################################
+
+        private DataRow ZufaelligeWaffe()
+        {
+            return SchatzAlltagMusikTB.Rows[0]; //++
+            //Tabelle Waffen+Waffentypen
+            //Tabelle Waffenmaterial 
+        }
+
+        private DataRow ZufaelligeRuestung()
+        {
+            return SchatzAlltagMusikTB.Rows[0];//++
+            //Tabelle Rüstung (300zeilen)
+            //Tabelle Rüstungsmaterial 
+        }
+
+        private DataRow ZufaelligesMusikinstrument()
+        {
+            DataRow musikzeile = SchatzAlltagMusikTB.Rows[zufall.Next(100, 119)];
+            return musikzeile;
+        }
+
+        private DataRow ZufaelligerAlltagsgegenstand()
+        {
+            DataRow alltagszeile = SchatzAlltagMusikTB.Rows[zufall.Next(1, 99)];
+            return alltagszeile;
+        }
+
+        private DataRow ZufaelligerGegenstand()
+        {
+            DataRow ergebnisgegenstand = SchatzGegenstandTB.Rows[zufall.Next(0, SchatzGegenstandTB.Rows.Count - 1)];
+
+            switch (ergebnisgegenstand["Name"].ToString())
+            {
+                case "Waffe":
+                    ergebnisgegenstand = ZufaelligeWaffe(); //+++++++++++
+                    break;
+                case "Rüstung":
+                    ergebnisgegenstand = ZufaelligeRuestung(); //+++++++++++
+                    break;
+                case "Musikinstrument":
+                    ergebnisgegenstand = ZufaelligesMusikinstrument();
+                    break;
+                case "Alltagsgegenstand":
+                    ergebnisgegenstand = ZufaelligerAlltagsgegenstand();
+                    break;
+                case "Schmuckstück":
+                    ergebnisgegenstand = ZufaelligerAlltagsgegenstand(); //+++++++++++
+                    break;
+            }
+
+            return ergebnisgegenstand;
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            DataRow kategoriezeile = SchatzTB.Rows[0];
+            DataRow ergebniszeile = SchatzTB.Rows[0]; //sollte eigentlich eine dummyzeile sein.
+            string ergebnisname = "(Kein Name)";
+            string ergebniswert = "(Kein Wert)";
+            string ergebniswirkung = "(Keine Wirkung)";
+            string kategorie = "";
+            bool keinlebewesen = false;
+            bool keinezauberei = false;
+            string ziertabellen = "NEIN";
+            if (checkBox7.Checked) keinlebewesen = true;
+            if (checkBox8.Checked) keinezauberei = true;
+
+
+            for (int i = 0; i < numericUpDown8.Value; i++)
+            {
+                dataGridView8.Rows.Add();
+                rowcount8++;
+                ergebnisname = "(Kein Name)";
+                ergebniswert = "(Kein Wert)";
+                ergebniswirkung = "(Keine Wirkung)";
+
+                kategoriezeile = SchatzTB.Rows[zufall.Next(0, SchatzTB.Rows.Count - 1)];
+                while (kategoriezeile["Zauberei"].ToString() == "JA" && keinezauberei
+                    || kategoriezeile["Lebendig"].ToString() == "JA" && keinlebewesen)
+                {
+                    kategoriezeile = SchatzTB.Rows[zufall.Next(0, SchatzTB.Rows.Count -1)];
+                }
+               
+                kategorie = kategoriezeile["Name"].ToString();
+                ziertabellen = kategoriezeile["Ziertabellen"].ToString();
+
+                switch (kategorie)
+                {
+                    case "Gegenstand":
+                        ergebniszeile = ZufaelligerGegenstand();
+                        ergebnisname = ergebniszeile["Name"].ToString();
+                        ergebniswert = ergebniszeile["Wert"].ToString();
+                        ergebniswirkung = ergebniszeile["Beschreibung"].ToString();
+                        break;
+                    case "Komplexring":
+                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
+                        ///ergebnisname = ergebniszeile["Name"].ToString();
+                        //ergebniswert = ergebniszeile["Wert"].ToString();
+                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
+                        ergebnisname = "Komplexring";
+                        break;
+                    case "Bannwaffe":
+                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
+                        //ergebnisname = ergebniszeile["Name"].ToString();
+                        //ergebniswert = ergebniszeile["Wert"].ToString();
+                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
+                        ergebnisname = "Bannwaffe";
+                        break;
+                    case "Schutzamulett":
+                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
+                        //ergebnisname = ergebniszeile["Name"].ToString();
+                        //ergebniswert = ergebniszeile["Wert"].ToString();
+                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
+                        ergebnisname = "Schutzamulett";
+                        break;
+                    case "Edelmetall":
+                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
+                        //ergebnisname = ergebniszeile["Name"].ToString();
+                        //ergebniswert = ergebniszeile["Wert"].ToString();
+                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
+                        ergebnisname = "Edelmetall";
+                        break;
+                    case "Zaubernahrung":
+                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
+                        //ergebnisname = ergebniszeile["Name"].ToString();
+                        //ergebniswert = ergebniszeile["Wert"].ToString();
+                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
+                        ergebnisname = "Zaubernahrung";
+                        break;
+                    case "Urkriegsgegenstand":
+                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
+                        //ergebnisname = ergebniszeile["Name"].ToString();
+                        //ergebniswert = ergebniszeile["Wert"].ToString();
+                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
+                        ergebnisname = "Urkriegsgegenstand";
+                        break;
+                    case "Schriftstück":
+                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
+                        //ergebnisname = ergebniszeile["Name"].ToString();
+                        //ergebniswert = ergebniszeile["Wert"].ToString();
+                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
+                        ergebnisname = "Schriftstück";
+                        break;
+                    case "Geschosse":
+                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
+                        //ergebnisname = ergebniszeile["Name"].ToString();
+                        //ergebniswert = ergebniszeile["Wert"].ToString();
+                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
+                        ergebnisname = "Geschosse";
+                        break;
+                    case "Schmuckstein":
+                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
+                        //ergebnisname = ergebniszeile["Name"].ToString();
+                        //ergebniswert = ergebniszeile["Wert"].ToString();
+                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
+                        ergebnisname = "Schmuckstein";
+                        break;
+                    case "Zauberstein":
+                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
+                        //ergebnisname = ergebniszeile["Name"].ToString();
+                        //ergebniswert = ergebniszeile["Wert"].ToString();
+                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
+                        ergebnisname = "Zauberstein";
+                        break;
+                    case "Zauberrolle":
+                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
+                        //ergebnisname = ergebniszeile["Name"].ToString();
+                        //ergebniswert = ergebniszeile["Wert"].ToString();
+                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
+                        ergebnisname = "Zauberrolle";
+                        break;
+                    case "Zaubertrank":
+                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
+                        //ergebnisname = ergebniszeile["Name"].ToString();
+                        //ergebniswert = ergebniszeile["Wert"].ToString();
+                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
+                        ergebnisname = "Zaubertrank";
+                        break;
+                    case "Münzen":
+                        ergebnisname = "Silbermünzen";
+                        ergebniswert = zufall.Next(1, 100).ToString();
+                        int waehrungswurf = zufall.Next(1, 10);
+                        switch (waehrungswurf)
+                        {
+                            case 1:
+                            case 2:
+                            case 3:
+                                ergebniswirkung = "Drachmen";
+                                break;
+                            case 4:
+                            case 5:
+                            case 6:
+                                ergebniswirkung = "Denare";
+                                break;
+                            case 7:
+                            case 8:
+                                ergebniswirkung = "Ungeprägt";
+                                break;
+                            case 9:
+                                ergebniswirkung = "Loi (Hochelfisch)";
+                                break;
+                            case 10:
+                                ergebniswirkung = "Fremdartige Prägung";
+                                break;
+                        }
+                        break;
+                    case "Ringgeld":
+                        int ringwurf = zufall.Next(1, 2);
+                        switch (ringwurf)
+                        {
+                            case 1:
+                                ergebnisname = "Goldener Armring";
+                                ergebniswert = "1000";
+                                ergebniswirkung = "Ringgeld";
+                                break;
+                            case 2:
+                                int ringgeldwurf = zufall.Next(5, 20);
+                                ergebnisname = (ringgeldwurf).ToString() + " silberne Finggerringe";
+                                ergebniswert = (ringgeldwurf * 10).ToString();
+                                ergebniswirkung = "Ringgeld";
+                                break;
+                        }
+                        break;
+                    case "Alkohol":
+                        int alkwurf = zufall.Next(1, 4);
+                        switch (alkwurf)
+                        {
+                            case 1:
+                                ergebnisname = "Flasche exquisiter Wein";
+                                ergebniswert = "11";
+                                ergebniswirkung = "1 Kornmaß (Liter)";
+                                break;
+                            case 2:
+                                ergebnisname = "Fass exquisiter Met";
+                                ergebniswert = "150";
+                                ergebniswirkung = "2 Amphoren (54 Liter)";
+                                break;
+                            case 3:
+                                ergebnisname = "Flasche teurer Schnaps";
+                                ergebniswert = "7";
+                                ergebniswirkung = "Halbes Kornmaß (Liter)";
+                                break;
+                            case 4:
+                                ergebnisname = "Amphore exquisiter Wein";
+                                ergebniswert = "300";
+                                ergebniswirkung = "(27 Liter)";
+                                break;
+                        }
+                        break;
+                    case "Pferd":
+                        int pferdewurf = zufall.Next(1, 4);
+                        switch (pferdewurf)
+                        {
+                            case 1:
+                                ergebnisname = "Junges Packpferd";
+                                ergebniswert = "600";
+                                ergebniswirkung = "Gewicht: 700 Pfund. Tragkraft: 350 Pfund. Bewegung: 90. Kampfgeist: 2";
+                                break;
+                            case 2:
+                                ergebnisname = "Junges Reitpferd";
+                                ergebniswert = "750";
+                                ergebniswirkung = "Gewicht: 900 Pfund. Tragkraft: 300 Pfund. Bewegung: 120. Kampfgeist: 3";
+                                break;
+                            case 3:
+                                ergebnisname = "Ausgezeichnetes Reitpferd";
+                                ergebniswert = "1800";
+                                ergebniswirkung = "Gewicht: 1000 Pfund. Tragkraft: 400 Pfund. Bewegung: 140. Kampfgeist: 3";
+                                break;
+                            case 4:
+                                ergebnisname = "Kriegspferd";
+                                ergebniswert = "2500";
+                                ergebniswirkung = "Gewicht: 1100 Pfund. Tragkraft: 400 Pfund. Bewegung: 120. Kampfgeist: 4";
+                                break;
+                        }
+                        break;
+                    case "Rind":
+                        int rinderwurf = zufall.Next(1, 4);
+                        switch (rinderwurf)
+                        {
+                            case 1:
+                                ergebnisname = "Stattlicher Ochse";
+                                ergebniswert = "250";
+                                ergebniswirkung = "";
+                                break;
+                            case 2:
+                                ergebnisname = "Stattliche Kuh";
+                                ergebniswert = "200";
+                                ergebniswirkung = "";
+                                break;
+                            case 3:
+                                ergebnisname = "Rinderherde";
+                                ergebniswert = "5000";
+                                ergebniswirkung = "25 Rinder";
+                                break;
+                            case 4:
+                                ergebnisname = "Hekatombe";
+                                ergebniswert = "20.000";
+                                ergebniswirkung = "100 Rinder";
+                                break;
+                        }
+                        break;
+                    case "Sklave":
+                        int sklavenwurf = zufall.Next(1, 4);
+                        switch (sklavenwurf)
+                        {
+                            case 1:
+                                ergebnisname = "Junger ungelernter Sklave";
+                                ergebniswert = "600";
+                                ergebniswirkung = "";
+                                break;
+                            case 2:
+                                ergebnisname = "Junge ungelernte Sklavin";
+                                ergebniswert = "800";
+                                ergebniswirkung = "";
+                                break;
+                            case 3:
+                                ergebnisname = "Gelernter Sklave";
+                                ergebniswert = "850";
+                                ergebniswirkung = "Beherrscht 3 Fähigkeiten/Handwerke sehr gut.";
+                                break;
+                            case 4:
+                                ergebnisname = "Gelernte Sklavin";
+                                ergebniswert = "1150";
+                                ergebniswirkung = "Beherrscht 3 Fähigkeiten/Handwerke sehr gut.";
+                                break;
+                        }
+                        break;
+                    case "Falke":
+                        ergebnisname = "Abgerichteter Falke";
+                        ergebniswert = "160";
+                        ergebniswirkung = "Kann zur Beizjagd verwendet werden.";
+                        break;
+                    case "Hund":
+                        int hundewurf = zufall.Next(1, 3);
+                        switch (hundewurf)
+                        {
+                            case 1:
+                                ergebnisname = "Wachhund";
+                                ergebniswert = "40";
+                                ergebniswirkung = "Weder für Kampf, noch für Jagd gut geeignet. Loyal.";
+                                break;
+                            case 2:
+                                ergebnisname = "Jagdhund";
+                                ergebniswert = "160";
+                                ergebniswirkung = "Gut für die Jagd aber kaum für den Kampf geeignet. Loyal.";
+                                break;
+                            case 3:
+                                ergebnisname = "Kampfhund";
+                                ergebniswert = "200";
+                                ergebniswirkung = "Gut für den Kampf aber kaum für die Jagd geeignet. Loyal.";
+                                break;
+                        }
+                        break;
+                    default:
+                        ergebnisname = "Nichts";
+                        break;
+                }
+
+                if (ziertabellen == "JA")
+                {
+                    ergebniswirkung = ergebniswirkung + " Der Gegenstand ist verziert!"; //++++++++++++++++++
+                }
+
+                dataGridView8[0, rowcount8 - 1].Value = ergebnisname;
+                dataGridView8[1, rowcount8 - 1].Value = ergebniswert;
+                dataGridView8[2, rowcount8 - 1].Value = ergebniswirkung;
+            }
+
+
+            
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            dataGridView8.Rows.Clear();
+            rowcount8 = 0;
+        }
 
         //#################### ################################################
         //##### EXPORTE ###### ################################################
@@ -3194,7 +3584,5 @@ namespace Tüfteltruhe
             Spielleitermodus spielleitermodus = new Spielleitermodus();
             spielleitermodus.Show();
         }
-
-        
     }
 }

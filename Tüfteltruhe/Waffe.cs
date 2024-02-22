@@ -21,13 +21,18 @@ namespace Tüfteltruhe
         public int ausschaltenmod;
         public int werfenmod;
         public int oeffnenmod;
+        public int parierennachteil;
+        public int blockennachteil;
+        public int ausschaltennachteil;
+        public int werfennachteil;
+        public int oeffnennachteil;
         public int waffenenergie;
         public string waffenschaden;
         public string wurfschaden;
         public int instanzindex;
         public int schirmwert;
 
-        public Waffe(string name, string waffentyp, double gewicht, int stichmod, int wuchtmod, int schnittmod, int parierenmod, int blockenmod, int ausschaltenmod, int werfenmod, int oeffnenmod, string waffenschaden, string wurfschaden, int instanzindex, int reichweiteNah, int reichweiteFern, int waffenenergie, int schirmwert)
+        public Waffe(string name, string waffentyp, double gewicht, int stichmod, int wuchtmod, int schnittmod, int parierenmod, int blockenmod, int ausschaltenmod, int werfenmod, int oeffnenmod, string waffenschaden, string wurfschaden, int instanzindex, int reichweiteNah, int reichweiteFern, int waffenenergie, int schirmwert, int parierennachteil, int blockennachteil, int ausschaltennachteil, int werfennachteil,int oeffnennachteil)
         {
             this.name = name;
             this.waffentyp = waffentyp;
@@ -40,6 +45,11 @@ namespace Tüfteltruhe
             this.ausschaltenmod = ausschaltenmod;
             this.werfenmod = werfenmod;
             this.oeffnenmod = oeffnenmod;
+            this.parierennachteil = parierennachteil;
+            this.blockennachteil = blockennachteil;
+            this.ausschaltennachteil = ausschaltennachteil;
+            this.werfennachteil = werfennachteil;
+            this.oeffnennachteil = oeffnennachteil;
             this.waffenschaden = waffenschaden;
             this.wurfschaden = wurfschaden;
             this.instanzindex = instanzindex;

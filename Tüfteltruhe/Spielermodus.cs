@@ -13,13 +13,11 @@ using System.Data.OleDb;
 
 namespace Tüfteltruhe
 { 
-    //+++Tooltips
-    //+++Seefahrt: Wetter vorher bestimmen, dann Fahrweise ausrechnen
     public partial class Spielermodus : Form
     {
         //Waffentestrechner
         public DataTable WaffenTB = new DataTable();
-        public Waffe Waffenwahl = new Waffe("", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, "", "", 0, 0, 0, 0, 0);
+        public Waffe Waffenwahl = new Waffe("", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, "", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         public int stichangriff_ergebnis = -100;
         public int wuchtangriff_ergebnis = -100;
         public int schnittangriff_ergebnis = -100;
@@ -60,14 +58,15 @@ namespace Tüfteltruhe
         public int fortschrittdurchorientierung = 0;
         public int fortschrittausgegeben = 0;
         public int orientierungswurf;
+        public int orientierungsvorteil = 0;
 
         //Seereise-Rechner
         public DataTable SchiffstypenTB = new DataTable();
         public int rowcount3 = 0;
         public decimal knoten;
-        public string wetter = "";
+        public string wetter = "Windstill";
         public string fahrweise;
-        public string seereiseumgebung;
+        public string seereiseumgebung; 
         public int schwierigkeit;
         public decimal seefahrtsfähigkeit;
         public decimal seefahrtswurf;
@@ -91,7 +90,7 @@ namespace Tüfteltruhe
 
             //Werte ermitteln
             fixwert1 = (int)numericUpDown1.Value; //Waffenfähigkeit
-            
+
             gewaehlte_gg = comboBox1.GetItemText(comboBox1.SelectedItem); //Griffgewöhnung
             switch (gewaehlte_gg) //Griffgewöhnung berechnen
             {
@@ -113,7 +112,7 @@ namespace Tüfteltruhe
                     break;
             }
 
-            
+
             if (!checkBox1.Checked) //Warn-Hinweise bei SP SC LH und SP, wenn nicht zweihändig verwendet
             { switch (Waffenwahl.waffentyp)
                 {
@@ -139,7 +138,8 @@ namespace Tüfteltruhe
 
             fixwert3 = 0;
             if ((Waffenwahl.gewicht * 10 / handzahl) > (int)(htk * 10)) //Wenn Waffengewicht größer HTK
-            fixwert3 = ((int)(htk*10) - (int)(Waffenwahl.gewicht*10 / handzahl))/10; //HTK minus Waffengewicht
+                nachteil++; //Regeländerung
+            //fixwert3 = ((int)(htk*10) - (int)(Waffenwahl.gewicht*10 / handzahl))/10; //HTK minus Waffengewicht
 
             //Schuss
             if (Waffenwahl.waffentyp == "SW" || Waffenwahl.waffentyp == "SD")
@@ -173,14 +173,14 @@ namespace Tüfteltruhe
             if (Waffenwahl.stichmod > -20)
             {
                 if (Waffenwahl.waffentyp != "") //Wenn Waffe -> reguläre Berechnung
-                {stichangriff_ergebnis = Waffenwahl.stichmod + fixwert1 + fixwert2 + fixwert3;}
+                { stichangriff_ergebnis = Waffenwahl.stichmod + fixwert1 + fixwert2 + fixwert3; }
                 else //Wenn keine Waffe -> auch keine Waffenfähigkeit mit einberechnen
-                { stichangriff_ergebnis = Waffenwahl.stichmod + fixwert2 + fixwert3;}
+                { stichangriff_ergebnis = Waffenwahl.stichmod + fixwert2 + fixwert3; }
                 dataGridView1.Rows.Add();
                 rowcount++;
                 dataGridView1.Rows[rowcount - 1].DefaultCellStyle.BackColor = Color.LightCoral;
-                dataGridView1[0, rowcount - 1].Value = Waffenwahl.name + " Stichangriff"; 
-                if (stichangriff_ergebnis >= 0){dataGridView1[1, rowcount - 1].Value = "+" + stichangriff_ergebnis;}
+                dataGridView1[0, rowcount - 1].Value = Waffenwahl.name + " Stichangriff";
+                if (stichangriff_ergebnis >= 0) { dataGridView1[1, rowcount - 1].Value = "+" + stichangriff_ergebnis; }
                 else { dataGridView1[1, rowcount - 1].Value = stichangriff_ergebnis; }
                 switch (nachteil)
                 {
@@ -200,9 +200,9 @@ namespace Tüfteltruhe
             if (Waffenwahl.wuchtmod > -20)
             {
                 if (Waffenwahl.waffentyp != "") //Wenn Waffe -> reguläre Berechnung
-                { wuchtangriff_ergebnis = Waffenwahl.wuchtmod + fixwert1 + fixwert2 + fixwert3;}
+                { wuchtangriff_ergebnis = Waffenwahl.wuchtmod + fixwert1 + fixwert2 + fixwert3; }
                 else //Wenn keine Waffe -> auch keine Waffenfähigkeit mit einberechnen
-                { wuchtangriff_ergebnis = Waffenwahl.wuchtmod + fixwert2 + fixwert3;}
+                { wuchtangriff_ergebnis = Waffenwahl.wuchtmod + fixwert2 + fixwert3; }
                 dataGridView1.Rows.Add();
                 rowcount++;
                 dataGridView1.Rows[rowcount - 1].DefaultCellStyle.BackColor = Color.LightCoral;
@@ -231,9 +231,9 @@ namespace Tüfteltruhe
             if (Waffenwahl.schnittmod > -20)
             {
                 if (Waffenwahl.waffentyp != "") //Wenn Waffe -> reguläre Berechnung
-                { schnittangriff_ergebnis = Waffenwahl.schnittmod + fixwert1 + fixwert2 + fixwert3;}
+                { schnittangriff_ergebnis = Waffenwahl.schnittmod + fixwert1 + fixwert2 + fixwert3; }
                 else //Wenn keine Waffe -> auch keine Waffenfähigkeit mit einberechnen
-                { schnittangriff_ergebnis = Waffenwahl.schnittmod + fixwert2 + fixwert3;}
+                { schnittangriff_ergebnis = Waffenwahl.schnittmod + fixwert2 + fixwert3; }
                 dataGridView1.Rows.Add();
                 rowcount++;
                 dataGridView1.Rows[rowcount - 1].DefaultCellStyle.BackColor = Color.LightCoral;
@@ -257,131 +257,193 @@ namespace Tüfteltruhe
                 }
                 dataGridView1[2, rowcount - 1].Value = Waffenwahl.waffenschaden + " Schnittschaden";
             }
-            
+
             //Waffe werfen
-            werfen_ergebnis = (int)numericUpDown6.Value + Waffenwahl.werfenmod + fixwert1 + fixwert2 + fixwert3;
-            dataGridView1.Rows.Add();
-            rowcount++;
-            dataGridView1.Rows[rowcount - 1].DefaultCellStyle.BackColor = Color.LightCoral;
-            dataGridView1[0, rowcount - 1].Value = Waffenwahl.name + " werfen";
-            if (werfen_ergebnis >= 0) { dataGridView1[1, rowcount - 1].Value = "+" + werfen_ergebnis; }
-            else { dataGridView1[1, rowcount - 1].Value = werfen_ergebnis; }
-            switch (nachteil)
+            if (Waffenwahl.werfennachteil != 50)
             {
-                case 1:
-                    dataGridView1[1, rowcount - 1].Value += " (Nachteil!)";
-                    break;
-                case 2:
-                    dataGridView1[1, rowcount - 1].Value += " (Doppel-Nachteil!)";
-                    break;
-                case 3:
-                    dataGridView1[1, rowcount - 1].Value += " (Dreifach-Nachteil!)";
-                    break;
-                case 4:
-                    dataGridView1[1, rowcount - 1].Value += " (Vierfach-Nachteil!)";
-                    break;
+                werfen_ergebnis = (int)numericUpDown6.Value + fixwert1 + fixwert2 + fixwert3;
+                dataGridView1.Rows.Add();
+                rowcount++;
+                dataGridView1.Rows[rowcount - 1].DefaultCellStyle.BackColor = Color.LightCoral;
+                dataGridView1[0, rowcount - 1].Value = Waffenwahl.name + " werfen";
+                if (werfen_ergebnis >= 0) { dataGridView1[1, rowcount - 1].Value = "+" + werfen_ergebnis; }
+                else { dataGridView1[1, rowcount - 1].Value = werfen_ergebnis; }
+                switch (nachteil + Waffenwahl.werfennachteil)
+                {
+                    case -3:
+                        dataGridView1[1, rowcount - 1].Value += " (Dreifach-Vorteil!)";
+                        break;
+                    case -2:
+                        dataGridView1[1, rowcount - 1].Value += " (Doppel-Vorteil!)";
+                        break;
+                    case -1:
+                        dataGridView1[1, rowcount - 1].Value += " (Vorteil!)";
+                        break;
+                    case 1:
+                        dataGridView1[1, rowcount - 1].Value += " (Nachteil!)";
+                        break;
+                    case 2:
+                        dataGridView1[1, rowcount - 1].Value += " (Doppel-Nachteil!)";
+                        break;
+                    case 3:
+                        dataGridView1[1, rowcount - 1].Value += " (Dreifach-Nachteil!)";
+                        break;
+                    case 4:
+                        dataGridView1[1, rowcount - 1].Value += " (Vierfach-Nachteil!)";
+                        break;
+                }
+                string wurfschaden = Waffenwahl.waffenschaden + " Schaden (siehe Regeln)";
+                if (Waffenwahl.waffentyp != "SP"
+                    && Waffenwahl.waffentyp != "WS"
+                    && Waffenwahl.name != "Wurfbeil") wurfschaden = Waffenwahl.waffenschaden + " / 2 Schaden (siehe Regeln)";
+                dataGridView1[2, rowcount - 1].Value = wurfschaden;
             }
-            dataGridView1[2, rowcount - 1].Value = Waffenwahl.wurfschaden + " Schaden (siehe Regeln)";
+
 
             //Parieren
-            parieren_ergebnis = (int)numericUpDown3.Value + Waffenwahl.parierenmod + fixwert1 + fixwert2 + fixwert3;
-            dataGridView1.Rows.Add();
-            rowcount++;
-            dataGridView1.Rows[rowcount - 1].DefaultCellStyle.BackColor = Color.LightSkyBlue;
-            dataGridView1[0, rowcount - 1].Value = "Parieren mit " + Waffenwahl.name;
-            if (parieren_ergebnis >= 0) { dataGridView1[1, rowcount - 1].Value = "+" + parieren_ergebnis; }
-            else { dataGridView1[1, rowcount - 1].Value = parieren_ergebnis; }
-            switch (nachteil)
+            if (Waffenwahl.parierennachteil != 50)
             {
-                case 1:
-                    dataGridView1[1, rowcount - 1].Value += " (Nachteil!)";
-                    break;
-                case 2:
-                    dataGridView1[1, rowcount - 1].Value += " (Doppel-Nachteil!)";
-                    break;
-                case 3:
-                    dataGridView1[1, rowcount - 1].Value += " (Dreifach-Nachteil!)";
-                    break;
-                case 4:
-                    dataGridView1[1, rowcount - 1].Value += " (Vierfach-Nachteil!)";
-                    break;
+                parieren_ergebnis = (int)numericUpDown3.Value +/* Waffenwahl.parierenmod +*/ fixwert1 + fixwert2 + fixwert3;
+                dataGridView1.Rows.Add();
+                rowcount++;
+                dataGridView1.Rows[rowcount - 1].DefaultCellStyle.BackColor = Color.LightSkyBlue;
+                dataGridView1[0, rowcount - 1].Value = "Parieren mit " + Waffenwahl.name;
+                if (parieren_ergebnis >= 0) { dataGridView1[1, rowcount - 1].Value = "+" + parieren_ergebnis; }
+                else { dataGridView1[1, rowcount - 1].Value = parieren_ergebnis; }
+                switch (nachteil + Waffenwahl.parierennachteil)
+                {
+                    case -3:
+                        dataGridView1[1, rowcount - 1].Value += " (Dreifach-Vorteil!)";
+                        break;
+                    case -2:
+                        dataGridView1[1, rowcount - 1].Value += " (Doppel-Vorteil!)";
+                        break;
+                    case -1:
+                        dataGridView1[1, rowcount - 1].Value += " (Vorteil!)";
+                        break;
+                    case 1:
+                        dataGridView1[1, rowcount - 1].Value += " (Nachteil!)";
+                        break;
+                    case 2:
+                        dataGridView1[1, rowcount - 1].Value += " (Doppel-Nachteil!)";
+                        break;
+                    case 3:
+                        dataGridView1[1, rowcount - 1].Value += " (Dreifach-Nachteil!)";
+                        break;
+                    case 4:
+                        dataGridView1[1, rowcount - 1].Value += " (Vierfach-Nachteil!)";
+                        break;
+                }
+                dataGridView1[2, rowcount - 1].Value = "";
             }
-            dataGridView1[2, rowcount - 1].Value = "";
 
             //Blocken
-            blocken_ergebnis = (int)numericUpDown4.Value + Waffenwahl.blockenmod + fixwert1 + fixwert2 + fixwert3;
-            dataGridView1.Rows.Add();
-            rowcount++;
-            dataGridView1.Rows[rowcount -1].DefaultCellStyle.BackColor = Color.LightSkyBlue;
-            dataGridView1[0, rowcount - 1].Value = "Blocken mit " + Waffenwahl.name;
-            if (blocken_ergebnis >= 0) { dataGridView1[1, rowcount - 1].Value = "+" + blocken_ergebnis; }
-            else { dataGridView1[1, rowcount - 1].Value = blocken_ergebnis; }
-            switch (nachteil)
+            if (Waffenwahl.blockennachteil != 50)
             {
-                case 1:
-                    dataGridView1[1, rowcount - 1].Value += " (Nachteil!)";
-                    break;
-                case 2:
-                    dataGridView1[1, rowcount - 1].Value += " (Doppel-Nachteil!)";
-                    break;
-                case 3:
-                    dataGridView1[1, rowcount - 1].Value += " (Dreifach-Nachteil!)";
-                    break;
-                case 4:
-                    dataGridView1[1, rowcount - 1].Value += " (Vierfach-Nachteil!)";
-                    break;
+                blocken_ergebnis = (int)numericUpDown4.Value + /*Waffenwahl.blockenmod +*/ fixwert1 + fixwert2 + fixwert3;
+                dataGridView1.Rows.Add();
+                rowcount++;
+                dataGridView1.Rows[rowcount - 1].DefaultCellStyle.BackColor = Color.LightSkyBlue;
+                dataGridView1[0, rowcount - 1].Value = "Blocken mit " + Waffenwahl.name;
+                if (blocken_ergebnis >= 0) { dataGridView1[1, rowcount - 1].Value = "+" + blocken_ergebnis; }
+                else { dataGridView1[1, rowcount - 1].Value = blocken_ergebnis; }
+                switch (nachteil + Waffenwahl.blockennachteil)
+                {
+                    case -3:
+                        dataGridView1[1, rowcount - 1].Value += " (Dreifach-Vorteil!)";
+                        break;
+                    case -2:
+                        dataGridView1[1, rowcount - 1].Value += " (Doppel-Vorteil!)";
+                        break;
+                    case -1:
+                        dataGridView1[1, rowcount - 1].Value += " (Vorteil!)";
+                        break;
+                    case 1:
+                        dataGridView1[1, rowcount - 1].Value += " (Nachteil!)";
+                        break;
+                    case 2:
+                        dataGridView1[1, rowcount - 1].Value += " (Doppel-Nachteil!)";
+                        break;
+                    case 3:
+                        dataGridView1[1, rowcount - 1].Value += " (Dreifach-Nachteil!)";
+                        break;
+                    case 4:
+                        dataGridView1[1, rowcount - 1].Value += " (Vierfach-Nachteil!)";
+                        break;
+                }
+                dataGridView1[2, rowcount - 1].Value = "";
             }
-            dataGridView1[2, rowcount - 1].Value = "";
 
             //Ausschaltversuch
-            ausschalten_ergebnis = (int)numericUpDown5.Value + Waffenwahl.ausschaltenmod + fixwert1 + fixwert2 + fixwert3;
-            dataGridView1.Rows.Add();
-            rowcount++;
-            dataGridView1.Rows[rowcount - 1].DefaultCellStyle.BackColor = Color.LightYellow;
-            dataGridView1[0, rowcount - 1].Value = "Ausschaltversuch mit " + Waffenwahl.name;
-            if (ausschalten_ergebnis >= 0) { dataGridView1[1, rowcount - 1].Value = "+" + ausschalten_ergebnis; }
-            else { dataGridView1[1, rowcount - 1].Value = ausschalten_ergebnis; }
-            switch (nachteil)
-            {
-                case 1:
-                    dataGridView1[1, rowcount - 1].Value += " (Nachteil!)";
-                    break;
-                case 2:
-                    dataGridView1[1, rowcount - 1].Value += " (Doppel-Nachteil!)";
-                    break;
-                case 3:
-                    dataGridView1[1, rowcount - 1].Value += " (Dreifach-Nachteil!)";
-                    break;
-                case 4:
-                    dataGridView1[1, rowcount - 1].Value += " (Vierfach-Nachteil!)";
-                    break;
-            }
-            dataGridView1[2, rowcount - 1].Value = "";
+            //ausschalten_ergebnis = (int)numericUpDown5.Value + /*Waffenwahl.ausschaltenmod +*/ fixwert1 + fixwert2 + fixwert3;
+            //dataGridView1.Rows.Add();
+            //rowcount++;
+            //dataGridView1.Rows[rowcount - 1].DefaultCellStyle.BackColor = Color.LightYellow;
+            //dataGridView1[0, rowcount - 1].Value = "Ausschaltversuch mit " + Waffenwahl.name;
+            //if (ausschalten_ergebnis >= 0) { dataGridView1[1, rowcount - 1].Value = "+" + ausschalten_ergebnis; }
+            //else { dataGridView1[1, rowcount - 1].Value = ausschalten_ergebnis; }
+            //switch (nachteil + Waffenwahl.ausschaltennachteil)
+            //{
+            //    case -3:
+            //        dataGridView1[1, rowcount - 1].Value += " (Dreifach-Vorteil!)";
+            //        break;
+            //    case -2:
+            //        dataGridView1[1, rowcount - 1].Value += " (Doppel-Vorteil!)";
+            //        break;
+            //    case -1:
+            //        dataGridView1[1, rowcount - 1].Value += " (Vorteil!)";
+            //        break;
+            //    case 1:
+            //        dataGridView1[1, rowcount - 1].Value += " (Nachteil!)";
+            //        break;
+            //    case 2:
+            //        dataGridView1[1, rowcount - 1].Value += " (Doppel-Nachteil!)";
+            //        break;
+            //    case 3:
+            //        dataGridView1[1, rowcount - 1].Value += " (Dreifach-Nachteil!)";
+            //        break;
+            //    case 4:
+            //        dataGridView1[1, rowcount - 1].Value += " (Vierfach-Nachteil!)";
+            //        break;
+            //}
+            //dataGridView1[2, rowcount - 1].Value = "";
 
             //Öffnungsversuch
-            oeffnen_ergebnis = (int)numericUpDown7.Value + Waffenwahl.oeffnenmod + fixwert1 + fixwert2 + fixwert3;
-            dataGridView1.Rows.Add();
-            rowcount++;
-            dataGridView1.Rows[rowcount - 1].DefaultCellStyle.BackColor = Color.LightYellow;
-            dataGridView1[0, rowcount - 1].Value = "Öffnungsversuch mit " + Waffenwahl.name;
-            if (oeffnen_ergebnis >= 0) { dataGridView1[1, rowcount - 1].Value = "+" + oeffnen_ergebnis; }
-            else { dataGridView1[1, rowcount - 1].Value = oeffnen_ergebnis; }
-            switch (nachteil)
+            if (Waffenwahl.oeffnennachteil != 50)
             {
-                case 1:
-                    dataGridView1[1, rowcount - 1].Value += " (Nachteil!)";
-                    break;
-                case 2:
-                    dataGridView1[1, rowcount - 1].Value += " (Doppel-Nachteil!)";
-                    break;
-                case 3:
-                    dataGridView1[1, rowcount - 1].Value += " (Dreifach-Nachteil!)";
-                    break;
-                case 4:
-                    dataGridView1[1, rowcount - 1].Value += " (Vierfach-Nachteil!)";
-                    break;
+                oeffnen_ergebnis = (int)numericUpDown7.Value + Waffenwahl.oeffnenmod + fixwert1 + fixwert2 + fixwert3;
+                dataGridView1.Rows.Add();
+                rowcount++;
+                dataGridView1.Rows[rowcount - 1].DefaultCellStyle.BackColor = Color.LightYellow;
+                dataGridView1[0, rowcount - 1].Value = "Öffnungsversuch mit " + Waffenwahl.name;
+                if (oeffnen_ergebnis >= 0) { dataGridView1[1, rowcount - 1].Value = "+" + oeffnen_ergebnis; }
+                else { dataGridView1[1, rowcount - 1].Value = oeffnen_ergebnis; }
+                switch (nachteil + Waffenwahl.oeffnennachteil)
+                {
+                    case -3:
+                        dataGridView1[1, rowcount - 1].Value += " (Dreifach-Vorteil!)";
+                        break;
+                    case -2:
+                        dataGridView1[1, rowcount - 1].Value += " (Doppel-Vorteil!)";
+                        break;
+                    case -1:
+                        dataGridView1[1, rowcount - 1].Value += " (Vorteil!)";
+                        break;
+                    case 1:
+                        dataGridView1[1, rowcount - 1].Value += " (Nachteil!)";
+                        break;
+                    case 2:
+                        dataGridView1[1, rowcount - 1].Value += " (Doppel-Nachteil!)";
+                        break;
+                    case 3:
+                        dataGridView1[1, rowcount - 1].Value += " (Dreifach-Nachteil!)";
+                        break;
+                    case 4:
+                        dataGridView1[1, rowcount - 1].Value += " (Vierfach-Nachteil!)";
+                        break;
+                }
+                dataGridView1[2, rowcount - 1].Value = "";
             }
-            dataGridView1[2, rowcount - 1].Value = "";
 
         }
 
@@ -398,6 +460,7 @@ namespace Tüfteltruhe
             willenskraftverlust = 0;
             extremfehl = 0;
             extremerfolg = 0;
+            reisenachteil = 0;
 
             gewaehlte_reiseart = comboBox3.GetItemText(comboBox3.SelectedItem);
             gewaehltes_terrain = comboBox4.GetItemText(comboBox4.SelectedItem);
@@ -408,15 +471,16 @@ namespace Tüfteltruhe
                     {
                         case "Straße/Weg":
                             reisegeschwindigkeit = 2;
-                            orientierungszw = 0;
+                            reisenachteil--;
                             break;
                         case "Gelände (Wiesen, lichter Wald, verschneite Straße)":
                             reisegeschwindigkeit = 2;
-                            orientierungszw = 10;
+                            orientierungsvorteil++;
+                            reisenachteil--;
                             break;
                         case "Dickicht (Urwald, Gebirge, Sumpf, Tiefschnee":
                             reisegeschwindigkeit = zufall.Next(1, 3);
-                            orientierungszw = 12;
+                            reisenachteil--;
                             break;
                     }
                     fortbewegungsmod = 1;
@@ -426,51 +490,32 @@ namespace Tüfteltruhe
                     {
                         case "Straße/Weg":
                             reisegeschwindigkeit = 4;
-                            orientierungszw = 0;
                             break;
                         case "Gelände (Wiesen, lichter Wald, verschneite Straße)":
                             reisegeschwindigkeit = 3;
-                            orientierungszw = 10;
+                            orientierungsvorteil++;
                             break;
                         case "Dickicht (Urwald, Gebirge, Sumpf, Tiefschnee":
                             reisegeschwindigkeit = 2;
-                            orientierungszw = 12;
                             break;
                     }
                     fortbewegungsmod = 0;
-                    break;
-                case "Laufschritt":
-                    switch (gewaehltes_terrain)
-                    {
-                        case "Straße/Weg":
-                            reisegeschwindigkeit = 6;
-                            orientierungszw = 0;
-                            break;
-                        case "Gelände (Wiesen, lichter Wald, verschneite Straße)":
-                            reisegeschwindigkeit = 5;
-                            orientierungszw = 11;
-                            break;
-                        case "Dickicht (Urwald, Gebirge, Sumpf, Tiefschnee":
-                            reisegeschwindigkeit = 3;
-                            orientierungszw = 13;
-                            break;
-                    }
-                    fortbewegungsmod = -1;
                     break;
                 case "Laufen":
                     switch (gewaehltes_terrain)
                     {
                         case "Straße/Weg":
                             reisegeschwindigkeit = 8;
-                            orientierungszw = 0;
+                            reisenachteil++;
                             break;
                         case "Gelände (Wiesen, lichter Wald, verschneite Straße)":
                             reisegeschwindigkeit = 6;
-                            orientierungszw = 12;
+                            reisenachteil++;
                             break;
                         case "Dickicht (Urwald, Gebirge, Sumpf, Tiefschnee":
                             reisegeschwindigkeit = 3;
-                            orientierungszw = 14;
+                            orientierungsvorteil--;
+                            reisenachteil++;
                             break;
                     }
                     fortbewegungsmod = -2;
@@ -480,15 +525,13 @@ namespace Tüfteltruhe
                     {
                         case "Straße/Weg":
                             reisegeschwindigkeit = zufall.Next(2,7);
-                            orientierungszw = 0;
                             break;
                         case "Gelände (Wiesen, lichter Wald, verschneite Straße)":
                             reisegeschwindigkeit = zufall.Next(1,4);
-                            orientierungszw = 10;
+                            orientierungsvorteil++;
                             break;
                         case "Dickicht (Urwald, Gebirge, Sumpf, Tiefschnee":
                             reisegeschwindigkeit = 0;
-                            orientierungszw = 0;
                             break;
                     }
                     break;
@@ -497,15 +540,12 @@ namespace Tüfteltruhe
                     {
                         case "Straße/Weg":
                             reisegeschwindigkeit = 8;
-                            orientierungszw = 0;
                             break;
                         case "Gelände (Wiesen, lichter Wald, verschneite Straße)":
                             reisegeschwindigkeit = 5;
-                            orientierungszw = 11;
                             break;
                         case "Dickicht (Urwald, Gebirge, Sumpf, Tiefschnee":
                             reisegeschwindigkeit = 0;
-                            orientierungszw = 0;
                             break;
                     }
                     break;
@@ -514,32 +554,51 @@ namespace Tüfteltruhe
                     {
                         case "Straße/Weg":
                             reisegeschwindigkeit = 16;
-                            orientierungszw = 10;
                             break;
                         case "Gelände (Wiesen, lichter Wald, verschneite Straße)":
                             reisegeschwindigkeit = 12;
-                            orientierungszw = 12;
+                            orientierungsvorteil--;
+                            reisenachteil++;
                             break;
                         case "Dickicht (Urwald, Gebirge, Sumpf, Tiefschnee":
                             reisegeschwindigkeit = 0;
-                            orientierungszw = 0;
+                            orientierungsvorteil--;
+                            reisenachteil++;
                             break;
                     }
                     break;
             }
 
             //Belastung
-            if (radioButton1.Checked) reisenachteil = 0;
-            else if (radioButton2.Checked) reisenachteil = 1;
-            else if (radioButton3.Checked) reisenachteil = 1;
-            else if (radioButton4.Checked) reisenachteil = 2;
+            if (radioButton1.Checked) reisenachteil += 0;
+            else if (radioButton2.Checked) reisenachteil++;
+            else if (radioButton3.Checked) reisenachteil++;
+            else if (radioButton4.Checked) reisenachteil += 2;
 
             //Würfelwurf            
             for (int i = 0; i < (int)numericUpDown8.Value; i++)
             {
                 textBox1.Text += "Reisetest: ";
-                switch (reisenachteil)
+                switch (reisenachteil - (int)numericUpDown13.Value)
                 {
+                    case -3: //3Vorteil
+                        wuerfelgesamt = nimmdiegroesserezahl(nimmdiegroesserezahl(nimmdiegroesserezahl(zufall.Next(1, 7), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7));
+                        wuerfelgesamt += nimmdiegroesserezahl(nimmdiegroesserezahl(nimmdiegroesserezahl(zufall.Next(1, 7), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7));
+                        wuerfelgesamt += nimmdiegroesserezahl(nimmdiegroesserezahl(nimmdiegroesserezahl(zufall.Next(1, 7), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7));
+                        textBox1.Text += "Dreifachvorteilswurf: ";
+                        break;
+                    case -2: //2Vorteil
+                        wuerfelgesamt = nimmdiegroesserezahl(nimmdiegroesserezahl(zufall.Next(1, 7), zufall.Next(1, 7)), zufall.Next(1, 7));
+                        wuerfelgesamt += nimmdiegroesserezahl(nimmdiegroesserezahl(zufall.Next(1, 7), zufall.Next(1, 7)), zufall.Next(1, 7));
+                        wuerfelgesamt += nimmdiegroesserezahl(nimmdiegroesserezahl(zufall.Next(1, 7), zufall.Next(1, 7)), zufall.Next(1, 7));
+                        textBox1.Text += "Doppelvorteilswurf: ";
+                        break;
+                    case -1: //Vorteil
+                        wuerfelgesamt = nimmdiegroesserezahl(zufall.Next(1, 7), zufall.Next(1, 7));
+                        wuerfelgesamt += nimmdiegroesserezahl(zufall.Next(1, 7), zufall.Next(1, 7));
+                        wuerfelgesamt += nimmdiegroesserezahl(zufall.Next(1, 7), zufall.Next(1, 7));
+                        textBox1.Text += "Vorteilswurf: ";
+                        break;
                     case 0:
                         wuerfelgesamt = zufall.Next(1, 7) + zufall.Next(1, 7) + zufall.Next(1, 7);
                         textBox1.Text += "Wurf: ";
@@ -561,6 +620,24 @@ namespace Tüfteltruhe
                         wuerfelgesamt += nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(zufall.Next(1, 7), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7));
                         wuerfelgesamt += nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(zufall.Next(1, 7), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7));
                         textBox1.Text += "Dreifachnachteilswurf: ";
+                        break;
+                    case 4: //4-Nachteil
+                        wuerfelgesamt = nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(zufall.Next(1, 7), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7));
+                        wuerfelgesamt += nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(zufall.Next(1, 7), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)); 
+                        wuerfelgesamt += nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(zufall.Next(1, 7), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7));
+                        textBox1.Text += "Vierfachnachteilswurf: ";
+                        break;
+                    case 5: //5-Nachteil
+                        wuerfelgesamt = nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(zufall.Next(1, 7), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7));
+                        wuerfelgesamt += nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(zufall.Next(1, 7), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7));
+                        wuerfelgesamt += nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(zufall.Next(1, 7), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7));
+                        textBox1.Text += "Fünffachnachteilswurf: ";
+                        break;
+                    case 6: //6-Nachteil
+                        wuerfelgesamt = nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(zufall.Next(1, 7), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7));
+                        wuerfelgesamt += nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(zufall.Next(1, 7), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7));
+                        wuerfelgesamt += nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(nimmdiekleinerezahl(zufall.Next(1, 7), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7)), zufall.Next(1, 7));
+                        textBox1.Text += "Sechsfachnachteilswurf: ";
                         break;
                 }
                 reisetest_ergebnis = wuerfelgesamt + (int)numericUpDown9.Value + fortbewegungsmod;
@@ -605,9 +682,30 @@ namespace Tüfteltruhe
             {
                 for (int i = 0; i < (int)numericUpDown8.Value; i++)
                 {
-                    orientierungswurf = zufall.Next(1, 7) + zufall.Next(1, 7) + zufall.Next(1, 7) + (int)numericUpDown10.Value;
-                    textBox1.Text += "Orientierungstest: " + orientierungswurf + " gegen ZW " + orientierungszw;
-                    resultat = test3w6gegenzw(orientierungszw, orientierungswurf, (int)numericUpDown10.Value);
+                    orientierungswurf = 0;
+                    switch (orientierungsvorteil)
+                    {
+                        case 0:
+                            orientierungswurf = zufall.Next(1, 7) + zufall.Next(1, 7) + zufall.Next(1, 7);
+                            textBox1.Text += "Orientierung Wurf: ";
+                            break;
+                        case 1: //Vorteil
+                            orientierungswurf = nimmdiegroesserezahl(zufall.Next(1, 7), zufall.Next(1, 7));
+                            orientierungswurf += nimmdiegroesserezahl(zufall.Next(1, 7), zufall.Next(1, 7));
+                            orientierungswurf += nimmdiegroesserezahl(zufall.Next(1, 7), zufall.Next(1, 7));
+                            textBox1.Text += "Orientierung Vorteilswurf: ";
+                            break;
+                        case -1: //Nachteil
+                            orientierungswurf = nimmdiekleinerezahl(zufall.Next(1, 7), zufall.Next(1, 7));
+                            orientierungswurf += nimmdiekleinerezahl(zufall.Next(1, 7), zufall.Next(1, 7));
+                            orientierungswurf += nimmdiekleinerezahl(zufall.Next(1, 7), zufall.Next(1, 7));
+                            textBox1.Text += "Orientierung Nachteilswurf: ";
+                            break;
+                    }
+
+                    orientierungswurf += (int)numericUpDown10.Value;
+                    textBox1.Text += orientierungswurf + " gegen ZW 13";
+                    resultat = test3w6gegenzw(13, orientierungswurf, (int)numericUpDown10.Value);
                     switch (resultat)
                     {
                         case 1:
@@ -649,8 +747,19 @@ namespace Tüfteltruhe
 
             //Strecke
             if (fortschrittausgegeben != 1) dataGridView2[1, rowcount2 - 1].Value = ((int)numericUpDown8.Value * reisegeschwindigkeit + fortschrittdurchorientierung) + " Meilen";
-            dataGridView2[2, rowcount2 - 1].Value = ("-" + ausdauerverlust + " Ausdauer");
-            dataGridView2[3, rowcount2 - 1].Value = ("-" + willenskraftverlust + " Willenskraft");
+            
+            dataGridView2[2, rowcount2 - 1].Value = ("-" + ausdauerverlust); 
+            if (gewaehlte_reiseart == "Wagenfahrt" || 
+            gewaehlte_reiseart == "Reiten" ||
+            gewaehlte_reiseart == "Galoppieren") dataGridView2[2, rowcount2 - 1].Value += " Fokus";
+            else dataGridView2[2, rowcount2 - 1].Value += " Ausdauer";
+
+            dataGridView2[3, rowcount2 - 1].Value = ("-" + willenskraftverlust + " Willenskraft/");
+            if (gewaehlte_reiseart == "Wagenfahrt" ||
+            gewaehlte_reiseart == "Reiten" ||
+            gewaehlte_reiseart == "Galoppieren") dataGridView2[3, rowcount2 - 1].Value += "Fokus";
+            else dataGridView2[3, rowcount2 - 1].Value += "Ausdauer";
+
             dataGridView2[4, rowcount2 - 1].Value = (extremfehl);
             dataGridView2[5, rowcount2 - 1].Value = (extremerfolg);
             if (extremerfolg > 0) dataGridView2[5, rowcount2 - 1].Style.BackColor = Color.LightGreen;
@@ -668,13 +777,8 @@ namespace Tüfteltruhe
 
             foreach (DataRow reihe in SchiffstypenTB.Rows)
             {
-                if (comboBox5.GetItemText(this.comboBox5.SelectedItem) == "Auswählen...")
-                {
-                    MessageBox.Show("Es muss ein Schiffstyp ausgewählt werden");
-                    comboBox5.BackColor = Color.LightCoral;
-                    return;
-                }
-                else if (reihe["Schiffstyp"].ToString() == comboBox5.GetItemText(this.comboBox5.SelectedItem))
+
+                if (reihe["Schiffstyp"].ToString() == comboBox5.GetItemText(this.comboBox5.SelectedItem))
                 {
                     tmp = reihe["Grundgeschwindigkeit"].ToString();
                     if (!string.IsNullOrEmpty(tmp) && tmp != "-") gewgrundgeschwindigkeit = int.Parse(tmp);
@@ -698,47 +802,71 @@ namespace Tüfteltruhe
             else if (radioButton11.Checked) seereiseumgebung = "Flussaufwärts";
 
             //Wetterberechnung
-            int wuerfel = zufall.Next(1, 21);
-            switch (seereiseumgebung)
+            if (checkBox3.Checked)
             {
-                case "Binnensee":
-                    if (wuerfel < 7) wetter = "Windstill";
-                    else if (wuerfel > 6 && wuerfel < 17) wetter = "Brise";
-                    else if (wuerfel > 16 && wuerfel < 20) wetter = "Wind";
-                    else wetter = "Sturm";
-                    break;
-                case "Küstennähe":
-                    if (wuerfel < 6) wetter = "Windstill";
-                    else if (wuerfel > 5 && wuerfel < 15) wetter = "Brise";
-                    else if (wuerfel > 14 && wuerfel < 20) wetter = "Wind";
-                    else wetter = "Sturm";
-                    break;
-                case "Offenes Meer":
-                    if (wuerfel < 4) wetter = "Windstill";
-                    else if (wuerfel > 3 && wuerfel < 10) wetter = "Brise";
-                    else if (wuerfel > 9 && wuerfel < 18) wetter = "Wind";
-                    else if (wuerfel > 17 && wuerfel < 20) wetter = "Sturm";
-                    else wetter = "Orkan";
-                    break;
-                case "Flussabwärts":
-                    if (fahrweise == "Rudern") schwierigkeit =6;
-                    else if (fahrweise == "Segeln") schwierigkeit = 10;
-                    wetter = "Flussreise - Kein Wettermod.";
-                    break;
-                case "Flussaufwärts":
-                    if (fahrweise == "Rudern") schwierigkeit = 20;
-                    else if (fahrweise == "Segeln") schwierigkeit = 40;
-                    wetter = "Flussreise - Kein Wettermod.";
-                    break;
-                default:
-                    MessageBox.Show("Es muss eine Fahrweise gewählt werden!");
-                    radioButton7.BackColor = Color.LightCoral;
-                    radioButton8.BackColor = Color.LightCoral;
-                    radioButton9.BackColor = Color.LightCoral;
-                    radioButton10.BackColor = Color.LightCoral;
-                    radioButton11.BackColor = Color.LightCoral;
-                    return;
+                int wuerfel = zufall.Next(1, 21);
+
+                switch (seereiseumgebung)
+                {
+                    case "Binnensee":
+                        if (wuerfel < 7) wetter = "Windstill";
+                        else if (wuerfel > 6 && wuerfel < 17) wetter = "Brise";
+                        else if (wuerfel > 16 && wuerfel < 20) wetter = "Wind";
+                        else wetter = "Sturm";
+                        break;
+                    case "Küstennähe":
+                        if (wuerfel < 6) wetter = "Windstill";
+                        else if (wuerfel > 5 && wuerfel < 15) wetter = "Brise";
+                        else if (wuerfel > 14 && wuerfel < 20) wetter = "Wind";
+                        else wetter = "Sturm";
+                        break;
+                    case "Offenes Meer":
+                        if (wuerfel < 4) wetter = "Windstill";
+                        else if (wuerfel > 3 && wuerfel < 10) wetter = "Brise";
+                        else if (wuerfel > 9 && wuerfel < 18) wetter = "Wind";
+                        else if (wuerfel > 17 && wuerfel < 20) wetter = "Sturm";
+                        else wetter = "Orkan";
+                        break;
+                    case "Flussabwärts":
+                        if (fahrweise == "Rudern") schwierigkeit = 6;
+                        else if (fahrweise == "Segeln") schwierigkeit = 10;
+                        wetter = "Flussreise - Kein Wettermod.";
+                        break;
+                    case "Flussaufwärts":
+                        if (fahrweise == "Rudern") schwierigkeit = 20;
+                        else if (fahrweise == "Segeln") schwierigkeit = 40;
+                        wetter = "Flussreise - Kein Wettermod.";
+                        break;
+                    default:
+                        MessageBox.Show("Es muss eine Fahrweise gewählt werden!");
+                        radioButton7.BackColor = Color.LightCoral;
+                        radioButton8.BackColor = Color.LightCoral;
+                        radioButton9.BackColor = Color.LightCoral;
+                        radioButton10.BackColor = Color.LightCoral;
+                        radioButton11.BackColor = Color.LightCoral;
+                        return;
+                }
+                switch (wetter)
+                {
+                    case "Windstill":
+                        comboBox6.SelectedIndex = 0;
+                        break;
+                    case "Brise":
+                        comboBox6.SelectedIndex = 1;
+                        break;
+                    case "Wind":
+                        comboBox6.SelectedIndex = 2;
+                        break;
+                    case "Sturm":
+                        comboBox6.SelectedIndex = 3;
+                        break;
+                    case "Orkan":
+                        comboBox6.SelectedIndex = 4;
+                        break;
+                }
             }
+            wetter = comboBox6.GetItemText(this.comboBox6.SelectedItem);
+
 
             //Schwierigkeitsberechnung
             switch (wetter)
@@ -878,7 +1006,14 @@ namespace Tüfteltruhe
             SchiffstypenTB = SchiffstypenTabelle;
             WaffenTB = WaffenTabelle;
 
-            connection.Close();
+            comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 0;
+            comboBox3.SelectedIndex = 0;
+            comboBox4.SelectedIndex = 0;
+            comboBox5.SelectedIndex = 0;
+            comboBox6.SelectedIndex = 0;
+
+            connection.Close(); 
 
 
 
@@ -996,6 +1131,21 @@ namespace Tüfteltruhe
                     tmp = row["Öffnen"].ToString();
                     if (!string.IsNullOrEmpty(tmp) && tmp != "-") Waffenwahl.oeffnenmod = int.Parse(tmp);
                     else Waffenwahl.oeffnenmod = -100;
+                    tmp = row["ParierenNachteil"].ToString();
+                    if (!string.IsNullOrEmpty(tmp) && tmp != "-") Waffenwahl.parierennachteil = int.Parse(tmp);
+                    else Waffenwahl.parierennachteil = 0;
+                    tmp = row["BlockenNachteil"].ToString();
+                    if (!string.IsNullOrEmpty(tmp) && tmp != "-") Waffenwahl.blockennachteil = int.Parse(tmp);
+                    else Waffenwahl.blockennachteil = 0;
+                    //tmp = row["AusschaltenNachteil"].ToString();
+                    //if (!string.IsNullOrEmpty(tmp) && tmp != "-") Waffenwahl.ausschaltennachteil = int.Parse(tmp);
+                    /*else*/ Waffenwahl.ausschaltennachteil = 0;
+                    tmp = row["WerfenNachteil"].ToString();
+                    if (!string.IsNullOrEmpty(tmp) && tmp != "-") Waffenwahl.werfennachteil = int.Parse(tmp);
+                    else Waffenwahl.werfennachteil = 0;
+                    tmp = row["ÖffnenNachteil"].ToString();
+                    if (!string.IsNullOrEmpty(tmp) && tmp != "-") Waffenwahl.oeffnennachteil = int.Parse(tmp);
+                    else Waffenwahl.oeffnennachteil = 0;
                     tmp = row["Waffenschaden"].ToString();
                     if (!string.IsNullOrEmpty(tmp) && tmp != "-") Waffenwahl.waffenschaden = tmp;
                     else Waffenwahl.waffenschaden = null;
@@ -1191,5 +1341,6 @@ namespace Tüfteltruhe
             Spielleitermodus spielleitermodus = new Spielleitermodus();
             spielleitermodus.Show();
         }
+
     }    
 }

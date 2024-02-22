@@ -117,17 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>264, 17</value>
-  </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>264, 17</value>
-  </metadata>
-  <data name="checkBox1.ToolTip" xml:space="preserve">
-    <value>Wird die Waffe in zwei Händen gehalten, halbiert sich das Gewicht, das eine Hand tragen muss.
-Das kann bei schweren Waffen einem Abzug vorbeugen.
-Manche Waffen müssen (Spann- und Schleuderwaffen) oder sollten (Spieße und Lange Hiebwaffen) zweihändig verwendet werden.</value>
-  </data>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -164,14 +153,6 @@ Manche Waffen müssen (Spann- und Schleuderwaffen) oder sollten (Spieße und Lan
   <metadata name="Column6.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="label12.ToolTip" xml:space="preserve">
-    <value>Die Fortbewegungsart beeinflusst die Reisegeschwindigkeit, sowie die Schwierigkeit des Konstitutions-Tests und des Orientierungs-Tests.
-Bei Ritt oder Wagen-Fahrt wird statt Konstitution die Reiten-Fähigkeit geprüft.</value>
-  </data>
-  <data name="comboBox3.ToolTip" xml:space="preserve">
-    <value>Die Fortbewegungsart beeinflusst die Reisegeschwindigkeit, sowie die Schwierigkeit des Konstitutions-Tests und des Orientierungs-Tests.
-Bei Ritt oder Wagen-Fahrt wird statt Konstitution die Reiten-Fähigkeit geprüft.</value>
-  </data>
   <metadata name="Column12.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -243,6 +224,9 @@ Bei Ritt oder Wagen-Fahrt wird statt Konstitution die Reiten-Fähigkeit geprüft
   </metadata>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>149, 17</value>
+  </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>264, 17</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>49</value>
