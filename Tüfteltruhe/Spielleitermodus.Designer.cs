@@ -95,15 +95,17 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label38 = new System.Windows.Forms.Label();
+            this.numericUpDown9 = new System.Windows.Forms.NumericUpDown();
             this.label16 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -119,6 +121,8 @@
             this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.numericUpDown10 = new System.Windows.Forms.NumericUpDown();
+            this.label39 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
@@ -165,9 +169,6 @@
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.dataGridView8 = new System.Windows.Forms.DataGridView();
-            this.Column34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label34 = new System.Windows.Forms.Label();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
@@ -187,10 +188,9 @@
             this.label32 = new System.Windows.Forms.Label();
             this.button13 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
-            this.numericUpDown9 = new System.Windows.Forms.NumericUpDown();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.numericUpDown10 = new System.Windows.Forms.NumericUpDown();
+            this.Column34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -204,9 +204,11 @@
             this.panel3.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -222,8 +224,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).BeginInit();
             this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -910,6 +910,29 @@
             this.panel2.Size = new System.Drawing.Size(1043, 110);
             this.panel2.TabIndex = 17;
             // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label38.Location = new System.Drawing.Point(386, 80);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(219, 16);
+            this.label38.TabIndex = 27;
+            this.label38.Text = "Optional: Manuelles Würfelergebnis";
+            // 
+            // numericUpDown9
+            // 
+            this.numericUpDown9.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.numericUpDown9.Location = new System.Drawing.Point(623, 77);
+            this.numericUpDown9.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.numericUpDown9.Name = "numericUpDown9";
+            this.numericUpDown9.Size = new System.Drawing.Size(75, 22);
+            this.numericUpDown9.TabIndex = 26;
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -930,17 +953,6 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(897, 40);
-            this.button4.Margin = new System.Windows.Forms.Padding(4);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(139, 27);
-            this.button4.TabIndex = 23;
-            this.button4.Text = "Neuer Tag";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -949,27 +961,6 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(0, 16);
             this.label15.TabIndex = 22;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(748, 44);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(129, 16);
-            this.label14.TabIndex = 21;
-            this.label14.Text = "Gesuchte Stunden: 0";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(735, 7);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(301, 28);
-            this.button1.TabIndex = 20;
-            this.button1.Text = "1 Stunde lang suchen";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // comboBox4
             // 
@@ -1000,6 +991,38 @@
             this.comboBox3.Size = new System.Drawing.Size(357, 24);
             this.comboBox3.TabIndex = 16;
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(748, 44);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(129, 16);
+            this.label14.TabIndex = 21;
+            this.label14.Text = "Gesuchte Stunden: 0";
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(897, 40);
+            this.button4.Margin = new System.Windows.Forms.Padding(4);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(139, 27);
+            this.button4.TabIndex = 23;
+            this.button4.Text = "Neuer Tag";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(735, 7);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(301, 28);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "1 Stunde lang suchen";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label9
             // 
@@ -1163,6 +1186,29 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(995, 110);
             this.panel1.TabIndex = 15;
+            // 
+            // numericUpDown10
+            // 
+            this.numericUpDown10.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.numericUpDown10.Location = new System.Drawing.Point(658, 80);
+            this.numericUpDown10.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.numericUpDown10.Name = "numericUpDown10";
+            this.numericUpDown10.Size = new System.Drawing.Size(75, 22);
+            this.numericUpDown10.TabIndex = 28;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label39.Location = new System.Drawing.Point(422, 83);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(219, 16);
+            this.label39.TabIndex = 29;
+            this.label39.Text = "Optional: Manuelles Würfelergebnis";
             // 
             // label13
             // 
@@ -1699,30 +1745,6 @@
             this.dataGridView8.Size = new System.Drawing.Size(1628, 752);
             this.dataGridView8.TabIndex = 16;
             // 
-            // Column34
-            // 
-            this.Column34.HeaderText = "Schatzstück";
-            this.Column34.MinimumWidth = 6;
-            this.Column34.Name = "Column34";
-            this.Column34.ReadOnly = true;
-            this.Column34.Width = 125;
-            // 
-            // Column35
-            // 
-            this.Column35.HeaderText = "Wert";
-            this.Column35.MinimumWidth = 6;
-            this.Column35.Name = "Column35";
-            this.Column35.ReadOnly = true;
-            this.Column35.Width = 60;
-            // 
-            // Column36
-            // 
-            this.Column36.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column36.HeaderText = "Beschreibung/Wirkung";
-            this.Column36.MinimumWidth = 6;
-            this.Column36.Name = "Column36";
-            this.Column36.ReadOnly = true;
-            // 
             // panel8
             // 
             this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -1939,51 +1961,29 @@
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
-            // numericUpDown9
+            // Column34
             // 
-            this.numericUpDown9.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.numericUpDown9.Location = new System.Drawing.Point(623, 77);
-            this.numericUpDown9.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.numericUpDown9.Name = "numericUpDown9";
-            this.numericUpDown9.Size = new System.Drawing.Size(75, 22);
-            this.numericUpDown9.TabIndex = 26;
+            this.Column34.HeaderText = "Schatzstück";
+            this.Column34.MinimumWidth = 6;
+            this.Column34.Name = "Column34";
+            this.Column34.ReadOnly = true;
+            this.Column34.Width = 300;
             // 
-            // label38
+            // Column35
             // 
-            this.label38.AutoSize = true;
-            this.label38.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label38.Location = new System.Drawing.Point(386, 80);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(219, 16);
-            this.label38.TabIndex = 27;
-            this.label38.Text = "Optional: Manuelles Würfelergebnis";
+            this.Column35.HeaderText = "Wert";
+            this.Column35.MinimumWidth = 6;
+            this.Column35.Name = "Column35";
+            this.Column35.ReadOnly = true;
+            this.Column35.Width = 60;
             // 
-            // label39
+            // Column36
             // 
-            this.label39.AutoSize = true;
-            this.label39.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label39.Location = new System.Drawing.Point(422, 83);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(219, 16);
-            this.label39.TabIndex = 29;
-            this.label39.Text = "Optional: Manuelles Würfelergebnis";
-            // 
-            // numericUpDown10
-            // 
-            this.numericUpDown10.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.numericUpDown10.Location = new System.Drawing.Point(658, 80);
-            this.numericUpDown10.Maximum = new decimal(new int[] {
-            30,
-            0,
-            0,
-            0});
-            this.numericUpDown10.Name = "numericUpDown10";
-            this.numericUpDown10.Size = new System.Drawing.Size(75, 22);
-            this.numericUpDown10.TabIndex = 28;
+            this.Column36.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column36.HeaderText = "Beschreibung/Wirkung";
+            this.Column36.MinimumWidth = 6;
+            this.Column36.Name = "Column36";
+            this.Column36.ReadOnly = true;
             // 
             // Spielleitermodus
             // 
@@ -2018,10 +2018,12 @@
             this.tabPage1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
@@ -2040,8 +2042,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).EndInit();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2205,12 +2205,12 @@
         private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.CheckBox checkBox7;
         private System.Windows.Forms.NumericUpDown numericUpDown8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column34;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column35;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column36;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.NumericUpDown numericUpDown9;
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.NumericUpDown numericUpDown10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column34;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column35;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column36;
     }
 }

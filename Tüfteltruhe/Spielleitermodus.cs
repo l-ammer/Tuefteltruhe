@@ -37,6 +37,12 @@ namespace Tüfteltruhe
         public DataTable SchatzAlltagMusikTB = new DataTable();
         public DataTable SchatzWaffeTB = new DataTable();
         public DataTable SchatzRuestungTB = new DataTable();
+        public DataTable WaffentypenTB = new DataTable();
+        public DataTable RuestungstypenTB = new DataTable();
+        public DataTable SpezialgegenstandTB = new DataTable();
+        public DataTable AlltagsgegenstandTB = new DataTable();
+        public DataTable KomplexringTB = new DataTable();
+        public DataTable BannwaffeTB = new DataTable();
         public Bereich Region = new Bereich(0, "", null, null, null, null);
         public Bereich Umgebung = new Bereich(0, "", null, null, null, null);
         public Bereich Region2 = new Bereich(0, "", null, null, null, null);
@@ -87,6 +93,9 @@ namespace Tüfteltruhe
         public string sonderbeschreibung = "";
         public string groesse = "";
         public bool eintragen = true;
+        public Color hintergrundfarbe = Color.White;
+        bool keinlebewesen = false;
+        bool keinezauberei = false;
 
         public Spielleitermodus()
         {
@@ -128,6 +137,10 @@ namespace Tüfteltruhe
             OleDbDataReader reader24 = null;
             OleDbDataReader reader25 = null;
             OleDbDataReader reader26 = null;
+            OleDbDataReader reader27 = null;
+            OleDbDataReader reader28 = null;
+            OleDbDataReader reader29 = null;
+            OleDbDataReader reader30 = null;
             OleDbCommand command = new OleDbCommand("SELECT * FROM ZutatenRegion", connection);
             OleDbCommand command2 = new OleDbCommand("SELECT * FROM ZutatenRegion", connection);
             OleDbCommand command3 = new OleDbCommand("SELECT * FROM ZutatenUmgebung", connection);
@@ -152,6 +165,12 @@ namespace Tüfteltruhe
             OleDbCommand command22 = new OleDbCommand("SELECT * FROM Schatz", connection);
             OleDbCommand command23 = new OleDbCommand("SELECT * FROM SchatzGegenstand", connection);
             OleDbCommand command24 = new OleDbCommand("SELECT * FROM SchatzAlltagMusik", connection);
+            OleDbCommand command25 = new OleDbCommand("SELECT * FROM Waffentypen", connection);
+            OleDbCommand command26 = new OleDbCommand("SELECT * FROM Ruestungstypen", connection);
+            OleDbCommand command27 = new OleDbCommand("SELECT * FROM Spezialgegenstand", connection);
+            OleDbCommand command28 = new OleDbCommand("SELECT * FROM Alltagsgegenstand", connection);
+            OleDbCommand command29 = new OleDbCommand("SELECT * FROM Komplexring", connection);
+            OleDbCommand command30 = new OleDbCommand("SELECT * FROM Bannwaffe", connection);
             reader = command.ExecuteReader();
             reader2 = command2.ExecuteReader();
             reader3 = command3.ExecuteReader();
@@ -176,6 +195,12 @@ namespace Tüfteltruhe
             reader22 = command22.ExecuteReader();
             reader23 = command23.ExecuteReader();
             reader24 = command24.ExecuteReader();
+            reader25 = command25.ExecuteReader();
+            reader26 = command26.ExecuteReader();
+            reader27 = command27.ExecuteReader();
+            reader28 = command28.ExecuteReader();
+            reader29 = command29.ExecuteReader();
+            reader30 = command30.ExecuteReader();
             comboBox5.Items.Clear();
             comboBox1.Items.Clear();
             comboBox2.Items.Clear();
@@ -232,6 +257,12 @@ namespace Tüfteltruhe
             DataTable SchatzTabelle = new DataTable();
             DataTable SchatzGegenstandTabelle = new DataTable();
             DataTable SchatzAlltagMusikTabelle = new DataTable();
+            DataTable WaffentypenTabelle = new DataTable();
+            DataTable RuestungstypenTabelle = new DataTable();
+            DataTable SpezialgegenstandTabelle = new DataTable();
+            DataTable AlltagsgegenstandTabelle = new DataTable();
+            DataTable KomplexringTabelle = new DataTable();
+            DataTable BannwaffeTabelle = new DataTable();
 
             ZutatenRegionTabelle.Load(reader2);
             ZutatenUmgebungTabelle.Load(reader4);
@@ -250,6 +281,12 @@ namespace Tüfteltruhe
             SchatzTabelle.Load(reader22);
             SchatzGegenstandTabelle.Load(reader23);
             SchatzAlltagMusikTabelle.Load(reader24);
+            WaffentypenTabelle.Load(reader25);
+            RuestungstypenTabelle.Load(reader26);
+            SpezialgegenstandTabelle.Load(reader27);
+            AlltagsgegenstandTabelle.Load(reader28);
+            KomplexringTabelle.Load(reader29);
+            BannwaffeTabelle.Load(reader30);
 
             ZutatenRegionTB = ZutatenRegionTabelle;
             ZutatenUmgebungTB = ZutatenUmgebungTabelle;
@@ -268,6 +305,12 @@ namespace Tüfteltruhe
             SchatzTB = SchatzTabelle;
             SchatzGegenstandTB = SchatzGegenstandTabelle;
             SchatzAlltagMusikTB = SchatzAlltagMusikTabelle;
+            WaffentypenTB = WaffentypenTabelle;
+            RuestungstypenTB = RuestungstypenTabelle;
+            SpezialgegenstandTB = SpezialgegenstandTabelle;
+            AlltagsgegenstandTB = AlltagsgegenstandTabelle;
+            KomplexringTB = KomplexringTabelle;
+            BannwaffeTB = BannwaffeTabelle;
 
             //comboBox2.SelectedIndex = 0;
             //comboBox3.SelectedIndex = 0;
@@ -1582,133 +1625,138 @@ namespace Tüfteltruhe
             return gh;
         }
 
-        public void ZauberTrankRolleGenerator(string modus)
+        public DataRow ZauberTrankRolleGenerator(string modus, bool Haendlertabelle)
         {
-            int trankzahl = zufall.Next(1, 11) + zufall.Next(1, 11) + zufall.Next(1, 11);
-            for (int i = 0; i < trankzahl; i++)
+            DataRow dummyergebnis = SchatzGegenstandTB.Rows[100]; // dummyzeile.
+            if (Haendlertabelle) dataGridView4.Rows.Add();
+            if (Haendlertabelle) rowcount4++;
+            if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.LightYellow;
+            //Zauber ermitteln
+            string komplex = ZufaelligerRegulaererKomplex();
+            int wurf = zufall.Next(1, 101);
+            if (wurf == 98)
             {
-                dataGridView4.Rows.Add();
-                rowcount4++;
-                dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.LightYellow;
-                //Zauber ermitteln
-                string komplex = ZufaelligerRegulaererKomplex();
-                int wurf = zufall.Next(1, 101);
-                if (wurf == 98)
-                {
-                    komplex = "Lebenszauber";
-                    dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Black;
-                    dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.ForeColor = Color.GhostWhite;
-                }
-                else if (wurf == 99)
-                {
-                    komplex = "Totenzauber";
-                    dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Black;
-                    dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.ForeColor = Color.GhostWhite;
-                }
-                else if (wurf == 100)
-                {
-                    komplex = "Seelenzauber";
-                    dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Black;
-                    dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.ForeColor = Color.GhostWhite;
-                }
-                
-                //Bei Rollen: Auch Sternbilder möglich
-                if (modus == "rolle")
-                {
-                    if (wurf == 94 || wurf == 95 || wurf == 96 || wurf == 97)
-                    {
-                        komplex = "Sternbild";
-                        dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.MidnightBlue;
-                        dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.ForeColor = Color.Yellow;
-                    }
-                }
-
-                int stufezufall = zufall.Next(1, 11);
-                int komplexstufe = 0;
-                DataRow ergebniszeile = ZauberTB.Rows[0];
-                if (komplex != "Seelenzauber" && komplex != "Totenzauber" && komplex != "Lebenszauber" && komplex != "Sternbild")
-                {
-                    switch (stufezufall)
-                    {
-                        case 1:
-                        case 2:
-                        case 3:
-                            komplexstufe = 1;
-                            break;
-                        case 4:
-                        case 5:
-                        case 6:
-                            komplexstufe = 2;
-                            break;
-                        case 7:
-                        case 8:
-                            komplexstufe = 3;
-                            break;
-                        case 9:
-                            komplexstufe = 4;
-                            dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Goldenrod;
-                            break;
-                        case 10:
-                            komplexstufe = 5;
-                            dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Goldenrod;
-                            break;
-                    }
-                    ergebniszeile = ZauberTB.Rows[ZauberFinden(komplex, komplexstufe)];
-                }
-                else
-                {
-                    ergebniszeile = ZauberTB.Rows[ZufaelligerZauberNachKomplex(komplex)];
-                    while (ergebniszeile["Zauber"].ToString() == "Zauberhaut") //Zauberhaut darf nicht als Trank existieren, nur als Artefakt
-                    { 
-                        ergebniszeile = ZauberTB.Rows[ZufaelligerZauberNachKomplex(komplex)]; 
-                    }
-                    
-                }     
-
-                //Zauber anzeigen
-                double bonusstufen = 0; 
-                double bonusstufenmöglichkeiten = Convert.ToDouble(ergebniszeile["Bonusstufen"]);
-                for (int a = 0; a < bonusstufenmöglichkeiten; a++)
-                {
-                    bonusstufen += zufall.Next(0, 3);
-                }
-                bonusstufenmöglichkeiten *= 2;
-                double bonusquote = (bonusstufen / bonusstufenmöglichkeiten) * 100;
-                if (bonusstufenmöglichkeiten == 0) { bonusquote = 0; }
-                else if (bonusquote == 100)
-                {
-                    dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
-                    dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
-                }
-                else if (bonusquote == 0)
-                {
-                    dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Orange;
-                    dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
-                }
-                string objekt = "";
-                int preismod = 1;
-                if (modus == "trank")
-                {
-                    objekt = "Zaubertrank: ";
-                    preismod = 20;
-                }
-                else if (modus == "rolle")
-                {
-                    objekt = "Zauberrolle: ";
-                    preismod = 10;
-                }
-                
-                dataGridView4[0, rowcount4 - 1].Value = objekt + ergebniszeile["Zauber"].ToString() + " (" + ergebniszeile["Stufe"].ToString() + ")";
-                int gesamtstufe = (int)bonusstufen + Convert.ToInt16(ergebniszeile["Stufe"]);
-                if (komplex == "Seelenzauber" || komplex == "Totenzauber" || komplex == "Lebenszauber") { gesamtstufe *= 3; } //dreifacher Preis für verbotene Zauberei
-                dataGridView4[1, rowcount4 - 1].Value = (double)(preismod * gesamtstufe);
-                dataGridView4[2, rowcount4 - 1].Value = "1";
-                dataGridView4[3, rowcount4 - 1].Value = "Bonusstufen: " + Convert.ToString(bonusstufen) + " von " + Convert.ToString(bonusstufenmöglichkeiten) + " (" + Math.Round(bonusquote) + "%)";
-                dataGridView4[4, rowcount4 - 1].Value = "Ja";
-                dataGridView4[5, rowcount4 - 1].Value = "Komplex: " + komplex + " (" + komplexstufe + ")";
-                if (komplexstufe == 0) { dataGridView4[5, rowcount4 - 1].Value = "Komplex: " + komplex; }
+                komplex = "Lebenszauber";
+                if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Black;
+                if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.ForeColor = Color.GhostWhite;
             }
+            else if (wurf == 99)
+            {
+                komplex = "Totenzauber";
+                if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Black;
+                if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.ForeColor = Color.GhostWhite;
+            }
+            else if (wurf == 100)
+            {
+                komplex = "Seelenzauber";
+                if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Black;
+                if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.ForeColor = Color.GhostWhite;
+            }
+                
+            //Bei Rollen: Auch Sternbilder möglich
+            if (modus == "rolle")
+            {
+                if (wurf == 94 || wurf == 95 || wurf == 96 || wurf == 97)
+                {
+                    komplex = "Sternbild";
+                    if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.MidnightBlue;
+                    if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.ForeColor = Color.Yellow;
+                }
+            }
+
+            int stufezufall = zufall.Next(1, 11);
+            int komplexstufe = 0;
+            DataRow ergebniszeile = ZauberTB.Rows[0];
+            if (komplex != "Seelenzauber" && komplex != "Totenzauber" && komplex != "Lebenszauber" && komplex != "Sternbild")
+            {
+                switch (stufezufall)
+                {
+                    case 1:
+                    case 2:
+                    case 3:
+                        komplexstufe = 1;
+                        break;
+                    case 4:
+                    case 5:
+                    case 6:
+                        komplexstufe = 2;
+                        break;
+                    case 7:
+                    case 8:
+                        komplexstufe = 3;
+                        break;
+                    case 9:
+                        komplexstufe = 4;
+                        if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Goldenrod;
+                        break;
+                    case 10:
+                        komplexstufe = 5;
+                        if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Goldenrod;
+                        break;
+                }
+                ergebniszeile = ZauberTB.Rows[ZauberFinden(komplex, komplexstufe)];
+            }
+            else
+            {
+                ergebniszeile = ZauberTB.Rows[ZufaelligerZauberNachKomplex(komplex)];
+                while (ergebniszeile["Zauber"].ToString() == "Zauberhaut") //Zauberhaut darf nicht als Trank existieren, nur als Artefakt
+                { 
+                    ergebniszeile = ZauberTB.Rows[ZufaelligerZauberNachKomplex(komplex)]; 
+                }
+                    
+            }     
+
+            //Zauber anzeigen
+            double bonusstufen = 0; 
+            double bonusstufenmöglichkeiten = Convert.ToDouble(ergebniszeile["Bonusstufen"]);
+            for (int a = 0; a < bonusstufenmöglichkeiten; a++)
+            {
+                bonusstufen += zufall.Next(0, 3);
+            }
+            bonusstufenmöglichkeiten *= 2;
+            double bonusquote = (bonusstufen / bonusstufenmöglichkeiten) * 100;
+            if (bonusstufenmöglichkeiten == 0) { bonusquote = 0; }
+            else if (bonusquote == 100)
+            {
+                if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
+                if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
+            }
+            else if (bonusquote == 0)
+            {
+                if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Orange;
+                if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
+            }
+            string objekt = "";
+            int preismod = 1;
+            if (modus == "trank")
+            {
+                objekt = "Zaubertrank: ";
+                preismod = 20;
+            }
+            else if (modus == "rolle")
+            {
+                objekt = "Zauberrolle: ";
+                preismod = 10;
+            }
+
+            if (Haendlertabelle) dataGridView4[0, rowcount4 - 1].Value = objekt + ergebniszeile["Zauber"].ToString() + " (" + ergebniszeile["Stufe"].ToString() + ")";
+            int gesamtstufe = (int)bonusstufen + Convert.ToInt16(ergebniszeile["Stufe"]);
+            if (komplex == "Seelenzauber" || komplex == "Totenzauber" || komplex == "Lebenszauber") { gesamtstufe *= 3; } //dreifacher Preis für verbotene Zauberei
+            if (Haendlertabelle) dataGridView4[1, rowcount4 - 1].Value = (double)(preismod * gesamtstufe);
+            if (Haendlertabelle) dataGridView4[2, rowcount4 - 1].Value = "1";
+            if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Value = "Bonusstufen: " + Convert.ToString(bonusstufen) + " von " + Convert.ToString(bonusstufenmöglichkeiten) + " (" + Math.Round(bonusquote) + "%)";
+            if (Haendlertabelle) dataGridView4[4, rowcount4 - 1].Value = "Ja";
+            if (Haendlertabelle) dataGridView4[5, rowcount4 - 1].Value = "Komplex: " + komplex + " (" + komplexstufe + ")";
+            if (komplexstufe == 0 && Haendlertabelle) { dataGridView4[5, rowcount4 - 1].Value = "Komplex: " + komplex; }
+
+            dummyergebnis["Beschreibung"] = "Komplex: " + komplex + " (" + komplexstufe + ")" + " Bonusstufen: " + Convert.ToString(bonusstufen) + " von " + Convert.ToString(bonusstufenmöglichkeiten) + " (" + Math.Round(bonusquote) + "%)";
+            dummyergebnis["Wert"] = (double)(preismod * gesamtstufe);
+            dummyergebnis["Name"] = objekt + ergebniszeile["Zauber"].ToString() + " (" + ergebniszeile["Stufe"].ToString() + ")";
+
+            return dummyergebnis;
+
         }
+        
 
         public void ArtefaktGenerator()
         {
@@ -1722,284 +1770,408 @@ namespace Tüfteltruhe
             dataGridView4[1, rowcount4 - 1].Value = (double)999;
             dataGridView4[2, rowcount4 - 1].Value = 1;
             dataGridView4[3, rowcount4 - 1].Value = "Mittel";
-            dataGridView4[4, rowcount4 - 1].Value = "Zukünftige TTruhe-Version...";
-            dataGridView4[5, rowcount4 - 1].Value = "Hier entsteht ein Generator für generische und einmalige Artefakte.";
+            dataGridView4[4, rowcount4 - 1].Value = "Siehe Kapitel 11.3 im Regelwerk.";
+            dataGridView4[5, rowcount4 - 1].Value = "";
         }
 
-        public void ZaubersteinGenerator()
+        public DataRow ZaubersteinGenerator(bool Haendlertabelle)
         {
-            int steinzahl = zufall.Next(1, 11) + zufall.Next(1, 11) + zufall.Next(1, 11);
-            for (int i = 0; i < steinzahl; i++)
+            DataRow dummyergebnis = SchatzGegenstandTB.Rows[100]; // dummyzeile.
+
+            if (Haendlertabelle) dataGridView4.Rows.Add();
+            if (Haendlertabelle) rowcount4++;
+            if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.LightYellow;
+
+            //Art ermitteln
+            int zufallart = zufall.Next(1, 101);
+            string art = "";
+            if (zufallart <= 45) { art = "Regulär"; }
+            if (zufallart > 45) { art = "Ahnenzauber"; }
+            if (zufallart > 60) { art = "Runenzauber"; }
+            if (zufallart > 85) { art = "Bannwort"; }
+            if (zufallart > 96) { art = "Totenzauber"; }
+            if (zufallart > 98) { art = "Seelenzauber"; }
+            //Zaubersteintabelle
+            DataRow ergebniszeile = ZaubersteinTB.Rows[0];
+            ergebniszeile = ZaubersteinTB.Rows[ZufaelligerZaubersteinNachArt(art)];
+            switch (ergebniszeile["Art"].ToString())
             {
-                dataGridView4.Rows.Add();
-                rowcount4++;
-                dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.LightYellow;
-
-                //Art ermitteln
-                int zufallart = zufall.Next(1, 101);
-                string art = "";
-                if (zufallart <= 45) { art = "Regulär"; }
-                if (zufallart > 45) { art = "Ahnenzauber"; }
-                if (zufallart > 60) { art = "Runenzauber"; }
-                if (zufallart > 85) { art = "Bannwort"; }
-                if (zufallart > 96) { art = "Totenzauber"; }
-                if (zufallart > 98) { art = "Seelenzauber"; }
-                //Zaubersteintabelle
-                DataRow ergebniszeile = ZaubersteinTB.Rows[0];
-                ergebniszeile = ZaubersteinTB.Rows[ZufaelligerZaubersteinNachArt(art)];
-                switch (ergebniszeile["Art"].ToString())
-                {
-                    case "Regulär":
-                        dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Thistle;
-                        break;
-                    case "Bannwort":
-                        dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.PaleVioletRed;
-                        break;
-                    case "Runenzauber":
-                        dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.BurlyWood;
-                        break;
-                    case "Ahnenzauber":
-                        dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.PowderBlue;
-                        break;
-                    case "Totenzauber":
-                    case "Lebenszauber":
-                    case "Seelenzauber":
-                        dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Black;
-                        dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.ForeColor = Color.GhostWhite;
-                        break;
-                }
-
-
-                //Zauberstein und Karatzahl ermitteln
-                DataRow stein = ZierTB.Rows[0];
-                stein = ZierTB.Rows[zufall.Next(0, 100)];
-                string steinname = "";
-                bool steinlegitim = false;
-                int mindestkaratzahl = 5;
-                while(!steinlegitim)
-                {
-                    stein = ZierTB.Rows[zufall.Next(0, 100)];
-                    steinname = stein["Schmuckstein"].ToString();
-                    switch (steinname)
-                    {
-                        case "Amethyst":
-                            mindestkaratzahl = 8;
-                            dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Orchid;
-                            dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
-                            steinlegitim = true;
-                            break;
-                        case "Diamant":
-                            dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.PaleTurquoise;
-                            dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
-                            steinlegitim = true;
-                            break;
-                        case "Rubin":
-                            dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Red;
-                            dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
-                            steinlegitim = true;
-                            break;
-                        case "Saphir":
-                            dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.SlateBlue;
-                            dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
-                            steinlegitim = true;
-                            break;
-                        case "Smaragd":
-                            steinlegitim = true;
-                            dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.LimeGreen;
-                            dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
-                            break;
-                        case "Granat":
-                            mindestkaratzahl = 10;
-                            steinlegitim = true;
-                            dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Crimson;
-                            dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
-                            break;
-                        case "Jade":
-                            mindestkaratzahl = 10;
-                            steinlegitim = true;
-                            dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Lime;
-                            dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
-                            break;
-                        case "Spinell":
-                            mindestkaratzahl = 10;
-                            dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Plum;
-                            dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
-                            steinlegitim = true;
-                            break;
-                        case "Mondstein":
-                            mindestkaratzahl = 12;
-                            dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Wheat;
-                            dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
-                            steinlegitim = true;
-                            break;
-                        case "Opal":
-                        case "Topas":
-                            mindestkaratzahl = 6;
-                            steinlegitim = true;
-                            break;
-                        default:
-                            steinlegitim = false;
-                            break;
-                    }
-                }
-                int karatzahl = XwY(Convert.ToInt16(stein["RohWurfZahl"]), Convert.ToInt16(stein["RohWuerfel"]));
-                while (karatzahl < mindestkaratzahl)
-                {
-                    karatzahl = XwY(Convert.ToInt16(stein["RohWurfZahl"]), Convert.ToInt16(stein["RohWuerfel"]));
-                }
-
-                int edelsteinwert = karatzahl * Convert.ToInt16(stein["Preis"]);
-
-                //Zauberstein anzeigen
-                dataGridView4[0, rowcount4 - 1].Value = "Zauberstein: " + ergebniszeile["Name"].ToString();
-                dataGridView4[1, rowcount4 - 1].Value = (double)(50 + zufall.Next(1, 51) + edelsteinwert);
-                dataGridView4[2, rowcount4 - 1].Value = 0.1;
-                dataGridView4[3, rowcount4 - 1].Value = steinname + " (" + karatzahl + " kt)";
-                dataGridView4[4, rowcount4 - 1].Value = "Ja";
-                dataGridView4[5, rowcount4 - 1].Value = ergebniszeile["Wirkung"].ToString() + " (" + ergebniszeile["Komplex"].ToString() + ")";
+                case "Regulär":
+                    if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Thistle;
+                    break;
+                case "Bannwort":
+                    if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.PaleVioletRed;
+                    break;
+                case "Runenzauber":
+                    if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.BurlyWood;
+                    break;
+                case "Ahnenzauber":
+                    if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.PowderBlue;
+                    break;
+                case "Totenzauber":
+                case "Lebenszauber":
+                case "Seelenzauber":
+                    if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.Black;
+                    if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.ForeColor = Color.GhostWhite;
+                    break;
             }
+
+            //Zauberstein und Karatzahl ermitteln
+            DataRow stein = ZierTB.Rows[0];
+            stein = ZierTB.Rows[zufall.Next(0, 100)];
+            string steinname = "";
+            bool steinlegitim = false;
+            int mindestkaratzahl = 5;
+            while(!steinlegitim)
+            {
+                stein = ZierTB.Rows[zufall.Next(0, 100)];
+                steinname = stein["Schmuckstein"].ToString();
+                switch (steinname)
+                {
+                    case "Amethyst":
+                        mindestkaratzahl = 8;
+                        if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Orchid;
+                        if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
+                        steinlegitim = true;
+                        break;
+                    case "Diamant":
+                        if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.PaleTurquoise;
+                        if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
+                        steinlegitim = true;
+                        break;
+                    case "Rubin":
+                        if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Red;
+                        if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
+                        steinlegitim = true;
+                        break;
+                    case "Saphir":
+                        if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.SlateBlue;
+                        if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
+                        steinlegitim = true;
+                        break;
+                    case "Smaragd":
+                        steinlegitim = true;
+                        if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.LimeGreen;
+                        if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
+                        break;
+                    case "Granat":
+                        mindestkaratzahl = 10;
+                        steinlegitim = true;
+                        if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Crimson;
+                        if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
+                        break;
+                    case "Jade":
+                        mindestkaratzahl = 10;
+                        steinlegitim = true;
+                        if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Lime;
+                        if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
+                        break;
+                    case "Spinell":
+                        mindestkaratzahl = 10;
+                        if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Plum;
+                        if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
+                        steinlegitim = true;
+                        break;
+                    case "Mondstein":
+                        mindestkaratzahl = 12;
+                        if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.BackColor = Color.Wheat;
+                        if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Style.ForeColor = Color.Black;
+                        steinlegitim = true;
+                        break;
+                    case "Opal":
+                    case "Topas":
+                        mindestkaratzahl = 6;
+                        steinlegitim = true;
+                        break;
+                    default:
+                        steinlegitim = false;
+                        break;
+                }
+            }
+            int karatzahl = XwY(Convert.ToInt16(stein["RohWurfZahl"]), Convert.ToInt16(stein["RohWuerfel"]));
+            while (karatzahl < mindestkaratzahl)
+            {
+                karatzahl = XwY(Convert.ToInt16(stein["RohWurfZahl"]), Convert.ToInt16(stein["RohWuerfel"]));
+            }
+
+            int edelsteinwert = karatzahl * Convert.ToInt16(stein["Preis"]);
+
+            //Zauberstein anzeigen
+            if (Haendlertabelle) dataGridView4[0, rowcount4 - 1].Value = "Zauberstein: " + ergebniszeile["Name"].ToString();
+            if (Haendlertabelle) dataGridView4[1, rowcount4 - 1].Value = (double)(50 + zufall.Next(1, 51) + edelsteinwert);
+            if (Haendlertabelle) dataGridView4[2, rowcount4 - 1].Value = 0.1;
+            if (Haendlertabelle) dataGridView4[3, rowcount4 - 1].Value = steinname + " (" + karatzahl + " kt)";
+            if (Haendlertabelle) dataGridView4[4, rowcount4 - 1].Value = "Ja";
+            if (Haendlertabelle) dataGridView4[5, rowcount4 - 1].Value = ergebniszeile["Wirkung"].ToString() + " (" + ergebniszeile["Komplex"].ToString() + ")";
+
+            dummyergebnis["Beschreibung"] = steinname + " (" + karatzahl + " kt) " + ergebniszeile["Wirkung"].ToString() + " (" + ergebniszeile["Komplex"].ToString() + ")";
+            dummyergebnis["Wert"] = (edelsteinwert + 50).ToString();
+            dummyergebnis["Name"] = "Zauberstein: " + ergebniszeile["Name"].ToString();
+
+            return dummyergebnis;
         }
 
-        public void SchmuckGenerator()
-        {    
-            int warenzahl = zufall.Next(1, 9) + zufall.Next(1, 9) + zufall.Next(1, 9);
-            if (zufall.Next(1, 5) == 1) { warenzahl += zufall.Next(1, 31); } //in 25% der Fälle: Reichhaltigeres Angebot, also +1W30
-            int rohsteinzahl = zufall.Next(1, 13);
-
-            for (int i = 0; i < warenzahl; i++)
+        public DataRow ZufaelligerRohstein(bool Haendlertabelle)
+        {
+            DataRow dummyergebnis = SchatzGegenstandTB.Rows[100]; // dummyzeile.
+            if (Haendlertabelle) dataGridView4.Rows.Add();
+            if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.LightYellow;
+            DataRow schmuckstein = ZierTB.Rows[zufall.Next(1, 100)];
+            int karatzahl = XwY(Convert.ToInt16(schmuckstein["RohWurfZahl"]), Convert.ToInt16(schmuckstein["RohWuerfel"]));
+            if (Haendlertabelle) dataGridView4[0, rowcount4 - 1].Value = schmuckstein["Schmuckstein"].ToString() + " (" + karatzahl + " kt)";
+            double realwert = karatzahl * (double)schmuckstein["Preis"];
+            double preis = realwert;
+            if (!checkBox2.Checked && Haendlertabelle) //Preisschwankungen (sind bei Schmucksteinen weniger extrem als sonst)
             {
-                string schmuckbezeichnung = "";
-                double realwert = 0;
-                double gesamtgewicht = 0;
-                DataRow ergebniszeilemetall = MetallTB.Rows[0];
-                DataRow ergebniszeilezier = ZierTB.Rows[0];
-                //Gegenstand
-                DataRow ergebniszeile = SchmuckTB.Rows[zufall.Next(1, 130)];
-                schmuckbezeichnung += ergebniszeile["Schmuck"].ToString();
-                //Metall
-                int metallgewicht = XwY(Convert.ToInt16(ergebniszeile["MetallWurfZahl"]), Convert.ToInt16(ergebniszeile["MetallWuerfel"])) + Convert.ToInt16(ergebniszeile["MetallMod"]);
-                if (metallgewicht > 0)
+                int preisschwank = zufall.Next(1, 21);
+                switch (preisschwank)
                 {
-                    schmuckbezeichnung += " aus " + (double)metallgewicht * 0.01 + " Pfund " /*+ "(=" + (double)metallgewicht * 25 + " Karat) "*/;
-                    ergebniszeilemetall = MetallTB.Rows[zufall.Next(1, 100)];
-                    schmuckbezeichnung += ergebniszeilemetall["Metall"].ToString();
-                    realwert += metallgewicht * (double)ergebniszeilemetall["Preis"];
-                    gesamtgewicht += metallgewicht * 0.01;
+                    case 1:
+                        preis *= 0.7;
+                        break;
+                    case 2:
+                    case 3:
+                        preis *= 0.8;
+                        break;
+                    case 4:
+                    case 5:
+                        preis *= 0.9;
+                        break;
+                    case 13:
+                    case 14:
+                    case 15:
+                    case 16:
+                    case 17:
+                        preis *= 1.2;
+                        break;
+                    case 18:
+                    case 19:
+                        preis *= 1.5;
+                        break;
+                    case 20:
+                        preis *= 2;
+                        break;
                 }
-                //Zierelemente
-                int anzahlzierelemente = XwY(Convert.ToInt16(ergebniszeile["ZierWurfZahl"]), Convert.ToInt16(ergebniszeile["ZierWuerfel"])) + Convert.ToInt16(ergebniszeile["ZierMod"]);
-                if (anzahlzierelemente > 0)
+            }
+            if (comboBox6.GetItemText(comboBox6.SelectedItem) == "Hehler" && Haendlertabelle
+                || comboBox6.GetItemText(comboBox6.SelectedItem) == "Zwielichtiger Händler" && Haendlertabelle)
+            {
+                preis *= 0.7;
+            }
+            if (preis > realwert)
+            {
+                if (Haendlertabelle) dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.Orange;
+            }
+            else if (preis < realwert)
+            {
+                if (Haendlertabelle) dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
+            }
+            if (preis > 20) preis = (double)Math.Round(preis); //Hohe Preise sollen keine Kommabeträge mehr haben
+            else preis = (double)Math.Round(preis, 2);
+            if (Haendlertabelle) dataGridView4[1, rowcount4 - 1].Value = preis;
+            if (Haendlertabelle) dataGridView4[2, rowcount4 - 1].Value = Math.Round(karatzahl * 0.0004, 1);
+            if (!checkBox4.Checked && Haendlertabelle) //Preisschwank verbergen
+            {
+                dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.LightYellow;
+            }
+            if (Haendlertabelle)
+            {
+                switch (schmuckstein["Schmuckstein"].ToString())
                 {
-                    int ergebnisverschiedenheitsgrad = zufall.Next(1, 21);
-                    int anzahlelementtypen = 0;
-                    //anzahlzierelemente verschwindet...! +++
-                    switch (ergebnisverschiedenheitsgrad)
-                    {
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
-                        case 5:
-                        case 6:
-                        case 7:
-                        case 8:
-                        case 9:
-                        case 10:
-                        case 11:
-                        case 12:
-                        case 13:
-                        case 14:
-                            anzahlelementtypen = 1;
-                            break;
-                        case 15:
-                        case 16:
-                        case 17:
-                            anzahlelementtypen = 2;
-                            break;
-                        case 18:
-                        case 19:
-                            anzahlelementtypen = 2;
-                            break;
-                        case 20:
-                            anzahlelementtypen = anzahlzierelemente;
-                            break;
-                    }
+                    case "Diamant":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.PaleTurquoise;
+                        break;
+                    case "Rubin":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Red;
+                        break;
+                    case "Saphir":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.SlateBlue;
+                        break;
+                    case "Smaragd":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.LimeGreen;
+                        break;
+                    case "Bernstein":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.FromArgb(255, 235, 163, 40);
+                        break;
+                    case "Jade":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Lime;
+                        break;
+                    case "Amethyst":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Orchid;
+                        break;
+                    case "Lapislazuli":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.MediumBlue;
+                        dataGridView4[0, rowcount4 - 1].Style.ForeColor = Color.White;
+                        break;
+                    case "Granat":
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Crimson;
+                        break;
+                }
+                if (comboBox6.GetItemText(comboBox6.SelectedItem) == "Hehler" && Haendlertabelle
+                    || comboBox6.GetItemText(comboBox6.SelectedItem) == "Zwielichtiger Händler" && Haendlertabelle)
+                {
+                    dataGridView4[4, rowcount4 - 1].Value = "Diebesgut!";
+                    dataGridView4[4, rowcount4 - 1].Style.BackColor = Color.Black;
+                    dataGridView4[4, rowcount4 - 1].Style.ForeColor = Color.GhostWhite;
+                }
+            }
+            dummyergebnis["Beschreibung"] = karatzahl + " kt";
+            dummyergebnis["Wert"] = preis.ToString();
+            dummyergebnis["Name"] = "Schmuckstein: " + schmuckstein["Schmuckstein"].ToString();
 
-                    for (int a = 0; a < anzahlelementtypen; a++)
-                    {
-                        ergebniszeilezier = ZierTB.Rows[zufall.Next(1, 100)];
-                        if (a == 0) { schmuckbezeichnung += " mit "; }
-                        else { schmuckbezeichnung += " und "; }
-                        schmuckbezeichnung += ergebniszeilezier["Schmuckstein"].ToString() + " (";
-                        int karatzahl = XwY(Convert.ToInt16(ergebniszeilezier["ZierWurfZahl"]), Convert.ToInt16(ergebniszeilezier["ZierWuerfel"]));
-                        schmuckbezeichnung += karatzahl + " kt)";
-                        realwert += karatzahl * (double)ergebniszeilezier["Preis"];
-                        gesamtgewicht += karatzahl * 0.0004; //1 Pfund sind 2500 Karat
-                    }
-                }
-                
-                dataGridView4.Rows.Add();
-                rowcount4++;
-                dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.LightYellow;
-                dataGridView4[0, rowcount4 - 1].Value = schmuckbezeichnung;
-                double preis = realwert;
-                //Preisschwankungen (sind bei Schmuck weniger extrem als sonst)
-                if (!checkBox2.Checked) 
+            return dummyergebnis;
+        }
+
+        public DataRow ZufaelligesSchmuckstueck(bool Haendlertabelle, string schmucktyp)
+        {
+            DataRow dummyergebnis = SchatzGegenstandTB.Rows[100]; // dummyzeile.
+
+            string schmuckbezeichnung = "";
+            double realwert = 0;
+            double gesamtgewicht = 0;
+            DataRow ergebniszeilemetall = MetallTB.Rows[0];
+            DataRow ergebniszeilezier = ZierTB.Rows[0];
+            //Gegenstand
+            DataRow ergebniszeile = SchmuckTB.Rows[zufall.Next(1, 130)];
+            if (schmucktyp != "" || schmucktyp == null) 
+            {
+                int k = 0;
+                while (ergebniszeile["Schmuck"].ToString() != schmucktyp)
                 {
-                    int preisschwank = zufall.Next(1, 21);
-                    switch (preisschwank)
-                    {
-                        case 1:
-                            preis *= 0.7;
-                            break;
-                        case 2:
-                        case 3:
-                            preis *= 0.8;
-                            break;
-                        case 4:
-                        case 5:
-                            preis *= 0.9;
-                            break;
-                        case 13:
-                        case 14:
-                        case 15:
-                        case 16:
-                        case 17:
-                            preis *= 1.2;
-                            break;
-                        case 18:
-                        case 19:
-                            preis *= 1.5;
-                            break;
-                        case 20:
-                            preis *= 2;
-                            break;
-                    }
-                }       
-                //Hehler verkaufen 30% günstiger
-                if (comboBox6.GetItemText(comboBox6.SelectedItem) == "Hehler" || comboBox6.GetItemText(comboBox6.SelectedItem) == "Zwielichtiger Händler")
-                {
-                    preis *= 0.7;
+                    ergebniszeile = SchmuckTB.Rows[k];
+                    k++;
                 }
-                //Preisschwank farblich anzeigen
-                if (preis > realwert)
+            }
+            schmuckbezeichnung += ergebniszeile["Schmuck"].ToString();
+            //Metall
+            int metallgewicht = XwY(Convert.ToInt16(ergebniszeile["MetallWurfZahl"]), Convert.ToInt16(ergebniszeile["MetallWuerfel"])) + Convert.ToInt16(ergebniszeile["MetallMod"]);
+            if (metallgewicht > 0)
+            {
+                schmuckbezeichnung += " aus " + (double)metallgewicht * 0.01 + " Pfund " /*+ "(=" + (double)metallgewicht * 25 + " Karat) "*/;
+                ergebniszeilemetall = MetallTB.Rows[zufall.Next(1, 100)];
+                schmuckbezeichnung += ergebniszeilemetall["Metall"].ToString();
+                realwert += metallgewicht * (double)ergebniszeilemetall["Preis"];
+                gesamtgewicht += metallgewicht * 0.01;
+            }
+            //Zierelemente
+            int anzahlzierelemente = XwY(Convert.ToInt16(ergebniszeile["ZierWurfZahl"]), Convert.ToInt16(ergebniszeile["ZierWuerfel"])) + Convert.ToInt16(ergebniszeile["ZierMod"]);
+            if (anzahlzierelemente > 0)
+            {
+                int ergebnisverschiedenheitsgrad = zufall.Next(1, 21);
+                int anzahlelementtypen = 0;
+                //anzahlzierelemente verschwindet...! +++
+                switch (ergebnisverschiedenheitsgrad)
                 {
-                    dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.Orange;
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                    case 14:
+                        anzahlelementtypen = 1;
+                        break;
+                    case 15:
+                    case 16:
+                    case 17:
+                        anzahlelementtypen = 2;
+                        break;
+                    case 18:
+                    case 19:
+                        anzahlelementtypen = 2;
+                        break;
+                    case 20:
+                        anzahlelementtypen = anzahlzierelemente;
+                        break;
                 }
-                else if (preis < realwert)
+
+                for (int a = 0; a < anzahlelementtypen; a++)
                 {
-                    dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
+                    ergebniszeilezier = ZierTB.Rows[zufall.Next(1, 100)];
+                    if (a == 0) { schmuckbezeichnung += " mit "; }
+                    else { schmuckbezeichnung += " und "; }
+                    schmuckbezeichnung += ergebniszeilezier["Schmuckstein"].ToString() + " (";
+                    int karatzahl = XwY(Convert.ToInt16(ergebniszeilezier["ZierWurfZahl"]), Convert.ToInt16(ergebniszeilezier["ZierWuerfel"]));
+                    schmuckbezeichnung += karatzahl + " kt)";
+                    realwert += karatzahl * (double)ergebniszeilezier["Preis"];
+                    gesamtgewicht += karatzahl * 0.0004; //1 Pfund sind 2500 Karat
                 }
-                //Preisschwank verbergen
-                if (!checkBox4.Checked) 
+            }
+
+            if (Haendlertabelle) dataGridView4.Rows.Add();
+            if (Haendlertabelle) rowcount4++;
+            if (Haendlertabelle) dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.LightYellow;
+            if (Haendlertabelle) dataGridView4[0, rowcount4 - 1].Value = schmuckbezeichnung;
+            double preis = realwert;
+            //Preisschwankungen (sind bei Schmuck weniger extrem als sonst)
+            if (!checkBox2.Checked && Haendlertabelle)
+            {
+                int preisschwank = zufall.Next(1, 21);
+                switch (preisschwank)
                 {
-                    dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.LightYellow;
+                    case 1:
+                        preis *= 0.7;
+                        break;
+                    case 2:
+                    case 3:
+                        preis *= 0.8;
+                        break;
+                    case 4:
+                    case 5:
+                        preis *= 0.9;
+                        break;
+                    case 13:
+                    case 14:
+                    case 15:
+                    case 16:
+                    case 17:
+                        preis *= 1.2;
+                        break;
+                    case 18:
+                    case 19:
+                        preis *= 1.5;
+                        break;
+                    case 20:
+                        preis *= 2;
+                        break;
                 }
-                dataGridView4[1, rowcount4 - 1].Value = (double)Math.Round(preis, 2);
-                if (realwert > 20) { dataGridView4[1, rowcount4 - 1].Value = (double)Math.Round(preis); } //Hohe Preise sollen keine Kommabeträge mehr haben
+            }
+            //Hehler verkaufen 30% günstiger
+            if (comboBox6.GetItemText(comboBox6.SelectedItem) == "Hehler" && Haendlertabelle
+                || comboBox6.GetItemText(comboBox6.SelectedItem) == "Zwielichtiger Händler" && Haendlertabelle)
+            {
+                preis *= 0.7;
+            }
+            //Preisschwank farblich anzeigen
+            if (preis > realwert)
+            {
+                if (Haendlertabelle) dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.Orange;
+            }
+            else if (preis < realwert)
+            {
+                if (Haendlertabelle) dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
+            }
+            //Preisschwank verbergen
+            if (!checkBox4.Checked && Haendlertabelle)
+            {
+                dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.LightYellow;
+            }
+
+            if (realwert > 20) preis = (double)Math.Round(preis);
+            else preis = (double)Math.Round(preis, 2); //Hohe Preise sollen keine Kommabeträge mehr haben
+            if (Haendlertabelle)
+            { 
+                dataGridView4[1, rowcount4 - 1].Value = preis;
                 dataGridView4[2, rowcount4 - 1].Value = Math.Round(gesamtgewicht, 1) + Convert.ToInt16(ergebniszeile["Zusatzgewicht"]);
                 dataGridView4[3, rowcount4 - 1].Value = "Mittel";
-                dataGridView4[5, rowcount4 - 1].Value = ergebniszeile["Beschreibung"].ToString(); 
+                dataGridView4[5, rowcount4 - 1].Value = ergebniszeile["Beschreibung"].ToString();
                 dataGridView4[4, rowcount4 - 1].Value = "Ja";
                 dataGridView4.Columns[0].Width = 500;
                 dataGridView4.Columns[3].Visible = false;
@@ -2016,7 +2188,7 @@ namespace Tüfteltruhe
                         dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Gold;
                         break;
                     case "Bernstein":
-                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.FromArgb(255,235, 163, 40);
+                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.FromArgb(255, 235, 163, 40);
                         break;
                     case "Elektrum":
                         dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.LightGray;
@@ -2073,104 +2245,27 @@ namespace Tüfteltruhe
                 }
             }
 
+            dummyergebnis["Beschreibung"] = "";
+            dummyergebnis["Wert"] = preis.ToString();
+            dummyergebnis["Name"] = schmuckbezeichnung;
+
+            return dummyergebnis;
+        }
+
+        public void SchmuckHaendlerGenerator()
+        {
+            int warenzahl = zufall.Next(1, 9) + zufall.Next(1, 9) + zufall.Next(1, 9);
+            if (zufall.Next(1, 5) == 1) { warenzahl += zufall.Next(1, 31); } //in 25% der Fälle: Reichhaltigeres Angebot, also +1W30
+            int rohsteinzahl = zufall.Next(1, 13);
+
+            for (int i = 0; i < warenzahl; i++)
+            {
+                ZufaelligesSchmuckstueck(true, "");
+            }
+
             for (int i = 0; i < rohsteinzahl; i++)
             {
-                dataGridView4.Rows.Add();
-                rowcount4++;
-                dataGridView4.Rows[rowcount4 - 1].DefaultCellStyle.BackColor = Color.LightYellow;
-                DataRow schmuckstein = ZierTB.Rows[zufall.Next(1, 100)]; 
-                int karatzahl = XwY(Convert.ToInt16(schmuckstein["RohWurfZahl"]), Convert.ToInt16(schmuckstein["RohWuerfel"]));
-                dataGridView4[0, rowcount4 - 1].Value = schmuckstein["Schmuckstein"].ToString() + " (" + karatzahl + " kt)";
-                double realwert = karatzahl * (double)schmuckstein["Preis"];
-                double preis = realwert;
-                if (!checkBox2.Checked) //Preisschwankungen (sind bei Schmucksteinen weniger extrem als sonst)
-                {
-                    int preisschwank = zufall.Next(1, 21);
-                    switch (preisschwank)
-                    {
-                        case 1:
-                            preis *= 0.7;
-                            break;
-                        case 2:
-                        case 3:
-                            preis *= 0.8;
-                            break;
-                        case 4:
-                        case 5:
-                            preis *= 0.9;
-                            break;
-                        case 13:
-                        case 14:
-                        case 15:
-                        case 16:
-                        case 17:
-                            preis *= 1.2;
-                            break;
-                        case 18:
-                        case 19:
-                            preis *= 1.5;
-                            break;
-                        case 20:
-                            preis *= 2;
-                            break;
-                    }
-                }
-                if (comboBox6.GetItemText(comboBox6.SelectedItem) == "Hehler" || comboBox6.GetItemText(comboBox6.SelectedItem) == "Zwielichtiger Händler")
-                {
-                    preis *= 0.7;
-                }
-                if (preis > realwert)
-                {
-                    dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.Orange;
-                }
-                else if (preis < realwert)
-                {
-                    dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.YellowGreen;
-                }
-                dataGridView4[1, rowcount4 - 1].Value = (double)Math.Round(preis, 2);
-                if (preis > 20) { dataGridView4[1, rowcount4 - 1].Value = (double)Math.Round(preis); } //Hohe Preise sollen keine Kommabeträge mehr haben
-                dataGridView4[2, rowcount4 - 1].Value = Math.Round(karatzahl * 0.0004, 1);
-                if (!checkBox4.Checked) //Preisschwank verbergen
-                {
-                    dataGridView4[1, rowcount4 - 1].Style.BackColor = Color.LightYellow;
-                }
-                switch (schmuckstein["Schmuckstein"].ToString())
-                {
-                    case "Diamant":
-                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.PaleTurquoise;
-                        break;
-                    case "Rubin":
-                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Red;
-                        break;
-                    case "Saphir":
-                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.SlateBlue;
-                        break;
-                    case "Smaragd":
-                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.LimeGreen;
-                        break;
-                    case "Bernstein":
-                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.FromArgb(255, 235, 163, 40);
-                        break;
-                    case "Jade":
-                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Lime;
-                        break;
-                    case "Amethyst":
-                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Orchid;
-                        break;
-                    case "Lapislazuli":
-                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.MediumBlue;
-                        dataGridView4[0, rowcount4 - 1].Style.ForeColor = Color.White;
-                        break;
-                    case "Granat":
-                        dataGridView4[0, rowcount4 - 1].Style.BackColor = Color.Crimson;
-                        break;
-                }
-                if (comboBox6.GetItemText(comboBox6.SelectedItem) == "Hehler" || comboBox6.GetItemText(comboBox6.SelectedItem) == "Zwielichtiger Händler")
-                {
-                    dataGridView4[4, rowcount4 - 1].Value = "Diebesgut!";
-                    dataGridView4[4, rowcount4 - 1].Style.BackColor = Color.Black;
-                    dataGridView4[4, rowcount4 - 1].Style.ForeColor = Color.GhostWhite;
-                }
+                ZufaelligerRohstein(true);
             }
             //dataGridView4.Sort(dataGridView4.Columns[4], ListSortDirection.Descending);
         }
@@ -2178,17 +2273,25 @@ namespace Tüfteltruhe
         public void WarenDurchsuchen(string Haendlertyp, string[] NurDieseWaren, double Haufigkeitsmod, bool Limit)
         {
             string kulturkontexthatkeineneinfluss = "Der Kulturkontext hat keine Auswirkungen.";
-            if (Haendlertyp == "Schmuck") { 
-                SchmuckGenerator();
+            if (Haendlertyp == "Schmuck") {
+                SchmuckHaendlerGenerator();
                 return;
             }
             else if (Haendlertyp == "Zaubertrank") {
-                ZauberTrankRolleGenerator("trank");
+                int trankzahl = zufall.Next(1, 11) + zufall.Next(1, 11) + zufall.Next(1, 11);
+                for (int i = 0; i < trankzahl; i++)
+                {
+                    ZauberTrankRolleGenerator("trank", true);
+                }
                 return;
             }
             else if (Haendlertyp == "Zauberrolle")
             {
-                ZauberTrankRolleGenerator("rolle");
+                int trankzahl = zufall.Next(1, 11) + zufall.Next(1, 11) + zufall.Next(1, 11);
+                for (int i = 0; i < trankzahl; i++)
+                {
+                    ZauberTrankRolleGenerator("rolle", true);
+                }
                 return;
             }
             else if (Haendlertyp == "Artefakte")
@@ -2198,8 +2301,12 @@ namespace Tüfteltruhe
             }
             else if (Haendlertyp == "Zaubersteine")
             {
-                ZaubersteinGenerator();
-                return;
+                int steinzahl = zufall.Next(1, 11) + zufall.Next(1, 11) + zufall.Next(1, 11);
+                for (int i = 0; i < steinzahl; i++)
+                {
+                    ZaubersteinGenerator(true);
+                }
+                    return;
             }
 
             //Beim Geldwechsler keine Preis- und Qualitätsschwankungen
@@ -3006,16 +3113,304 @@ namespace Tüfteltruhe
 
         private DataRow ZufaelligeWaffe()
         {
-            return SchatzAlltagMusikTB.Rows[0]; //++
-            //Tabelle Waffen+Waffentypen
-            //Tabelle Waffenmaterial 
+            int row = 0;
+            int rowwaffe = 10;
+            double wert = 0;
+            string material = "";
+            DataRow waffenzeile = WaffentypenTB.Rows[rowwaffe];
+            DataRow typenzeile = WaffentypenTB.Rows[row];
+            DataRow dummyergebnis = SchatzGegenstandTB.Rows[100]; // dummyzeile.
+            int wuerfel = zufall.Next(1, 100);
+            
+            while(wuerfel > Convert.ToInt16(typenzeile["Ergebnis"].ToString()) && Convert.ToInt16(typenzeile["Ergebnis"].ToString()) < 101)
+            {
+                typenzeile = WaffentypenTB.Rows[row];
+                row++;
+            }
+
+            if (row == 0) row++;
+            wuerfel = zufall.Next(1, 20);
+
+            while (wuerfel + (1000*row) > Convert.ToInt16(waffenzeile["Ergebnis"].ToString()) && Convert.ToInt16(waffenzeile["Ergebnis"].ToString()) < (1000 * row) + 25)
+            {
+                waffenzeile = WaffentypenTB.Rows[rowwaffe];
+                rowwaffe++;
+            }
+
+            wert = Convert.ToDouble(waffenzeile["Wert"].ToString());
+            wuerfel = zufall.Next(1, 100);
+            material = "";
+
+            switch (wuerfel)
+            {
+                case 76:
+                case 77:
+                case 78:
+                case 79:
+                case 80:
+                case 81:
+                case 82:
+                case 83:
+                case 84:
+                case 85:
+                case 86:
+                case 87:
+                case 88:
+                case 89:
+                case 90:
+                    material = "Bronze";
+                    wert *= 2;
+                    break;
+                case 91:
+                    material = "Adamant";
+                    wert *= 250;
+                    break;
+                case 92:
+                    material = "Asterium";
+                    wert *= 425;
+                    break;
+                case 93:
+                    material = "Kupfer";
+                    break;
+                case 94:
+                case 95:
+                case 96:
+                case 97:
+                    material = "Obsidian";
+                    wert *= 100;
+                    break;
+                case 98:
+                case 99:
+                    material = "Gold";
+                    wert *= 625;
+                    break;
+                case 100:
+                    material = "Holz";
+                    wert *= 0.1;
+                    break;
+                default:
+                    material = "Eisen";
+                    wert *= 1;
+                    break;
+            }
+
+            if (row == 7 || row == 8 || row == 9)
+            {
+                material = "Holz";
+                wert = Convert.ToDouble(waffenzeile["Wert"].ToString());
+            }
+
+            dummyergebnis["Beschreibung"] = "Material: " + material + ".";
+            dummyergebnis["Wert"] = wert.ToString();
+            dummyergebnis["Name"] = waffenzeile["Name"].ToString();
+
+            return dummyergebnis;
         }
 
         private DataRow ZufaelligeRuestung()
         {
-            return SchatzAlltagMusikTB.Rows[0];//++
-            //Tabelle Rüstung (300zeilen)
-            //Tabelle Rüstungsmaterial 
+            int rowruestung = 0;
+            double wert = 0;
+            string material = "";
+            DataRow ruestungszeile = RuestungstypenTB.Rows[rowruestung];
+            DataRow dummyergebnis = SchatzGegenstandTB.Rows[100]; // dummyzeile.
+            int wuerfel = zufall.Next(1, 100);
+            string beschreibung = "";
+
+            while (wuerfel > Convert.ToInt16(ruestungszeile["Ergebnis"].ToString()) && Convert.ToInt16(ruestungszeile["Ergebnis"].ToString()) < 101)
+            {
+                ruestungszeile = RuestungstypenTB.Rows[rowruestung];
+                rowruestung++;
+            }
+
+            if (rowruestung == 0)
+            {
+                rowruestung += 13; //springe zu Rumpfrüstungen
+                wuerfel = zufall.Next(1, 100);
+
+                while (wuerfel + 1000 > Convert.ToInt16(ruestungszeile["Ergebnis"].ToString()))
+                {
+                    ruestungszeile = RuestungstypenTB.Rows[rowruestung];
+                    rowruestung++;
+                }
+            }
+
+            wert = Convert.ToDouble(ruestungszeile["Wert"].ToString());
+            wuerfel = zufall.Next(1, 100);
+            material = "";
+
+            switch (wuerfel)
+            {
+                case 76:
+                case 77:
+                case 78:
+                case 79:
+                case 80:
+                case 81:
+                case 82:
+                case 83:
+                case 84:
+                case 85:
+                case 86:
+                case 87:
+                case 88:
+                case 89:
+                case 90:
+                    material = "Bronze";
+                    wert *= 2;
+                    break;
+                case 91:
+                    material = "Adamant";
+                    wert *= 250;
+                    break;
+                case 92:
+                    material = "Asterium";
+                    wert *= 425;
+                    break;
+                case 93:
+                case 94:
+                case 95:
+                case 96:
+                case 97:
+                    material = "Bronze";
+                    wert *= 2;
+                    break;
+                case 98:
+                case 99:
+                    material = "Drachenschuppen";
+                    wert *= 200;
+                    break;
+                case 100:
+                    material = "Chitin";
+                    wert *= 20;
+                    break;
+                default:
+                    material = "Eisen";
+                    break;
+            }
+
+            switch (rowruestung)
+            {
+                case 26:
+                case 27: //Thorax
+                    if (zufall.Next(1, 2) == 1) material = "Leder";
+                    else material = "Leinen";
+                    wert = Convert.ToDouble(ruestungszeile["Wert"].ToString());
+                    break;
+                case 28:
+                case 29:
+                case 30:
+                case 31: //Gambeson
+                    material = "Leinen";
+                    wert = Convert.ToDouble(ruestungszeile["Wert"].ToString());
+                    break;
+                case 19: 
+                case 20:
+                case 21:
+                case 22: //Schuppenrüstung
+                    if (zufall.Next(1, 2) == 1) material = "Leder";
+                    wert = Convert.ToDouble(ruestungszeile["Wert"].ToString());
+                    break;
+                case 23: //Brustharnisch
+                    if (zufall.Next(1, 3) == 1) material = "Leder";
+                    wert = Convert.ToDouble(ruestungszeile["Wert"].ToString());
+                    break;
+                case 24: //Lamellen
+                case 25: 
+                    if (zufall.Next(1,2) == 1) material = "Leder";
+                    wert = Convert.ToDouble(ruestungszeile["Wert"].ToString());
+                    break;
+                default:
+                    break;
+            }
+
+            beschreibung = ruestungszeile["Beschreibung"].ToString();
+
+            if (beschreibung == "Verstärkung:")
+            {
+                wuerfel = zufall.Next(1, 10);
+                switch (wuerfel)
+                {
+                    case 1:
+                    case 2:
+                        beschreibung += " Asteriumschuppen.";
+                        wert += 25000;
+                        break;
+                    case 3:
+                        beschreibung += " Eisenschuppen.";
+                        wert += 0;
+                        break;
+                    case 4:
+                        beschreibung += " Bronzeschuppen.";
+                        wert += 180;
+                        break;
+                    case 5:
+                        beschreibung += " Adamantschuppen.";
+                        wert += 30000;
+                        break;
+                    case 6:
+                        beschreibung += " Chitin.";
+                        wert += 0;
+                        break;
+                    case 7:
+                        beschreibung += " Riesenknochenplatten.";
+                        wert += 300;
+                        break;
+                    case 8:
+                        beschreibung += " Lederschuppen.";
+                        wert += -40;
+                        break;
+                    case 9:
+                        beschreibung += " Leinenschuppen.";
+                        wert += -40;
+                        break;
+                    case 10:
+                        beschreibung += " Drachenschuppen.";
+                        wert += 1000;
+                        break;
+                    default:
+                        beschreibung += " Eisenschuppen.";
+                        wert += 0;
+                        break;
+                }
+                beschreibung += " Kernmaterial: " + material + ".";
+            }
+            else if (beschreibung == "Metall")
+            {
+                if (zufall.Next(1, 2) == 1) beschreibung = "Material: Eisen.";
+                else if (zufall.Next(1, 10) == 1) 
+                { 
+                    beschreibung = "Material: Asterium.";
+                    wert = Convert.ToDouble(ruestungszeile["Wert"].ToString());
+                    wert *= 425;
+                }
+                else if (zufall.Next(1, 10) == 1) 
+                { 
+                    beschreibung = "Material: Adamant.";
+                    wert = Convert.ToDouble(ruestungszeile["Wert"].ToString());
+                    wert *= 250;
+                }
+                else
+                {
+                    beschreibung = "Material: Bronze.";
+                    wert = Convert.ToDouble(ruestungszeile["Wert"].ToString());
+                    wert *= 2;
+                }
+            }
+            else if (beschreibung == "Material: Leinen." || beschreibung == "Material: Leder.")
+            {
+                wert = Convert.ToDouble(ruestungszeile["Wert"].ToString());
+            }
+            else
+            {
+                beschreibung = "Material: " + material + ".";
+            }
+
+            dummyergebnis["Beschreibung"] = beschreibung;
+            dummyergebnis["Wert"] = wert.ToString();
+            dummyergebnis["Name"] = ruestungszeile["Name"].ToString();
+
+            return dummyergebnis;
         }
 
         private DataRow ZufaelligesMusikinstrument()
@@ -3026,8 +3421,230 @@ namespace Tüfteltruhe
 
         private DataRow ZufaelligerAlltagsgegenstand()
         {
-            DataRow alltagszeile = SchatzAlltagMusikTB.Rows[zufall.Next(1, 99)];
+            DataRow alltagszeile = SchatzAlltagMusikTB.Rows[zufall.Next(0, 99)];
+
+            if (keinezauberei)
+            {
+                while (alltagszeile["Zauberei"].ToString() == "JA")
+                {
+                    alltagszeile = SchatzAlltagMusikTB.Rows[zufall.Next(0, 99)];
+                }
+            }
             return alltagszeile;
+        }
+
+        private DataRow ZufaelligerSpezialGegenstand(string typ)
+        {
+
+            int row = 0;
+            double wert = 0;
+            string beschreibung = "";
+            DataRow zeile = SpezialgegenstandTB.Rows[row];
+            DataRow dummyergebnis = SchatzGegenstandTB.Rows[100]; // dummyzeile.
+            int wuerfel = zufall.Next(1, 20);
+            int wuerfel2 = zufall.Next(1, 20);
+            if (typ == "Urkriegsgegenstand" || typ == "Schutzamulett") wuerfel = zufall.Next(1, 100);
+
+            while (wuerfel > Convert.ToInt16(zeile["Ergebnis"].ToString()) || zeile["Typ"].ToString() != typ)
+            {
+                zeile = SpezialgegenstandTB.Rows[row];
+                row++;
+            }
+
+            dummyergebnis["Beschreibung"] = zeile["Beschreibung"].ToString();
+            dummyergebnis["Wert"] = zeile["Wert"].ToString();
+
+            if (typ == "Edelmetall")
+            {
+                wuerfel = zufall.Next(1, 20);
+                wert = 0;
+                wert = Convert.ToDouble(zeile["Wert"].ToString());
+                switch (wuerfel)
+                {
+                    case 1:
+                        beschreibung = "Ein Talent (50-Pfund-Barren).";
+                        wert *= 50;
+                        break;
+                    case 2:
+                    case 3:
+                    case 4:
+                        beschreibung = "Ein 5-Pfund-Barren.";
+                        wert *= 5;
+                        break;
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                        wuerfel2 = zufall.Next(1, 10);
+                        beschreibung = wuerfel2.ToString() + " kleine Barren (je 0,5 Pfund).";
+                        wert *= 0.5 * wuerfel2;
+                        break;
+                    case 10:
+                    case 11:
+                    case 12:
+                        wuerfel2 = zufall.Next(1, 20);
+                        beschreibung = wuerfel2.ToString() + " kleine Nuggets (je 0,2 Pfund).";
+                        wert *= 0.2 * wuerfel2;
+                        break;
+                    case 13:
+                    case 14:
+                    case 15:
+                    case 16:
+                        wuerfel2 = zufall.Next(1, 20);
+                        beschreibung = wuerfel2.ToString() + " kleine Bruchstücke (je 0,2 Pfund).";
+                        wert *= 0.2 * wuerfel2;
+                        break;
+                    case 17:
+                    case 18:
+                    case 19:
+                    case 20:
+                        wuerfel2 = zufall.Next(1, 6);
+                        beschreibung = wuerfel2.ToString() + " Pfund schwerer, unreiner (unverhütteter) Erzbrocken.";
+                        wert *= 0.5 * wuerfel2;
+                        break;
+                }
+                dummyergebnis["Beschreibung"] = beschreibung;
+                dummyergebnis["Wert"] = wert.ToString();
+            }
+
+            dummyergebnis["Name"] = zeile["Name"].ToString();
+
+            return dummyergebnis;
+        }
+
+        private DataRow ZufaelligeBannwaffe()
+        {
+            int row = 0;
+            double wert = 0;
+            DataRow zeile = BannwaffeTB.Rows[row];
+            DataRow waffe = ZufaelligeWaffe();
+            DataRow effekt = BannwaffeTB.Rows[26];
+            DataRow dummyergebnis = SchatzGegenstandTB.Rows[100]; // dummyzeile.
+            int wuerfel = zufall.Next(1, 100);
+
+            while (wuerfel > Convert.ToInt16(zeile["Ergebnis"].ToString()) && Convert.ToInt16(zeile["Ergebnis"].ToString()) < 101)
+            {
+                zeile = BannwaffeTB.Rows[row];
+                row++;
+            }
+
+            row = 26;
+            while (wuerfel + 1000 > Convert.ToInt16(effekt["Ergebnis"].ToString()))
+            {
+                effekt = BannwaffeTB.Rows[row];
+                row++;
+            }
+
+            wert = Convert.ToDouble(waffe["Wert"].ToString()) + 500;
+
+            dummyergebnis["Beschreibung"] = "Bannwaffe: " + waffe["Name"].ToString() + " gegen " + zeile["Beschreibung"].ToString() + ". Effekt: " + effekt["Name"].ToString();
+            dummyergebnis["Wert"] = wert.ToString();
+            dummyergebnis["Name"] = zeile["Name"].ToString();
+
+            return dummyergebnis;
+        }
+
+        private DataRow ZufaelligerKomplexring()
+        {
+            int row = 0;
+            double wert = 0;
+            DataRow zeile = KomplexringTB.Rows[row];
+            DataRow ring = ZufaelligesSchmuckstueck(false, "Ring");
+            string zauberkomplex = ZufaelligerRegulaererKomplex();
+            DataRow wirkweise = KomplexringTB.Rows[5];
+            DataRow dummyergebnis = SchatzGegenstandTB.Rows[100]; // dummyzeile.
+            int wuerfel = zufall.Next(1, 20);
+
+            while (wuerfel > Convert.ToInt16(zeile["Ergebnis"].ToString()) && Convert.ToInt16(zeile["Ergebnis"].ToString()) < 101)
+            {
+                zeile = KomplexringTB.Rows[row];
+                row++;
+            }
+
+            row = 5;
+            wuerfel = zufall.Next(1, 20);
+            while (wuerfel + 1000 > Convert.ToInt16(wirkweise["Ergebnis"].ToString()))
+            {
+                wirkweise = KomplexringTB.Rows[row];
+                row++;
+            }
+
+            wert = Convert.ToDouble(zeile["Wert"].ToString()) * 100; 
+            wert += Convert.ToDouble(ring["Wert"].ToString()); 
+
+            dummyergebnis["Beschreibung"] = ring["Name"].ToString() + " Der Träger des Ringes kann " + zeile["Beschreibung"].ToString() + " " + zauberkomplex + " wirken. " + wirkweise["Beschreibung"].ToString();
+            dummyergebnis["Wert"] = wert.ToString();
+            dummyergebnis["Name"] = "Zauberring: " + zauberkomplex;
+
+            return dummyergebnis;
+        }
+
+        private DataRow ZufaelligesGeschoss()
+        {
+            DataRow zeile = ZufaelligerSpezialGegenstand("Geschosse");
+            DataRow dummyergebnis = SchatzGegenstandTB.Rows[100]; // dummyzeile.
+            double wert = Convert.ToDouble(zeile["Wert"].ToString());
+            string beschreibung = zeile["Beschreibung"].ToString();
+            string name = zeile["Name"].ToString();
+            string material = "Eisen";
+            int anzahl = zufall.Next(1, 20) + zufall.Next(1, 20);
+            wert *= anzahl;
+
+            if (beschreibung == "Material")
+            {
+                int wuerfel = zufall.Next(1, 2);
+                if (wuerfel == 1)
+                {
+                    material = "Eisen";
+                    wert *= 1;
+                }
+                else
+                    {
+                        wuerfel = zufall.Next(1, 10);
+                        switch (wuerfel)
+                        {
+                            case 1:
+                            case 2:
+                                material = "Bronze";
+                                wert *= 2;
+                                break;
+                            case 3:
+                                material = "Adamant";
+                                wert *= 250;
+                                break;
+                            case 4:
+                                material = "Asterium";
+                                wert *= 425;
+                            break;
+                            case 5:
+                                material = "Kupfer";
+                                wert *= 1;
+                                break;
+                            case 6:
+                                material = "Obsidian";
+                                wert *= 100;
+                                break;
+                            case 7:
+                            case 8:
+                                material = "Feuerstein";
+                                wert *= 0.2;
+                                break;
+                            case 9:
+                            case 10:
+                                material = "Knochen";
+                                wert *= 0.2;
+                            break;
+                        }
+                    }
+                
+            }
+
+            dummyergebnis["Beschreibung"] = anzahl.ToString() + " " + name + " aus Holz mit Spitzen aus " + material + ".";
+            dummyergebnis["Wert"] = wert.ToString();
+            dummyergebnis["Name"] = zeile["Name"].ToString();
+
+            return dummyergebnis;
         }
 
         private DataRow ZufaelligerGegenstand()
@@ -3037,19 +3654,27 @@ namespace Tüfteltruhe
             switch (ergebnisgegenstand["Name"].ToString())
             {
                 case "Waffe":
-                    ergebnisgegenstand = ZufaelligeWaffe(); //+++++++++++
+                    ergebnisgegenstand = ZufaelligeWaffe();
+                    hintergrundfarbe = Color.Gray;
                     break;
                 case "Rüstung":
-                    ergebnisgegenstand = ZufaelligeRuestung(); //+++++++++++
+                    ergebnisgegenstand = ZufaelligeRuestung();
+                    hintergrundfarbe = Color.DimGray;
                     break;
                 case "Musikinstrument":
                     ergebnisgegenstand = ZufaelligesMusikinstrument();
+                    hintergrundfarbe = Color.Yellow;
                     break;
                 case "Alltagsgegenstand":
                     ergebnisgegenstand = ZufaelligerAlltagsgegenstand();
+                    hintergrundfarbe = Color.BurlyWood;
                     break;
                 case "Schmuckstück":
-                    ergebnisgegenstand = ZufaelligerAlltagsgegenstand(); //+++++++++++
+                    ergebnisgegenstand = ZufaelligesSchmuckstueck(false, "");
+                    hintergrundfarbe = Color.Goldenrod;
+                    break;
+                default:
+                    hintergrundfarbe = Color.BurlyWood;
                     break;
             }
 
@@ -3059,13 +3684,11 @@ namespace Tüfteltruhe
         private void button15_Click(object sender, EventArgs e)
         {
             DataRow kategoriezeile = SchatzTB.Rows[0];
-            DataRow ergebniszeile = SchatzTB.Rows[0]; //sollte eigentlich eine dummyzeile sein.
+            DataRow ergebniszeile = SchatzGegenstandTB.Rows[100]; // dummyzeile.
             string ergebnisname = "(Kein Name)";
             string ergebniswert = "(Kein Wert)";
             string ergebniswirkung = "(Keine Wirkung)";
             string kategorie = "";
-            bool keinlebewesen = false;
-            bool keinezauberei = false;
             string ziertabellen = "NEIN";
             if (checkBox7.Checked) keinlebewesen = true;
             if (checkBox8.Checked) keinezauberei = true;
@@ -3098,88 +3721,89 @@ namespace Tüfteltruhe
                         ergebniswirkung = ergebniszeile["Beschreibung"].ToString();
                         break;
                     case "Komplexring":
-                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
-                        ///ergebnisname = ergebniszeile["Name"].ToString();
-                        //ergebniswert = ergebniszeile["Wert"].ToString();
-                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
-                        ergebnisname = "Komplexring";
+                        ergebniszeile = ZufaelligerKomplexring(); 
+                        ergebnisname = ergebniszeile["Name"].ToString();
+                        ergebniswert = ergebniszeile["Wert"].ToString();
+                        ergebniswirkung = ergebniszeile["Beschreibung"].ToString();
+                        hintergrundfarbe = Color.DodgerBlue;
                         break;
                     case "Bannwaffe":
-                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
-                        //ergebnisname = ergebniszeile["Name"].ToString();
-                        //ergebniswert = ergebniszeile["Wert"].ToString();
-                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
-                        ergebnisname = "Bannwaffe";
+                        ergebniszeile = ZufaelligeBannwaffe();
+                        ergebnisname = ergebniszeile["Name"].ToString();
+                        ergebniswert = ergebniszeile["Wert"].ToString();
+                        ergebniswirkung = ergebniszeile["Beschreibung"].ToString();
+                        hintergrundfarbe = Color.OrangeRed;
                         break;
                     case "Schutzamulett":
-                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
-                        //ergebnisname = ergebniszeile["Name"].ToString();
-                        //ergebniswert = ergebniszeile["Wert"].ToString();
-                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
-                        ergebnisname = "Schutzamulett";
+                        ergebniszeile = ZufaelligerSpezialGegenstand("Schutzamulett");
+                        ergebnisname = ergebniszeile["Name"].ToString();
+                        ergebniswert = ergebniszeile["Wert"].ToString();
+                        ergebniswirkung = ergebniszeile["Beschreibung"].ToString();
+                        hintergrundfarbe = Color.Plum;
                         break;
                     case "Edelmetall":
-                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
-                        //ergebnisname = ergebniszeile["Name"].ToString();
-                        //ergebniswert = ergebniszeile["Wert"].ToString();
-                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
-                        ergebnisname = "Edelmetall";
+                        ergebniszeile = ZufaelligerSpezialGegenstand("Edelmetall");
+                        ergebnisname = ergebniszeile["Name"].ToString();
+                        ergebniswert = ergebniszeile["Wert"].ToString();
+                        ergebniswirkung = ergebniszeile["Beschreibung"].ToString();
+                        hintergrundfarbe = Color.LightBlue;
                         break;
                     case "Zaubernahrung":
-                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
-                        //ergebnisname = ergebniszeile["Name"].ToString();
-                        //ergebniswert = ergebniszeile["Wert"].ToString();
-                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
-                        ergebnisname = "Zaubernahrung";
+                        ergebniszeile = ZufaelligerSpezialGegenstand("Zaubernahrung");
+                        ergebnisname = ergebniszeile["Name"].ToString();
+                        ergebniswert = ergebniszeile["Wert"].ToString();
+                        ergebniswirkung = ergebniszeile["Beschreibung"].ToString();
+                        hintergrundfarbe = Color.Tomato;
                         break;
                     case "Urkriegsgegenstand":
-                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
-                        //ergebnisname = ergebniszeile["Name"].ToString();
-                        //ergebniswert = ergebniszeile["Wert"].ToString();
-                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
-                        ergebnisname = "Urkriegsgegenstand";
+                        ergebniszeile = ZufaelligerSpezialGegenstand("Urkriegsgegenstand");
+                        ergebnisname = ergebniszeile["Name"].ToString();
+                        ergebniswert = ergebniszeile["Wert"].ToString();
+                        ergebniswirkung = ergebniszeile["Beschreibung"].ToString();
+                        hintergrundfarbe = Color.LightSlateGray;
                         break;
                     case "Schriftstück":
-                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
-                        //ergebnisname = ergebniszeile["Name"].ToString();
-                        //ergebniswert = ergebniszeile["Wert"].ToString();
-                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
-                        ergebnisname = "Schriftstück";
+                        ergebniszeile = ZufaelligerSpezialGegenstand("Schriftstück");
+                        ergebnisname = ergebniszeile["Name"].ToString();
+                        ergebniswert = ergebniszeile["Wert"].ToString();
+                        ergebniswirkung = ergebniszeile["Beschreibung"].ToString();
+                        hintergrundfarbe = Color.Moccasin;
                         break;
                     case "Geschosse":
-                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
-                        //ergebnisname = ergebniszeile["Name"].ToString();
-                        //ergebniswert = ergebniszeile["Wert"].ToString();
-                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
-                        ergebnisname = "Geschosse";
+                        ergebniszeile = ZufaelligesGeschoss();
+                        ergebnisname = ergebniszeile["Name"].ToString();
+                        ergebniswert = ergebniszeile["Wert"].ToString();
+                        ergebniswirkung = ergebniszeile["Beschreibung"].ToString();
+                        ziertabellen = "JA";
+                        hintergrundfarbe = Color.LightGray;
                         break;
                     case "Schmuckstein":
-                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
-                        //ergebnisname = ergebniszeile["Name"].ToString();
-                        //ergebniswert = ergebniszeile["Wert"].ToString();
-                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
-                        ergebnisname = "Schmuckstein";
+                        ergebniszeile = ZufaelligerRohstein(false);
+                        ergebnisname = ergebniszeile["Name"].ToString();
+                        ergebniswert = ergebniszeile["Wert"].ToString();
+                        ergebniswirkung = ergebniszeile["Beschreibung"].ToString();
+                        hintergrundfarbe = Color.LimeGreen;
                         break;
                     case "Zauberstein":
-                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
-                        //ergebnisname = ergebniszeile["Name"].ToString();
-                        //ergebniswert = ergebniszeile["Wert"].ToString();
-                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
-                        ergebnisname = "Zauberstein";
+                        ergebniszeile = ZaubersteinGenerator(false);
+                        ergebnisname = ergebniszeile["Name"].ToString();
+                        ergebniswert = ergebniszeile["Wert"].ToString();
+                        ergebniswirkung = ergebniszeile["Beschreibung"].ToString();
+                        hintergrundfarbe = Color.DarkViolet;
                         break;
                     case "Zauberrolle":
-                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
-                        //ergebnisname = ergebniszeile["Name"].ToString();
-                        //ergebniswert = ergebniszeile["Wert"].ToString();
-                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
-                        ergebnisname = "Zauberrolle";
+                        ergebniszeile = ZauberTrankRolleGenerator("rolle", false); 
+                        ergebnisname = ergebniszeile["Name"].ToString();
+                        ergebniswert = ergebniszeile["Wert"].ToString();
+                        ergebniswirkung = ergebniszeile["Beschreibung"].ToString();
+                        hintergrundfarbe = Color.Purple;
                         break;
                     case "Zaubertrank":
-                        ergebniszeile = ZufaelligerGegenstand(); //Greift auf weitere Tabelle zu.
-                        //ergebnisname = ergebniszeile["Name"].ToString();
-                        //ergebniswert = ergebniszeile["Wert"].ToString();
-                        //ergebniswirkung = ergebniszeile["Wirkung"].ToString();
-                        ergebnisname = "Zaubertrank";
+                        ergebniszeile = ZauberTrankRolleGenerator("trank", false);
+                        ergebnisname = ergebniszeile["Name"].ToString();
+                        ergebniswert = ergebniszeile["Wert"].ToString();
+                        ergebniswirkung = ergebniszeile["Beschreibung"].ToString();
+                        hintergrundfarbe = Color.MediumTurquoise;
                         break;
                     case "Münzen":
                         ergebnisname = "Silbermünzen";
@@ -3208,6 +3832,7 @@ namespace Tüfteltruhe
                                 ergebniswirkung = "Fremdartige Prägung";
                                 break;
                         }
+                        hintergrundfarbe = Color.Silver;
                         break;
                     case "Ringgeld":
                         int ringwurf = zufall.Next(1, 2);
@@ -3225,6 +3850,7 @@ namespace Tüfteltruhe
                                 ergebniswirkung = "Ringgeld";
                                 break;
                         }
+                        hintergrundfarbe = Color.Gold;
                         break;
                     case "Alkohol":
                         int alkwurf = zufall.Next(1, 4);
@@ -3251,6 +3877,7 @@ namespace Tüfteltruhe
                                 ergebniswirkung = "(27 Liter)";
                                 break;
                         }
+                        hintergrundfarbe = Color.Crimson;
                         break;
                     case "Pferd":
                         int pferdewurf = zufall.Next(1, 4);
@@ -3277,6 +3904,7 @@ namespace Tüfteltruhe
                                 ergebniswirkung = "Gewicht: 1100 Pfund. Tragkraft: 400 Pfund. Bewegung: 120. Kampfgeist: 4";
                                 break;
                         }
+                        hintergrundfarbe = Color.SaddleBrown;
                         break;
                     case "Rind":
                         int rinderwurf = zufall.Next(1, 4);
@@ -3299,10 +3927,11 @@ namespace Tüfteltruhe
                                 break;
                             case 4:
                                 ergebnisname = "Hekatombe";
-                                ergebniswert = "20.000";
+                                ergebniswert = "20000";
                                 ergebniswirkung = "100 Rinder";
                                 break;
                         }
+                        hintergrundfarbe = Color.Cornsilk;
                         break;
                     case "Sklave":
                         int sklavenwurf = zufall.Next(1, 4);
@@ -3329,11 +3958,13 @@ namespace Tüfteltruhe
                                 ergebniswirkung = "Beherrscht 3 Fähigkeiten/Handwerke sehr gut.";
                                 break;
                         }
+                        hintergrundfarbe = Color.MistyRose;
                         break;
                     case "Falke":
                         ergebnisname = "Abgerichteter Falke";
                         ergebniswert = "160";
                         ergebniswirkung = "Kann zur Beizjagd verwendet werden.";
+                        hintergrundfarbe = Color.Tan;
                         break;
                     case "Hund":
                         int hundewurf = zufall.Next(1, 3);
@@ -3355,20 +3986,147 @@ namespace Tüfteltruhe
                                 ergebniswirkung = "Gut für den Kampf aber kaum für die Jagd geeignet. Loyal.";
                                 break;
                         }
+                        hintergrundfarbe = Color.Peru;
                         break;
                     default:
                         ergebnisname = "Nichts";
+                        hintergrundfarbe = Color.White;
                         break;
                 }
 
                 if (ziertabellen == "JA")
                 {
-                    ergebniswirkung = ergebniswirkung + " Der Gegenstand ist verziert!"; //++++++++++++++++++
+                    double wert = Convert.ToDouble(ergebniswert);
+                    if (ergebniswirkung != "") ergebniswirkung += " ";
+
+                    //Zier
+                    int zierwurf = zufall.Next(1, 20);
+                    if (zierwurf < 5)
+                    {
+                        ergebniswirkung += "Verziert. ";
+                        wert += 10;
+                    }
+
+                    zierwurf = zufall.Next(1, 20);
+                    if (zierwurf < 9) ergebniswirkung += "Kulturelle Eigenart. ";
+
+                    zierwurf = zufall.Next(1, 20);
+                    if (zierwurf < 4)
+                    {
+                        ergebniswirkung += "Von einem Helden/König. ";
+                        wert += 50;
+                    }
+                    zierwurf = zufall.Next(1, 20);
+                    if (zierwurf < 4)
+                    {
+                        ergebniswirkung += "Mit Goldbestandteilen. ";
+                        wert += 100;
+                    }
+                    zierwurf = zufall.Next(1, 20);
+                    if (zierwurf < 4)
+                    {
+                        ergebniswirkung += "Enthält Bestandteile einer Jagdtrophäe. ";
+                        wert += 20;
+                    }
+
+                    //Qualität
+                    zierwurf = zufall.Next(1, 20);
+                    switch (zierwurf)
+                    {
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                            ergebniswirkung += "Geringe Qualität (-1 auf Tests). ";
+                            wert *= 0.5;
+                            break;
+                        case 13:
+                        case 14:
+                        case 15:
+                        case 16:
+                        case 17:
+                            ergebniswirkung += "Hohe Qualität (+1 auf Tests). ";
+                            wert *= 1.5;
+                            break;
+                        case 18:
+                        case 19:
+                        case 20:
+                            ergebniswirkung += "Herausragende Qualität (+3 auf Tests). ";
+                            wert *= 3;
+                            break;
+                    }
+
+
+                    //Inschriften
+                    zierwurf = zufall.Next(1, 20);
+                    switch (zierwurf)
+                    {
+                        case 1:
+                            ergebniswirkung += "Mit seltsamen Zauberzeichen. ";
+                            break;
+                        case 2:
+                        case 3:
+                            ergebniswirkung += "Mit Gravur. ";
+                            break;
+                        case 4:
+                        case 5:
+                        case 6:
+                            ergebniswirkung += "Mit unlesbarer Gravur. ";
+                            break;
+                        case 7:
+                            ergebniswirkung += "Mit Weiheinschrift. ";
+                            break;
+                        case 8:
+                        case 9:
+                        case 10:
+                            ergebniswirkung += "Mit Namensinschrift. ";
+                            break;
+                    }
+
+                    //Schmucksteine
+                    zierwurf = zufall.Next(1, 20);
+                    switch (zierwurf)
+                    {
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                            DataRow schmucksteinzeile = ZufaelligerRohstein(false);
+                            wert += Convert.ToDouble(schmucksteinzeile["Wert"].ToString());
+                            ergebniswirkung += "Mit Schmuckstein: " + schmucksteinzeile["Name"].ToString() + " " + schmucksteinzeile["Beschreibung"].ToString() + " ";
+                            break;
+                        case 5:
+                        case 6:
+                        case 7:
+                            if (!keinezauberei)
+                            {
+                                DataRow zauberzeile = ZaubersteinGenerator(false);
+                                wert += Convert.ToDouble(zauberzeile["Wert"].ToString());
+                                ergebniswirkung += "Mit Zauberstein: " + zauberzeile["Name"].ToString() + " " + zauberzeile["Beschreibung"].ToString() + " ";
+                            }
+                            break;
+                    }
+
+                    //Artefakt
+                    if (!keinezauberei)
+                    {
+                        zierwurf = zufall.Next(1, 20);
+                        if (zierwurf > 3)
+                        { 
+                            ergebniswirkung += "Verzaubert! Siehe Abschnitt 11.3 im Regelwerk.";
+                            //Zufälliger Zauber
+                            wert += 500;
+                        }
+                    }
+
+                    ergebniswert = wert.ToString();
                 }
 
                 dataGridView8[0, rowcount8 - 1].Value = ergebnisname;
                 dataGridView8[1, rowcount8 - 1].Value = ergebniswert;
                 dataGridView8[2, rowcount8 - 1].Value = ergebniswirkung;
+                dataGridView8[0, rowcount8 - 1].Style.BackColor = hintergrundfarbe;
+                hintergrundfarbe = Color.White;
             }
 
 

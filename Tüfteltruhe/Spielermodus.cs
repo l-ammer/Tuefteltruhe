@@ -660,6 +660,7 @@ namespace Tüfteltruhe
                 {
                     case 1:
                         extremfehl++;
+                        ausdauerverlust += 2;
                         break;
                     case 2:
                         ausdauerverlust++;
@@ -1008,7 +1009,7 @@ namespace Tüfteltruhe
 
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
-            comboBox3.SelectedIndex = 0;
+            comboBox3.SelectedIndex = 1;
             comboBox4.SelectedIndex = 0;
             comboBox5.SelectedIndex = 0;
             comboBox6.SelectedIndex = 0;
