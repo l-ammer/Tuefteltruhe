@@ -5,7 +5,7 @@ Sammlung an kleinen Hilfsanwendungen für das PNP-Spiel [Alt-Europa](https://alb
 
 [**➤ Tüfteltruhe herunterladen**](https://alberich-verlag.de/alteuropamaterial.html)
 
-# Fertige und geplante Anwendungen
+# Anwendungen
 
 ###### Spielermodus:
 - [x] **Waffentest**
@@ -27,11 +27,7 @@ Sammlung an kleinen Hilfsanwendungen für das PNP-Spiel [Alt-Europa](https://alb
 3. Ggf. prüfen, ob **Tüfteltruhe.exe** und **TTruheAccess.accdb** vorhanden und im selben Ordner sind.
 4. Ggf. prüfen, ob **TTruheAccess.accdb** entsperrt und von Windows als vertrauenswürdig eingestuft ist.
 5. Ausführen der **Tüfteltruhe.exe**.
-6. Falls Windows einen fehenden "ACE.OLEDB 12.0 Provider" meldet, kann dieser [**hier**](https://www.microsoft.com/de-DE/download/details.aspx?id=13255) nachinstalliert werden.
-
-# Anleitung
-
-Hier entsteht eine genauere Bedienungsanleitung...
+6. Falls Windows einen fehenden "ACE.OLEDB 12.0 Provider" meldet, kann dieser [**hier**](https://www.microsoft.com/de-DE/download/details.aspx?id=13255) nachinstalliert werden. Alternativ kann in diesem Fall auch statt x64 die x32-Version funktionieren.
 
 # Bilder
 
@@ -52,7 +48,8 @@ Hier entsteht eine genauere Bedienungsanleitung...
 
 # Versionshistorie
 
-
+###### v1.0
+- **Zufälliger Schatz** abgeschlossen.
 ###### v1.0
 - **Zufälliger Schatz** hinzugefügt.
 - **Zutatensuche** erweitert.
@@ -82,4 +79,4 @@ Hier entsteht eine genauere Bedienungsanleitung...
 
 # Danksagung
 
-Danke an Niklas, Kai, Fabian, Kathi und Jessi für langjähriges Testen und Rückmeldungen zu Alt-Europa und Tüfteltruhe!
+Danke an Niklas, Kai, Fabian, Kathi und Jessi für langjähriges Testen und Rückmeldungen!
